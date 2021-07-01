@@ -1,0 +1,39 @@
+@Library('zepline-ci') _
+
+pipeline {
+  agent none
+  log.info("Info node")
+}
+
+
+
+node {
+  stage ("build") {
+    parallel {
+      stage ("build-0") {
+        script {
+          log.info("Info node")
+        }
+      }
+
+      stage ("build-1") {
+        script {
+          log.info("Info node")
+        }
+      }
+    }
+   
+  }
+
+  stage ("hello") {
+    script {
+      log.info("Info node")
+    }
+  }
+
+  stage ("hello2") {
+    script {
+      log.info("Info node2")
+    }
+  }
+}
