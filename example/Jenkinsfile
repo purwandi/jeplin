@@ -1,0 +1,45 @@
+@Library('jeplin@main') _
+
+pipeline {
+  agent none
+  stages {
+    stage('build') {
+      parallel {
+        stage('build-0') {
+          steps {
+            script {
+              log.info 'Info starting jobs'
+              log.warning 'Warning jobs'
+            }
+          }
+        }
+        stage('build-1') {
+          steps {
+            script {
+              log.info 'Info starting jobs'
+              log.warning 'Warning jobs'
+            }
+          }
+        }
+      }
+    }
+
+    stage('release') {
+      steps {
+        script {
+          log.info 'Info starting jobs'
+          log.warning 'Warning jobs'
+        }
+      }
+    }
+
+    stage('deploy') {
+      steps {
+        script {
+          log.info 'Info starting jobs'
+          log.warning 'Warning jobs'
+        }
+      }
+    }
+  }
+}

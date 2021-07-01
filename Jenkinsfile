@@ -1,9 +1,9 @@
-@Library('jeplin@main') _
+@Library('zepline') _
 
 node {
   checkout scm
 
-  jepline(".jepline.yaml")  
+  zepline(".zepline.yaml")  
 }
 
 // pipeline {

@@ -1,0 +1,26 @@
+stages:
+  - build
+  - release
+
+tasks:
+  - task: testing
+    stage: build
+    inputs:
+      version: v1.0.1
+
+  - task: script
+    stage: build
+    inputs:
+      script: 
+        - echo "hello"
+
+  - task: docker
+    inputs:
+      command: build
+      context:
+      dockerfile:
+      repository:
+      tags:
+      arguments:
+      
+  - task: helm

@@ -1,0 +1,16 @@
+@Library('jepline')
+
+import com.jepline.*
+
+def call(Zepline zepline) {
+  return {
+    List<String> stagesA = zepline.stages
+    stages {
+      stagesA.each { stg ->
+        stage(stg) {
+          sh "echo ${stg}"
+        }
+      }
+    }
+  }
+}
