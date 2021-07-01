@@ -7,8 +7,8 @@ services:
     environment:
       DOCKER_TLS_CERTDIR: /certs
     volumes:
-      - ./storage-jenkins:/var/jenkins_home
-      - ./storage-docker:/certs/client
+      - ./storage/jenkins:/var/jenkins_home
+      - ./storage/docker:/certs/client
 
   jenkins:
     image: jenkinsci/blueocean:1.24.7
@@ -19,8 +19,8 @@ services:
       DOCKER_CERT_PATH: /certs/client
       DOCKER_TLS_VERIFY: 1
     volumes:
-      - ./storage-jenkins:/var/jenkins_home
-      - ./storage-docker:/certs/client:ro
+      - ./storage/jenkins:/var/jenkins_home
+      - ./storage/docker:/certs/client:ro
     ports:
       - 8080:8080
       - 50000:50000
