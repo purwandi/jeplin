@@ -1,4 +1,4 @@
-@Library('zepline') _
+@Library('zepline-ci') _
 
 node {
   checkout scm
