@@ -14,10 +14,7 @@ def call(String filename) {
   def closure = buildStages(zepline)
 
   try {
-    pipeline {
-      agent none
-      closure([:])
-    }
+    closure([:])
   } finally {
     log.info("ok")
   }
