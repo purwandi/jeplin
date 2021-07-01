@@ -1,6 +1,6 @@
-@Library('jepline')
+@Library('zepline')
 
-import com.jepline.*
+import com.zepline.*
 
 def call(Zepline zepline) {
   return {
