@@ -5,9 +5,10 @@ import com.zepline.*
 
 def call(String filename) {
   def config = readYaml file: filename
+  println(config)
+  println(config.stages)
 
   Zepline zepline = Config.parse(config, env)
-
   def closure = buildStages(zepline)
 
   try {
@@ -17,7 +18,7 @@ def call(String filename) {
   }
   
   // def config = new YamlSlurper().parse(new File(filename))
-  println(config)
+ 
 }
 
 // call(".jepline.yaml")
