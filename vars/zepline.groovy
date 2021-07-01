@@ -3,17 +3,17 @@ import com.zepline.*
 
 def call(String filename) {
   def config = readYaml file: filename
-  Zepline zepline = Config.parse(config, env, this)
+  // Zepline zepline = Config.parse(config, env, this)
 
-  println(zepline)
+  // println(zepline)
   println(this)
-  def closure = buildStages(zepline)
+  // def closure = buildStages(zepline)
 
-  try {
-    closure([:])
-  } finally {
-    log.info("ok")
-  }
+  // try {
+  //   closure([:])
+  // } finally {
+  //   log.info("ok")
+  // }
 }
 
 
