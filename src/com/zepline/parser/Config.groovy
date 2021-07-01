@@ -7,5 +7,7 @@ class Config {
     Zepline zepline = new Zepline()
 
     zepline.stages = yaml.stages
+
+    return zepline
   }
 }

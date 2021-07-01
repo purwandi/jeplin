@@ -10,7 +10,7 @@ def call(String filename) {
 
   Zepline zepline = Config.parse(config, env)
 
-  println(zepline.stages)
+  println(zepline)
   // def closure = buildStages(zepline)
 
   // try {
