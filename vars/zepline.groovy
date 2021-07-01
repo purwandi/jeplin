@@ -6,7 +6,7 @@ def call(String filename) {
   // Zepline zepline = Config.parse(config, env, this)
 
   // println(zepline)
-  println(this)
+  println(sh)
   // def closure = buildStages(zepline)
 
   // try {
