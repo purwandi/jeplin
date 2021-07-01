@@ -9,13 +9,15 @@ def call(String filename) {
   println(config.stages)
 
   Zepline zepline = Config.parse(config, env)
-  def closure = buildStages(zepline)
 
-  try {
-    closure([:])
-  } finally {
-    log.info("ok")
-  }
+  println(zepline.stages)
+  // def closure = buildStages(zepline)
+
+  // try {
+  //   closure([:])
+  // } finally {
+  //   log.info("ok")
+  // }
   
   // def config = new YamlSlurper().parse(new File(filename))
  
