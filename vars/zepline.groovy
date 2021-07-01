@@ -1,4 +1,4 @@
-@Library('zepline')
+@Library('zepline-ci')
 
 import com.zepline.parser.Config
 import com.zepline.*

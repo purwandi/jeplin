@@ -1,4 +1,4 @@
-package com.jepline
+package com.zepline
 
 def checkoutFrom(repo) {
   git url "git@github.com/${repo}"

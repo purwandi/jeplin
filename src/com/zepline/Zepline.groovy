@@ -1,4 +1,4 @@
-package com.jepline
+package com.zepline
 
 class Zepline {
   List<String> stages = []
