@@ -1,5 +1,12 @@
 package com.zepline
 
+import com.zepline.tasks.Taskable
+
 class Zepline {
-  List<String> stages = []
+  List<Taskable> tasks
+
+  def build() {
+    
+  }
+
 }

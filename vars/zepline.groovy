@@ -1,14 +1,9 @@
-// @Library('zepline-ci')
-
 import com.zepline.parser.Config
 import com.zepline.*
 
 def call(String filename) {
   def config = readYaml file: filename
-  println(config)
-  println(config.stages)
-
-  Zepline zepline = Config.parse(config, env)
+  Zepline zepline = Config.parse(config, env, this)
 
   println(zepline)
   def closure = buildStages(zepline)
@@ -18,7 +13,8 @@ def call(String filename) {
   } finally {
     log.info("ok")
   }
- 
 }
 
+
+return this
 // call(".jepline.yaml")
