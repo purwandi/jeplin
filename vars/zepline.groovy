@@ -1,19 +1,19 @@
-import com.zepline.parser.Config
-import com.zepline.*
+import com.zepline.Zepline
 
 def call(String filename) {
   def config = readYaml file: filename
   // Zepline zepline = Config.parse(config, env, this)
+  Zepline zepline = new Zepline(config).init()
 
   // println(zepline)
-  println(sh)
+  // println(this)
   // def closure = buildStages(zepline)
 
-  // try {
-  //   closure([:])
-  // } finally {
-  //   log.info("ok")
-  // }
+  try {
+    closure([:])
+  } finally {
+    log.info("ok")
+  }
 }
 
 

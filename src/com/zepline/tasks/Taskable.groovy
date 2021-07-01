@@ -4,8 +4,7 @@ abstract class Taskable {
   protected def script
   protected String name
 
-  def Taskable(def script, String name) {
-    this.script = script
+  def Taskable(String name) {
     this.name = name
   }
 
