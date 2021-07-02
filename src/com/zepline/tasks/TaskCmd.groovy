@@ -2,6 +2,12 @@ package com.zepline.tasks
 
 class TaskCmdInput {
   List<String> commands
+
+  TaskCmdInput(def input) {
+    this.commands = input.script.each { cmd ->
+      return cmd
+    }
+  }
 }
 
 class TaskCmd extends Taskable {
@@ -10,14 +16,7 @@ class TaskCmd extends Taskable {
   TaskCmd(def yaml, def script) {
     super("cmd", script)
 
-    // @TODO: validate input
-
-    // Parsing command
-    List<String> commands = yaml.inputs.script.each { cmd ->
-      return cmd
-    }
-
-    this.input = new TaskCmdInput(commands: commands)
+    this.input = new TaskCmdInput(yaml.input)
   }
 
   def run() {

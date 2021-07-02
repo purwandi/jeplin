@@ -8,25 +8,25 @@ environment:
 
 steps:
 - task: cmd
-  inputs:
+  input:
     script: 
       - echo "number 1 hello"
       - echo "number 2 hello"
       - env
 
 # - task: ssh
-#   inputs:
+#   input:
 #     credentials: ssh-server-10
 #     script:
 #       - echo "hello"
 
 - task: cmd
-  inputs:
+  input:
     script: 
       - echo "number 2 hello"
 
 - task: cmd
-  inputs:
+  input:
     script:
       - | 
         echo "number 2 hello"
@@ -34,7 +34,7 @@ steps:
       - echo "Hello world"
 
 - task: docker
-  inputs:
+  input:
     context: ${WORKSPACE}
     dockerfile: ${WORKSPACE}/Dockerfile
     credential: dockerhub-credentials
@@ -45,13 +45,13 @@ steps:
     args:
 
 # - task: testing
-#   inputs:
+#   input:
 #     version: v1.0.1
 
 
 
 # - task: docker
-#   inputs:
+#   input:
 #     command: build
 #     context:
 #     dockerfile:

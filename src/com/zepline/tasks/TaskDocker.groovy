@@ -10,14 +10,14 @@ class TaskDockerInput {
   String tag
   String args
 
-  TaskDockerInput(def yamlInputs, def script) {
-    this.dockerfile = yamlInputs.dockerfile
-    this.context    = yamlInputs.context
-    this.repository = yamlInputs.repository
-    this.credential = yamlInputs.credential
-    this.registry   = yamlInputs.registry
-    this.command    = yamlInputs.command
-    this.tag        = yamlInputs.tag
+  TaskDockerInput(def input, def script) {
+    this.dockerfile = input.dockerfile
+    this.context    = input.context
+    this.repository = input.repository
+    this.credential = input.credential
+    this.registry   = input.registry
+    this.command    = input.command
+    this.tag        = input.tag
   }
 }
 
@@ -28,7 +28,7 @@ class TaskDocker extends Taskable {
   TaskDocker(def yaml, def script) {
     super("docker", script)
 
-    this.input = new TaskDockerInput(yaml, script)
+    this.input = new TaskDockerInput(yaml.input, script)
   }
 
   def run() {
