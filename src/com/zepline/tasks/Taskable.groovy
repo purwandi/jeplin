@@ -2,7 +2,7 @@ package com.zepline.tasks
 
 abstract class Taskable {
   protected def script
-  protected String name
+  String name
 
   def Taskable(String name) {
     this.name = name
