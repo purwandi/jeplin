@@ -17,8 +17,11 @@ class Zepline {
   def init() {
     // Parse task
     this.tasks = config.steps.collect { yamlItem ->
-      if (yamlItem.task == "cmd") {
-        return new TaskCmd(yamlItem, script)
+      switch(yamlItem.task) {
+        case "cmd": return new TaskCmd(yamlItem, script)
+        case "docker": return new TaskDocker(yamlItem, script)
+        default:
+        break
       }
     }
 

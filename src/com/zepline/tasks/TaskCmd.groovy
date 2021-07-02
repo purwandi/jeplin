@@ -10,6 +10,8 @@ class TaskCmd extends Taskable {
   TaskCmd(def yaml, def script) {
     super("cmd", script)
 
+    // @TODO: validate input
+
     // Parsing command
     List<String> commands = yaml.inputs.script.each { cmd ->
       return cmd
