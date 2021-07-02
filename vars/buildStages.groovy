@@ -5,7 +5,7 @@ def call(Zepline zepline, def defaultImage) {
     zepline.tasks.each { task ->
       // setup container image to run
       if (task.image) {
-        docker.image(image).inside() {
+        docker.image(task.image).inside() {
           stage(task.name) {
             task.run()
           }

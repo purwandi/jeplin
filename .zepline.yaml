@@ -40,7 +40,7 @@ steps:
     args: "--build-arg token=x887232"
 
 - task: helm
-  image: dtzar/helm-kubectl
+  image: dtzar/helm-kubectl:3.4.1
   input:
     script:
       - kubectl version --short || true
