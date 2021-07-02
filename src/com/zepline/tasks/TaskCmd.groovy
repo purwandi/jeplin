@@ -14,7 +14,7 @@ class TaskCmd extends Taskable {
   TaskCmdInput input
 
   TaskCmd(def yaml, def script) {
-    super("cmd", script)
+    super("cmd", yaml, script)
 
     this.input = new TaskCmdInput(yaml.input)
   }

@@ -27,7 +27,7 @@ class TaskDocker extends Taskable {
   TaskDockerInput input
 
   TaskDocker(def yaml, def script) {
-    super("docker", script)
+    super("docker", yaml, script)
 
     this.input = new TaskDockerInput(yaml.input, script)
   }
@@ -37,7 +37,6 @@ class TaskDocker extends Taskable {
       case 'buildPush': return buildPush()
       case 'build': return build()
       case 'push': return push()
-      case 'delete': return delete()
       default:
         throw new Exception("Invalid input.command ${input.command} was not recognized")
       break

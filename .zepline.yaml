@@ -1,8 +1,17 @@
-image: 
+image: alpine:latest
+
+include:
+  - receipt: 'https://gitlab.com/purwandi/zepline-pipeline.git'
+    credential: github-credentials
+    ref: main
+    file: 
+      - /variables.yaml
+      - /pre-post.yaml
+      - /helm.yaml
 
 services:
-- docker:dind
-- postgres:alpine
+  - image: docker:dind
+  - image: postgres:alpine
 
 environment:
 
@@ -23,6 +32,7 @@ steps:
       - echo "Hello world"
 
 - task: docker
+  image: docker:dind
   input:
     context: $WORKSPACE
     dockerfile: $WORKSPACE/Dockerfile
@@ -32,6 +42,13 @@ steps:
     repository: ghcr.io/purwandi/zepline
     tag: dev-9898
     args: "--build-arg token=x887232"
+
+# - task: helm
+#   image: dtzar/helm-kubectl
+#   input:
+#     script:
+#       - kubectl version --short || true
+#       - helm version --short || true
 
 # - task: testing
 #   input:

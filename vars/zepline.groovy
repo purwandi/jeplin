@@ -3,7 +3,9 @@ import com.zepline.Zepline
 def call(String filename) {
   def config = readYaml file: filename
   Zepline zepline = new Zepline(this, config).init()
-  def closure = buildStages(zepline)
+
+  def image = config.image ? config.image : 'alpine:latest'
+  def closure = buildStages(zepline, image)
 
   try {
     closure([:])
