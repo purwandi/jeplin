@@ -1,3 +1,11 @@
+image: 
+
+services:
+- docker:dind
+- postgres:alpine
+
+environment:
+
 steps:
 - task: cmd
   inputs:
@@ -8,6 +16,10 @@ steps:
   inputs:
     script: 
       - echo "number 2 hello"
+
+- task: docker
+  inputs:
+    command: build
 
 
 # - task: testing
