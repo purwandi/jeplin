@@ -2,6 +2,7 @@ package com.zepline
 
 import com.zepline.tasks.Taskable
 import com.zepline.tasks.TaskCmd
+import com.zepline.tasks.TaskDocker
 
 class Zepline {
   def config
