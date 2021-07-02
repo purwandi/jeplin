@@ -28,10 +28,10 @@ steps:
     dockerfile: $WORKSPACE/Dockerfile
     credential: github-credentials
     registry: https://ghcr.io
-    command: build
+    command: buildPush
     repository: ghcr.io/purwandi/zepline
     tag: dev-9898
-    args:
+    args: "--build-arg token=x887232"
 
 # - task: testing
 #   input:

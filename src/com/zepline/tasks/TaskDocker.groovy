@@ -18,6 +18,7 @@ class TaskDockerInput {
     this.registry   = input.registry
     this.command    = input.command
     this.tag        = input.tag
+    this.args       = input.args
   }
 }
 
@@ -33,6 +34,7 @@ class TaskDocker extends Taskable {
 
   def run() {
     switch(input.command) {
+      case 'buildPush': return buildPush()
       case 'build': return build()
       case 'push': return push()
       case 'delete': return delete()
@@ -42,12 +44,23 @@ class TaskDocker extends Taskable {
     }
   }
 
+  def buildPush() {
+    script.docker.withRegistry(input.registry, input.credential) {
+      def image = script.docker.build(
+        "${input.repository}:${input.tag}",
+        "-f ${input.dockerfile} ${input.args} ${input.context}",
+      )
+
+      image.push()
+      image.delete()
+    }
+  }
+
   def build() {
-    println(input)
     script.docker.withRegistry(input.registry, input.credential) {
       script.docker.build(
         "${input.repository}:${input.tag}",
-        "-f ${input.dockerfile} ${input.context}",
+        "-f ${input.dockerfile} ${input.args} ${input.context}",
       )
     }
   }

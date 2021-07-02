@@ -5,7 +5,6 @@ def call(Zepline zepline) {
     zepline.tasks.each { task ->
       stage(task.name) {
         task.run()
-        // sh "echo ${task.name}"
       }
     }
   }
