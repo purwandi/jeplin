@@ -1,6 +1,5 @@
 import groovy.yaml.YamlSlurper
 import com.zepline.Zepline
-import com.zepline.parser.Config
 
 // def configYaml = '''\
 // steps:
@@ -11,6 +10,7 @@ import com.zepline.parser.Config
 // '''
 
 def config = new YamlSlurper().parse(new File(".zepline.yaml"))
-Zepline zepline = Config.parse(config)
+Zepline zepline = new Zepline(config).init()
+// zepline.init()
 
 println(zepline.tasks)
