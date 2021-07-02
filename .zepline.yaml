@@ -39,12 +39,12 @@ steps:
     tag: dev-9898
     args: "--build-arg token=x887232"
 
-# - task: helm
-#   image: dtzar/helm-kubectl
-#   input:
-#     script:
-#       - kubectl version --short || true
-#       - helm version --short || true
+- task: helm
+  image: dtzar/helm-kubectl
+  input:
+    script:
+      - kubectl version --short || true
+      - helm version --short || true
 
 # - task: testing
 #   input:

@@ -1,8 +1,6 @@
 package com.zepline
 
-import com.zepline.tasks.Taskable
-import com.zepline.tasks.TaskCmd
-import com.zepline.tasks.TaskDocker
+import com.zepline.tasks.*
 
 class Zepline {
   def config
@@ -21,6 +19,7 @@ class Zepline {
       switch(yamlItem.task) {
         case "cmd": return new TaskCmd(yamlItem, script)
         case "docker": return new TaskDocker(yamlItem, script)
+        case "helm": return new TaskHelm(yamlItem, script)
         default:
         break
       }
