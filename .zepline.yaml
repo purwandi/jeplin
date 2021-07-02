@@ -1,5 +1,3 @@
-image: alpine:latest
-
 include:
   - receipt: 'https://gitlab.com/purwandi/zepline-pipeline.git'
     credential: github-credentials
@@ -32,13 +30,11 @@ steps:
       - echo "Hello world"
 
 - task: docker
-  image: docker:latest
   input:
     context: $WORKSPACE
     dockerfile: $WORKSPACE/Dockerfile
     credential: github-credentials
     registry: https://ghcr.io
-    command: buildPush
     repository: ghcr.io/purwandi/zepline
     tag: dev-9898
     args: "--build-arg token=x887232"

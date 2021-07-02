@@ -5,7 +5,7 @@ class TaskDockerInput {
   String registry
   String context
   String dockerfile
-  String command
+  // String command
   String repository
   String tag
   String args
@@ -16,7 +16,7 @@ class TaskDockerInput {
     this.repository = input.repository
     this.credential = input.credential
     this.registry   = input.registry
-    this.command    = input.command
+    // this.command    = input.command
     this.tag        = input.tag
     this.args       = input.args
   }
@@ -33,37 +33,11 @@ class TaskDocker extends Taskable {
   }
 
   def run() {
-    switch(input.command) {
-      case 'buildPush': return buildPush()
-      case 'build': return build()
-      case 'push': return push()
-      default:
-        throw new Exception("Invalid input.command ${input.command} was not recognized")
-      break
-    }
-  }
-
-  def buildPush() {
     script.docker.withRegistry(input.registry, input.credential) {
       script.docker.build(
         "${input.repository}:${input.tag}",
         "-f ${input.dockerfile} ${input.args} ${input.context}",
       ).push()
-    }
-  }
-
-  def build() {
-    script.docker.withRegistry(input.registry, input.credential) {
-      script.docker.build(
-        "${input.repository}:${input.tag}",
-        "-f ${input.dockerfile} ${input.args} ${input.context}",
-      )
-    }
-  }
-
-  def push() {
-    script.docker.withRegistry(input.registry, input.credential) {
-      script.docker.push("${input.repository}:${input.tag}")
     }
   }
 }
