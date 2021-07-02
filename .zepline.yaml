@@ -17,9 +17,9 @@ steps:
     script: 
       - echo "number 2 hello"
 
-- task: docker
-  inputs:
-    command: build
+# - task: docker
+#   inputs:
+#     command: build
 
 
 # - task: testing
