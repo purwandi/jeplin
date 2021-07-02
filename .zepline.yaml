@@ -38,7 +38,7 @@ steps:
     context: ${WORKSPACE}
     dockerfile: ${WORKSPACE}/Dockerfile
     credential: dockerhub-credentials
-    registry: https://index.docker.io/v1/
+    registry: https://index.docker.io/v1
     command: build
     repository: istio
     tag: dev-9898
