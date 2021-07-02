@@ -15,7 +15,7 @@ class TaskCmd extends Taskable {
       return cmd
     }
 
-    this.input = new TaskCmdInput(commands: command)
+    this.input = new TaskCmdInput(commands: commands)
   }
 
   def run() {
