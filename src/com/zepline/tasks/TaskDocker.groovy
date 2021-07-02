@@ -47,8 +47,7 @@ class TaskDocker extends Taskable {
     script.docker.withRegistry(input.registry, input.credential) {
       script.docker.build(
         "${input.registry}/${input.repository}:${input.tag}",
-        "-f ${input.dockerfile}",
-        "${input.context}"
+        "-f ${input.dockerfile} ${input.context}",
       )
     }
   }
