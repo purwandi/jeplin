@@ -11,7 +11,7 @@ class TaskCmd extends Taskable {
     super("cmd", script)
 
     // Parsing command
-    List<String> commands = yaml.input.script.each { cmd ->
+    List<String> commands = yaml.inputs.script.each { cmd ->
       return cmd
     }
 
