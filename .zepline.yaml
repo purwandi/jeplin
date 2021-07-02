@@ -38,9 +38,9 @@ steps:
     context: ${WORKSPACE}
     dockerfile: ${WORKSPACE}/Dockerfile
     credential: github-credentials
-    registry: ghcr.io
+    registry: https://ghcr.io
     command: build
-    repository: purwandi/zepline
+    repository: ghcr.io/purwandi/zepline
     tag: dev-9898
     args:
 

@@ -46,7 +46,7 @@ class TaskDocker extends Taskable {
     println(input)
     script.docker.withRegistry(input.registry, input.credential) {
       script.docker.build(
-        "${input.registry}/${input.repository}:${input.tag}",
+        "${input.repository}:${input.tag}",
         "-f ${input.dockerfile} ${input.context}",
       )
     }
@@ -54,7 +54,7 @@ class TaskDocker extends Taskable {
 
   def push() {
     script.docker.withRegistry(input.registry, input.credential) {
-      script.docker.push("${input.registry}/${input.repository}:${input.tag}")
+      script.docker.push("${input.repository}:${input.tag}")
     }
   }
 
