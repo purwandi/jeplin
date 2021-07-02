@@ -32,6 +32,12 @@ class Zepline {
         script.sh "echo 'Hello world'"
       }
     }
+
+    script.stage("stage 2") {
+      script.script {
+        script.sh "echo 'Hello world'"
+      }
+    }
   }
 
 }
