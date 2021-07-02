@@ -25,7 +25,7 @@ class TaskDockerInput {
 class TaskDocker extends Taskable {
   TaskDockerInput input
 
-  TaskCmd(def yaml, def script) {
+  TaskDocker(def yaml, def script) {
     super("docker", script)
 
     this.input = new TaskDockerInput(yaml, script)
