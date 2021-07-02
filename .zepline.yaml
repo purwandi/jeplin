@@ -37,10 +37,10 @@ steps:
   input:
     context: ${WORKSPACE}
     dockerfile: ${WORKSPACE}/Dockerfile
-    credential: dockerhub-credentials
-    registry: docker.io
+    credential: github-credentials
+    registry: ghcr.io
     command: build
-    repository: purwandi/istio
+    repository: purwandi/zepline
     tag: dev-9898
     args:
 
