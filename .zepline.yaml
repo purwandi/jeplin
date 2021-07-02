@@ -25,11 +25,13 @@ steps:
     script: 
       - echo "number 2 hello"
 
-# - task: cmd
-#   inputs:
-#     script: |
-#       echo "number 2 hello"
-#       env
+- task: cmd
+  inputs:
+    script:
+      - | 
+        echo "number 2 hello"
+        env
+      - echo "Hello world"
 
 # - task: docker
 #   inputs:
