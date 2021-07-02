@@ -5,9 +5,11 @@ def call(String filename) {
   Zepline zepline = new Zepline(this, config).init()
   // def closure = buildStages(zepline)
 
+  def closure = zepline.init()
+
   try {
-    zepline.run()
-    // closure([:])
+    // zepline.run()
+    closure([:])
   } finally {
     log.info("ok")
   }

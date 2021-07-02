@@ -27,9 +27,11 @@ class Zepline {
   }
 
   def run() {
-    tasks.each { task ->
-      script.stage(task.name) {
-        script.sh "echo ${task.name}"
+    return { variables ->
+      tasks.each { k, task ->
+        script.stage(k) {
+          script.sh "echo 'Running task'"
+        }
       }
     }
     // script.stage("stage 1") {
