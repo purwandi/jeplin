@@ -14,17 +14,6 @@ steps:
       - echo "number 2 hello"
       - env
 
-# - task: ssh
-#   input:
-#     credentials: ssh-server-10
-#     script:
-#       - echo "hello"
-
-- task: cmd
-  input:
-    script: 
-      - echo "number 2 hello"
-
 - task: cmd
   input:
     script:
@@ -35,8 +24,8 @@ steps:
 
 - task: docker
   input:
-    context: ${WORKSPACE}
-    dockerfile: ${WORKSPACE}/Dockerfile
+    context: $WORKSPACE
+    dockerfile: $WORKSPACE/Dockerfile
     credential: github-credentials
     registry: https://ghcr.io
     command: build
