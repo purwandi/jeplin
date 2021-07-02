@@ -46,13 +46,10 @@ class TaskDocker extends Taskable {
 
   def buildPush() {
     script.docker.withRegistry(input.registry, input.credential) {
-      def image = script.docker.build(
+      script.docker.build(
         "${input.repository}:${input.tag}",
         "-f ${input.dockerfile} ${input.args} ${input.context}",
-      )
-
-      image.push()
-      image.delete()
+      ).push()
     }
   }
 
@@ -69,9 +66,5 @@ class TaskDocker extends Taskable {
     script.docker.withRegistry(input.registry, input.credential) {
       script.docker.push("${input.repository}:${input.tag}")
     }
-  }
-
-  def delete() {
-
   }
 }
