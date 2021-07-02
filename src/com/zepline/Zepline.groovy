@@ -15,36 +15,13 @@ class Zepline {
   }
 
   def init() {
-    this.tasks = config.steps.collect { item ->
-      if (item.task == "cmd") {
-        return new TaskCmd(item.task)
+    // Parse task
+    this.tasks = config.steps.collect { yamlItem ->
+      if (yamlItem.task == "cmd") {
+        return new TaskCmd(yamlItem, script)
       }
     }
-
-    // print(config.steps)
 
     return this
   }
-
-  def run() {
-    return { variables ->
-      tasks.each { k, task ->
-        script.stage(k) {
-          script.sh "echo 'Running task'"
-        }
-      }
-    }
-    // script.stage("stage 1") {
-    //   script.script {
-    //     script.sh "echo 'Hello world'"
-    //   }
-    // }
-
-    // script.stage("stage 2") {
-    //   script.script {
-    //     script.sh "echo 'Hello world'"
-    //   }
-    // }
-  }
-
 }

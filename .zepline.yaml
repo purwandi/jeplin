@@ -11,6 +11,13 @@ steps:
   inputs:
     script: 
       - echo "number 1 hello"
+      - echo "number 2 hello"
+
+# - task: ssh
+#   inputs:
+#     credentials: ssh-server-10
+#     script:
+#       - echo "hello"
 
 - task: cmd
   inputs:
