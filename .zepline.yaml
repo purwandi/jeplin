@@ -32,7 +32,7 @@ steps:
       - echo "Hello world"
 
 - task: docker
-  image: docker:dind
+  image: docker:latest
   input:
     context: $WORKSPACE
     dockerfile: $WORKSPACE/Dockerfile
