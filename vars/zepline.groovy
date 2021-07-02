@@ -9,5 +9,6 @@ def call(String filename) {
     closure([:])
   } finally {
     log.info("ok")
+    cleanWs()
   }
 }
