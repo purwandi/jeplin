@@ -4,7 +4,7 @@ class Zepline {
   def config
   def script
 
-  List<Step> steps
+  List<Task> tasks
 
   Zepline(def script, def config) {
     this.script = script
@@ -12,10 +12,18 @@ class Zepline {
   }
 
   def init() {
-    this.steps = config.steps.collect { k, item ->
-      return new Step(k, item, script)
+    this.tasks = config.tasks.collect { k, item ->
+      return new Task(k, item, script)
     }
 
     return this
+  }
+
+  def execute() {
+    return { variables ->
+      tasks.each { task ->
+        task.execute()
+      }
+    }
   }
 }

@@ -9,7 +9,7 @@ include:
       - /pre-post.yaml
       - /helm.yaml
 
-steps:
+tasks:
   test:
     image: alpine
     services:
@@ -19,7 +19,7 @@ steps:
         # command: 
     script:
       - echo "hello"
-      
+
   build:
     image: alpine:3.13
     script: 
