@@ -43,7 +43,7 @@ class Zepline {
   def execute () {
     return { variables ->
       tasks.each { task ->
-        script.docker.image(getImage(task)).inside() {
+        script.docker.image(getImage(task)).inside("--entrypoint=''") {
           script.stage(task.name) {
             task.run()
           }
