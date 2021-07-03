@@ -15,18 +15,18 @@ class Task {
   List<String>  only
 
   List<Service> services
-  def           script
+  def           jk
   def           config
 
-  Task (String name, def config, def script) {
+  Task (String name, def config, def jk) {
     this.name     = name
     this.config   = config
-    this.script   = script
+    this.jk   = jk
   }
 
   def execute() {
-    script.stage(name) {
-      script.sh 'echo "Hello"'
+    jk.stage(name) {
+      jk.sh 'echo "Hello"'
     }
   }
 
