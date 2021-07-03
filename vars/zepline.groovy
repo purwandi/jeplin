@@ -7,10 +7,13 @@ def call(String filename) {
   // def image = config.image ? config.image : 'alpine:latest'
   // def closure = buildStages(zepline, image)
 
-  def closure = zepline.execute()
+  // def closure = zepline.execute()
 
   try {
-    closure([:])
+    stage('test') {
+      sh 'hello'
+    }
+    // closure([:])
   } finally {
     log.info("ok")
     cleanWs()

@@ -9,45 +9,57 @@ include:
       - /pre-post.yaml
       - /helm.yaml
 
-services:
-  - image: docker:dind
-  - image: postgres:alpine
-
-environment:
-
 steps:
-- task: cmd
-  input:
-    script: 
-      - echo "number 1 hello"
-      - echo "number 2 hello"
-      - env
-
-- task: cmd
-  input:
+  test:
+    image: alpine
+    services:
+      - image: nginx:alpine
+        alias: web
+        # entrypoint: 
+        # command: 
     script:
-      - | 
-        echo "number 2 hello"
-        env
-      - echo "Hello world"
+      - echo "hello"
 
-- task: docker
-  image: gcr.io/kaniko-project/executor:debug
-  input:
-    context: $WORKSPACE
-    dockerfile: $WORKSPACE/Dockerfile
-    credential: github-credentials
-    registry: https://ghcr.io
-    repository: ghcr.io/purwandi/zepline
-    tag: dev-9898
-    args: "--build-arg token=x887232"
 
-- task: helm
-  image: dtzar/helm-kubectl:3.4.1
-  input:
-    script:
-      - kubectl version --short || true
-      - helm version --short || true
+# services:
+#   - image: docker:dind
+#   - image: postgres:alpine
+
+# environment:
+
+# steps:
+# - task: cmd
+#   input:
+#     script: 
+#       - echo "number 1 hello"
+#       - echo "number 2 hello"
+#       - env
+
+# - task: cmd
+#   input:
+#     script:
+#       - | 
+#         echo "number 2 hello"
+#         env
+#       - echo "Hello world"
+
+# - task: docker
+#   image: gcr.io/kaniko-project/executor:debug
+#   input:
+#     context: $WORKSPACE
+#     dockerfile: $WORKSPACE/Dockerfile
+#     credential: github-credentials
+#     registry: https://ghcr.io
+#     repository: ghcr.io/purwandi/zepline
+#     tag: dev-9898
+#     args: "--build-arg token=x887232"
+
+# - task: helm
+#   image: dtzar/helm-kubectl:3.4.1
+#   input:
+#     script:
+#       - kubectl version --short || true
+#       - helm version --short || true
 
 # - task: testing
 #   input:

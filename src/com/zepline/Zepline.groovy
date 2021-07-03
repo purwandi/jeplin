@@ -22,35 +22,37 @@ class Zepline {
   }
 
   def init() {
-    // Parse task
-    this.tasks = config.steps.collect { yamlItem ->
-      switch(yamlItem.task) {
-        case "cmd": return new TaskCmd(yamlItem, script)
-        case "docker": return new TaskKaniko(yamlItem, script)
-        case "helm": return new TaskHelm(yamlItem, script)
-        default:
-        break
-      }
+    config.steps.collect { k, item ->
+      println(k)
     }
+    
+    // // Parse task
+    // this.tasks = config.steps.collect { yamlItem ->
+    //   switch(yamlItem.task) {
+    //     case "cmd": return new TaskCmd(yamlItem, script)
+    //     case "docker": return new TaskKaniko(yamlItem, script)
+    //     case "helm": return new TaskHelm(yamlItem, script)
+    //     default:
+    //     break
+    //   }
+    // }
 
-    return this
+    // return this
   }
 
-  def getImage(Taskable task) {
-    return task.image ? task.image : image
-  }
+  // def getImage(Taskable task) {
+  //   return task.image ? task.image : image
+  // }
 
-  def execute () {
-    return { variables ->
-      tasks.each { task ->
-        script.docker.image(getImage(task)).inside("--entrypoint=''") {
-          script.stage(task.name) {
-            task.run()
-          }
-        }
-      }
-    }
-  }
-
-
+  // def execute () {
+  //   return { variables ->
+  //     tasks.each { task ->
+  //       script.docker.image(getImage(task)).inside("--entrypoint=''") {
+  //         script.stage(task.name) {
+  //           task.run()
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 }
