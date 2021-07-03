@@ -4,8 +4,6 @@ class Zepline {
   def config
   def script
 
-  List<Taskable> tasks
-
   Zepline(def script, def config) {
     this.script = script
     this.config = config
