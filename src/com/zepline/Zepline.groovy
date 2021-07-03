@@ -12,7 +12,7 @@ class Zepline {
   }
 
   def init() {
-    this.tasks = config.steps.collect { k, item ->
+    this.steps = config.steps.collect { k, item ->
       return new Step(k, item)
     }
   }
