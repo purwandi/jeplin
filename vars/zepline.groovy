@@ -2,7 +2,7 @@ import com.zepline.Zepline
 
 def call(String filename) {
   def config = readYaml file: filename
-  println(config.steps)
+  println(config.tasks)
 
   Zepline zepline = new Zepline(this, config).init()
 
@@ -12,7 +12,7 @@ def call(String filename) {
   def closure = zepline.execute()
 
   try {
-    println(zepline.steps)
+    println(zepline.tasks)
     // stage('test') {
     //   sh 'hello'
     // }
