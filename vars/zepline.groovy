@@ -7,9 +7,15 @@ def call(String filename) {
   pipeline {
     agent any 
     stages {
-      stage('hello') {
-        steps {
-          sh 'echo "Hello"'
+      zepline.tasks.each { task ->
+        stage(task.name) {
+          steps {
+            sh 'echo "Hello"'
+          }
+
+          steps {
+            sh 'echo "Hello"'
+          }
         }
       }
     }
