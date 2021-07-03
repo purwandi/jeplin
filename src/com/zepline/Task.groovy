@@ -8,8 +8,6 @@ class Service {
 }
 
 class Task {
-  private static String LATEST  = 'latest'
-
   String        image
   List<String>  environments
   List<String>  scripts
