@@ -2,6 +2,8 @@ import com.zepline.Zepline
 
 def call(String filename) {
   def config = readYaml file: filename
+  println(config.steps)
+
   Zepline zepline = new Zepline(this, config).init()
 
   // def image = config.image ? config.image : 'alpine:latest'
