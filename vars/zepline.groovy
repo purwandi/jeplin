@@ -8,7 +8,7 @@ def call(String filename) {
     agent any 
     stages {
       stage('hello') {
-        step {
+        steps {
           sh 'echo "Hello"'
         }
       }
