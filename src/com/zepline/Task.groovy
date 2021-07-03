@@ -26,12 +26,12 @@ class Task {
 
   def execute() {
     script.stage(name) {
-      run()
+      script.sh 'echo "Hello"'
     }
   }
 
-  def run() {
-    script.sh 'echo "Hello"'
+  // def run() {
+    
     // script.sh 'docker network create bridge1 || true'
     // script.sh(script: 'docker run --net bridge1 --name nginx -d nginx:alpine', returnStdout: true)
     // script.sh(script: 'docker run --net bridge1 --name httpd -d httpd:2.4-alpine', returnStdout: true)
@@ -51,5 +51,5 @@ class Task {
 
     // script.sh 'docker rm nginx httpd --force'
     // script.sh 'docker network rm bridge1 --force'
-  }
+  // }
 }
