@@ -43,7 +43,7 @@ class Zepline {
   def execute () {
     return { variables ->
       tasks.each { task ->
-        script.image(getImage(task)).inside() {
+        script.docker.image(getImage(task)).inside() {
           script.stage(task.name) {
             task.run()
           }
@@ -52,5 +52,5 @@ class Zepline {
     }
   }
 
-  
+
 }
