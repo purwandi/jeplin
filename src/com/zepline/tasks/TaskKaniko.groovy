@@ -1,5 +1,7 @@
 package com.zepline.tasks
 
+import com.zepline.tasks.TaskDockerInput
+
 class TaskKaniko extends Taskable {
   TaskDockerInput input
 
