@@ -10,9 +10,9 @@ def call(String filename) {
   // def closure = zepline.execute()
 
   try {
-    stage('test') {
-      sh 'hello'
-    }
+    // stage('test') {
+    //   sh 'hello'
+    // }
     // closure([:])
   } finally {
     log.info("ok")
