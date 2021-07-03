@@ -17,8 +17,7 @@ class TaskKaniko extends Taskable {
         --dockerfile ${input.dockerfile} \
         --context ${input.context} \
         ${input.args} \
-        --destination ${input.repository}:${input.tag}
-      "
+        --destination ${input.repository}:${input.tag}"
     }
   }
 }
