@@ -12,8 +12,14 @@ class Zepline {
   }
 
   def init() {
-    this.steps = config.steps.collect { k, item ->
-      return new Step(k, item)
+    // println(config.steps)
+
+    List<Step> steps = config.steps.each { item ->
+      // println(item)
     }
+    
+    // this.steps = config.steps.collect { k, item ->
+    //   return new Step(k, item)
+    // }
   }
 }

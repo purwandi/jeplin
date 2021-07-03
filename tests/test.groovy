@@ -10,7 +10,7 @@ import com.zepline.Zepline
 // '''
 
 def config = new YamlSlurper().parse(new File(".zepline.yaml"))
-Zepline zepline = new Zepline(config).init()
+Zepline zepline = new Zepline(this, config).init()
 // zepline.init()
 
-println(zepline.tasks)
+// println(zepline.steps)
