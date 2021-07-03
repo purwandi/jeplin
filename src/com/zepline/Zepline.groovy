@@ -26,7 +26,7 @@ class Zepline {
     this.tasks = config.steps.collect { yamlItem ->
       switch(yamlItem.task) {
         case "cmd": return new TaskCmd(yamlItem, script)
-        case "docker": return new TaskDocker(yamlItem, script)
+        case "docker": return new TaskKaniko(yamlItem, script)
         case "helm": return new TaskHelm(yamlItem, script)
         default:
         break

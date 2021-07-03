@@ -32,6 +32,7 @@ steps:
       - echo "Hello world"
 
 - task: docker
+  image: gcr.io/kaniko-project/executor:debug
   input:
     context: $WORKSPACE
     dockerfile: $WORKSPACE/Dockerfile
