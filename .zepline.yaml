@@ -19,6 +19,11 @@ steps:
         # command: 
     script:
       - echo "hello"
+      
+  build:
+    image: alpine:3.13
+    script: 
+      - echo "hello from alpine 3.13"
 
 
 # services:

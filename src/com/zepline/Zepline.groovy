@@ -2,24 +2,20 @@ package com.zepline
 
 class Zepline {
   def config
-  def script
+  def jk
 
   List<Step> steps
 
-  Zepline(def script, def config) {
-    this.script = script
+  Zepline(def jk, def config) {
+    this.jk = jk
     this.config = config
   }
 
   def init() {
-    // println(config.steps)
-
-    List<Step> steps = config.steps.each { item ->
-      // println(item)
+    this.steps = config.steps.collect { k, item ->
+      return new Step(k, item, jk)
     }
-    
-    // this.steps = config.steps.collect { k, item ->
-    //   return new Step(k, item)
-    // }
+
+    return this
   }
 }

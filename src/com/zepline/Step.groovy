@@ -15,13 +15,22 @@ class Step {
   List<String>  only
 
   List<Service> services
-  def           script
+  def           jk
 
-  Step (String name, def config) {
-    this.name = name
+  Step (String name, def config, def jk) {
+    this.name     = name
+    this.config   = config
+    this.jk       = jk
   }
 
   def execute() {
+    jk.stage(name) {
+      run()
+    }
+  }
+
+  def run() {
+    jk.sh 'echo "Hello"'
     // script.sh 'docker network create bridge1 || true'
     // script.sh(script: 'docker run --net bridge1 --name nginx -d nginx:alpine', returnStdout: true)
     // script.sh(script: 'docker run --net bridge1 --name httpd -d httpd:2.4-alpine', returnStdout: true)
