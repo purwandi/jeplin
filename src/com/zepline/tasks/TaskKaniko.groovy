@@ -32,14 +32,19 @@ class TaskKaniko extends Taskable {
   }
 
   def run() {
-    script.docker.withRegistry(input.registry, input.credential) {
-      script.sh "/kaniko/executor \
-        --insecure --skip-tls-verify --insecure-pull --skip-tls-verify-pull \
-        --insecure-registry --skip-tls-verify-registry \
-        --dockerfile ${input.dockerfile} \
-        --context ${input.context} \
-        ${input.args} \
-        --destination ${input.repository}:${input.tag}"
-    }
+    // authenticate docker registry
+    script.sh "id"
+    script.sh "whoami"
+    script.sh "env"
+
+
+    // build and deploy
+    // script.sh "/kaniko/executor \
+    //   --insecure --skip-tls-verify --insecure-pull --skip-tls-verify-pull \
+    //   --insecure-registry --skip-tls-verify-registry \
+    //   --dockerfile ${input.dockerfile} \
+    //   --context ${input.context} \
+    //   ${input.args} \
+    //   --destination ${input.repository}:${input.tag}"
   }
 }
