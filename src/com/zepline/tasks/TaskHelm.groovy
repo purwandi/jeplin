@@ -20,6 +20,10 @@ class TaskHelm extends Taskable {
   }
 
   def run() {
+    script.sh 'kubectl version --short || true'
+    script.sh 'helm version --short || true'
+
+    
     input.commands.each { cmd ->
       script.sh cmd
     }

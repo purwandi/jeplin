@@ -1,3 +1,5 @@
+image: alpine:latest
+
 include:
   - receipt: 'https://gitlab.com/purwandi/zepline-pipeline.git'
     credential: github-credentials
