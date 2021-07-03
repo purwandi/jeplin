@@ -1,14 +1,34 @@
 package com.zepline.tasks
 
-import com.zepline.tasks.TaskDockerInput
+class TaskKanikoInput {
+  String credential
+  String registry
+  String context
+  String dockerfile
+  // String command
+  String repository
+  String tag
+  String args
+
+  TaskKanikoInput(def input, def script) {
+    this.dockerfile = input.dockerfile
+    this.context    = input.context
+    this.repository = input.repository
+    this.credential = input.credential
+    this.registry   = input.registry
+    // this.command    = input.command
+    this.tag        = input.tag
+    this.args       = input.args
+  }
+}
 
 class TaskKaniko extends Taskable {
-  TaskDockerInput input
+  TaskKanikoInput input
 
   TaskKaniko(def yaml, def script) {
     super("kaniko", yaml, script)
 
-    this.input = new TaskDockerInput(yaml.input, script)
+    this.input = new TaskKanikoInput(yaml.input, script)
   }
 
   def run() {
