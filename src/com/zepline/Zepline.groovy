@@ -3,9 +3,6 @@ package com.zepline
 import com.zepline.tasks.*
 
 class Zepline {
-  // default image
-  String image = "alpine:3.13"
-
   def config
   def script
 
@@ -14,14 +11,10 @@ class Zepline {
   Zepline(def script, def config) {
     this.script = script
     this.config = config
-    
-    // set default image
-    if (config.image != "") {
-      this.image = config.image
-    }
   }
 
   def init() {
+    println(config)
     config.steps.collect { k, item ->
       println(k)
     }
