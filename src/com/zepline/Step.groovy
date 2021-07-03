@@ -11,26 +11,26 @@ class Step {
   String        name
   String        image
   List<String>  environments
-  List<String>  scripts
+  List<String>  command
   List<String>  only
 
   List<Service> services
-  def           jk
+  def           script
 
-  Step (String name, def config, def jk) {
+  Step (String name, def config, def script) {
     this.name     = name
     this.config   = config
-    this.jk       = jk
+    this.script   = script
   }
 
   def execute() {
-    jk.stage(name) {
+    script.stage(name) {
       run()
     }
   }
 
   def run() {
-    jk.sh 'echo "Hello"'
+    script.sh 'echo "Hello"'
     // script.sh 'docker network create bridge1 || true'
     // script.sh(script: 'docker run --net bridge1 --name nginx -d nginx:alpine', returnStdout: true)
     // script.sh(script: 'docker run --net bridge1 --name httpd -d httpd:2.4-alpine', returnStdout: true)
