@@ -16,7 +16,9 @@ def call(String filename) {
       dir('.include') {
         git branch: item.ref , credentialsId: item.credential, url: item.remote
         item.files.each { f -> 
-          sh 'cat $WORKSPACE/.include/${f} >> $WORKSPACE/.config/.zepline.yaml' 
+          sh "echo ${f}"
+          sh "cat $WORKSPACE/.include${f}" 
+          sh "cat $WORKSPACE/.include${f} >> $WORKSPACE/.config/.zepline.yaml" 
         }
       }
     }
