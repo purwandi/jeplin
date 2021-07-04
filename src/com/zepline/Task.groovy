@@ -1,17 +1,9 @@
 package com.zepline
 
-class Service {
-  String image
-  String alias
-  List<String> entrypoint
-  List<String> command
-}
-
 class Task {
   String        name
   String        image
   List<String>  environments
-  List<String>  command
   List<String>  only
 
   List<Service> services
@@ -21,12 +13,29 @@ class Task {
   Task (String name, def config, def jk) {
     this.name     = name
     this.config   = config
-    this.jk   = jk
+    this.jk       = jk
   }
 
   def execute() {
-    jk.stage(name) {
-      jk.sh 'echo "Hello"'
+    return {
+      script.stage(name) {
+        script.sh "echo 'Hello'"
+      }
+      // if (config.before_script) {
+      //   config.before_script.each { command ->
+      //     jk.script.sh command
+      //   }
+      // }
+
+      // config.script.each { command ->
+      //   jk.script.sh command
+      // }
+
+      // if (config.after_script) {
+      //   config.after_script.each { command ->
+      //     jk.script.sh command
+      //   }
+      // }
     }
   }
 

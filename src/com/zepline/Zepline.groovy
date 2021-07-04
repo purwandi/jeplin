@@ -4,6 +4,11 @@ class Zepline {
   def config
   def script
 
+  String        image
+  List<Service> services
+  def           environment
+
+
   List<Task> tasks
 
   Zepline(def script, def config) {
@@ -12,9 +17,9 @@ class Zepline {
   }
 
   def init() {
-    this.tasks = config.tasks.collect { k, item ->
-      return new Task(k, item, script)
-    }
+    // this.tasks = config.tasks.collect { k, item ->
+    //   return new Task(k, item, script)
+    // }
 
     return this
   }
@@ -22,7 +27,6 @@ class Zepline {
   def execute() {
     return { variables ->
       tasks.each { task ->
-        task.execute()
       }
     }
   }

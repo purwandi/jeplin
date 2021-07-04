@@ -1,5 +1,9 @@
 image: alpine:latest
 
+# stages:
+# - prepare
+# - build
+
 include:
   - receipt: 'https://gitlab.com/purwandi/zepline-pipeline.git'
     credential: github-credentials
@@ -10,8 +14,13 @@ include:
       - /helm.yaml
 
 tasks:
+  notification:
+    image: alpine
+    stage: prepare
+
   test:
     image: alpine
+    stage: build
     services:
       - image: nginx:alpine
         alias: web
@@ -22,6 +31,7 @@ tasks:
 
   build:
     image: alpine:3.13
+    stage: build
     script: 
       - echo "hello from alpine 3.13"
 
