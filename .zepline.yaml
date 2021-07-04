@@ -1,92 +1,22 @@
 image: alpine:latest
 
-# stages:
-# - prepare
-# - build
-
 include:
-  - receipt: 'https://gitlab.com/purwandi/zepline-pipeline.git'
+  - remote: 'https://gitlab.com/purwandi/zepline.git'
     credential: github-credentials
     ref: main
-    file: 
-      - /variables.yaml
-      - /pre-post.yaml
-      - /helm.yaml
+    files: 
+      - /manifest/.helm.yaml
 
 tasks:
-  notification:
-    image: alpine
-    stage: prepare
-
-  test:
-    image: alpine
-    stage: build
-    services:
-      - image: nginx:alpine
-        alias: web
-        # entrypoint: 
-        # command: 
-    script:
-      - echo "hello"
-
-  build:
+  release:
     image: alpine:3.13
-    stage: build
+    stage: release
     script: 
       - echo "hello from alpine 3.13"
+      - sleep 10
 
-
-# services:
-#   - image: docker:dind
-#   - image: postgres:alpine
-
-# environment:
-
-# steps:
-# - task: cmd
-#   input:
-#     script: 
-#       - echo "number 1 hello"
-#       - echo "number 2 hello"
-#       - env
-
-# - task: cmd
-#   input:
-#     script:
-#       - | 
-#         echo "number 2 hello"
-#         env
-#       - echo "Hello world"
-
-# - task: docker
-#   image: gcr.io/kaniko-project/executor:debug
-#   input:
-#     context: $WORKSPACE
-#     dockerfile: $WORKSPACE/Dockerfile
-#     credential: github-credentials
-#     registry: https://ghcr.io
-#     repository: ghcr.io/purwandi/zepline
-#     tag: dev-9898
-#     args: "--build-arg token=x887232"
-
-# - task: helm
-#   image: dtzar/helm-kubectl:3.4.1
-#   input:
-#     script:
-#       - kubectl version --short || true
-#       - helm version --short || true
-
-# - task: testing
-#   input:
-#     version: v1.0.1
-
-
-
-# - task: docker
-#   input:
-#     command: build
-#     context:
-#     dockerfile:
-#     repository:
-#     tags:
-#     arguments:
+  helm:
+    extends: .helm
+    stage: release
+    variables:
+      ENV: prod

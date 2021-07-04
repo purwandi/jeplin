@@ -51,17 +51,19 @@ def buildTask(def tasks, def script) {
 }
 
 node {
+  def config2 = readYaml text: """
+.helm: &helm
+  script:
+    - echo "Runing as helm"
+    - sleep 30
+"""
+
   def config = readYaml text: """
 stages:
   - prepare
   - build
   - release
   - post
-
-.helm: &helm
-  script:
-    - echo "Runing as helm"
-    - sleep 30
 
 tasks:
   release:
@@ -110,5 +112,6 @@ tasks:
       - echo "post from alpine 3.13"
       - sleep 20
 """
-  parse(config, this)
+  config = config + config2
+  // parse(config, this)
 }
