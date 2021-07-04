@@ -3,7 +3,7 @@ image: alpine:latest
 include:
   - remote: 'https://gitlab.com/purwandi/zepline.git'
     credential: github-credentials
-    ref: main
+    ref: docker-runner
     files: 
       - /manifest/.helm.yaml
 
