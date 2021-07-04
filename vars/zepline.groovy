@@ -7,7 +7,7 @@ def call(String filename) {
   }
 
   dir(".config") {
-    sh 'cat $WORKSPACE/.zepline.yaml >> $WORKSPACE/.config/.zepline.yaml'
+    sh "cat $WORKSPACE/.zepline.yaml >> $WORKSPACE/.config/.zepline.yaml"
   }
   
   // clone include project
@@ -25,5 +25,5 @@ def call(String filename) {
   }
 
   sh 'ls -all'
-  sh 'cat $WORKSPACE/.config/.zepline.yaml'
+  sh "cat $WORKSPACE/.config/.zepline.yaml"
 }
