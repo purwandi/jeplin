@@ -1,7 +1,7 @@
 import com.zepline.Zepline
 
 def call(String filename) {
-  def config = readYaml file: ".zepline.yaml"
+  def config = readYaml file: filename
   if (config == null) {
     return
   }
