@@ -12,13 +12,13 @@ def call(String filename) {
   }
   
   // clone include project
-  if (config.includes) {
-    config.includes.each { item ->
+  if (config.include) {
+    config.include.each { item ->
       dir('.include') {
         git branch: item.ref , credentialsId: item.credential, url: item.remote 
       }
 
-      sh "echo print item ${item}"
+      // sh "echo print item ${item}"
       item.files.each { f -> 
         sh "echo ${f}"
         sh "cat $WORKSPACE/.include${f}" 
