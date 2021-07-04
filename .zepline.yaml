@@ -1,7 +1,7 @@
 image: alpine:latest
 
 include:
-  - remote: 'https://gitlab.com/purwandi/zepline-test.git'
+  - remote: 'https://github.com/purwandi/zepline-test.git'
     credential: github-credentials
     ref: main
     files: 
