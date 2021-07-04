@@ -1,11 +1,11 @@
 image: alpine:latest
 
 include:
-  - remote: 'https://gitlab.com/purwandi/zepline.git'
+  - remote: 'https://gitlab.com/purwandi/zepline-test.git'
     credential: github-credentials
     ref: docker-runner
     files: 
-      - /manifest/.helm.yaml
+      - /helm.yaml
 
 tasks:
   release:
