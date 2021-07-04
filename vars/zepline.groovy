@@ -15,13 +15,14 @@ def call(String filename) {
   if (config.includes) {
     config.includes.each { item ->
       dir('.include') {
-        git branch: item.ref , credentialsId: item.credential, url: item.remote
-        println item
-        item.files.each { f -> 
-          sh "echo ${f}"
-          sh "cat $WORKSPACE/.include${f}" 
-          sh "cat $WORKSPACE/.include${f} >> $WORKSPACE/.config/.zepline.yaml" 
-        }
+        git branch: item.ref , credentialsId: item.credential, url: item.remote 
+      }
+
+      println item
+      item.files.each { f -> 
+        sh "echo ${f}"
+        sh "cat $WORKSPACE/.include${f}" 
+        sh "cat $WORKSPACE/.include${f} >> $WORKSPACE/.config/.zepline.yaml" 
       }
     }
   }
