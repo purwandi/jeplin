@@ -18,7 +18,7 @@ def call(String filename) {
         git branch: item.ref , credentialsId: item.credential, url: item.remote 
       }
 
-      println item
+      sh "echo print item ${item}"
       item.files.each { f -> 
         sh "echo ${f}"
         sh "cat $WORKSPACE/.include${f}" 
