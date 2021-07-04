@@ -22,6 +22,6 @@ def call(String filename) {
     }
   }
 
-  sh 'tree'
+  sh 'ls -all'
   sh 'cat $WORKSPACE/.config/.zepline.yaml'
 }
