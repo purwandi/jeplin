@@ -6,6 +6,7 @@ def call(String filename) {
     return
   }
 
+  sh "rm -rf $WORKSPACE/.config/.zepline.yaml || true"
   dir(".config") {
     sh "cat $WORKSPACE/.zepline.yaml >> $WORKSPACE/.config/.zepline.yaml"
   }
