@@ -4,7 +4,7 @@ class Credentials {
 
   static Credentials parse(def yaml, def script, def closure) {
     def credentials = []
-    yaml.each { item -> {
+    yaml.each { item ->
       switch(item.type) {
         case "usernamePassword": return credentials.add(passUsernamePassword(item, script))
         case "usernameColonPassword": return credentials.add(passUsernameColonPassword(item, script))
@@ -14,7 +14,7 @@ class Credentials {
           throw new Exception("Undefined '${item.type}' credential ")
           break
       }
-    }}
+    }
 
     script.withCredentials(credentials) {
       closure()
