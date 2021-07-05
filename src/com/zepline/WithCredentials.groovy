@@ -8,9 +8,11 @@ class WithCredentials {
     def self = new WithCredentials()
 
     yaml.each { item ->
-      println item.type
-      // switch(item.type) {
-      //   case "usernamePassword": 
+      // println item.type
+      switch(item.type) {
+        case "usernamePassword": 
+          return
+          break
       //     return self.passUsernamePassword(item, script)
       //   case "usernameColonPassword": 
       //     return self.passUsernameColonPassword(item, script)
@@ -18,10 +20,10 @@ class WithCredentials {
       //     return self.passFile(item, script)
       //   case "string": 
       //     return self.passString(item, script)
-      //   default:
-      //     throw new Exception("Undefined '${item.type}' credential ")
-      //     break
-      // }
+        default:
+          throw new Exception("Undefined '${item.type}' credential ")
+          break
+      }
     }
 
     return closure()
