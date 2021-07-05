@@ -20,13 +20,20 @@ class Task {
     def task = {
       if (config.services) {
         config.services.each { service ->
-          def container = script.docker.image(service.image).run("--privileged -v ${script.env.WORKSPACE}:${script.env.WORKSPACE}")
+          def container = script.docker.image(service.image).run("--privileged")
           links = links +  " --link $container.id:${service.alias}"
           containerIds = " $container.id "
         }
       }
 
-      script.docker.image(config.image).inside(" $links --privileged") { c ->
+      // parse environment variable
+      if (config.variables) {
+        config.variables.each { k, v -> 
+          script.env."$k" = v
+        }
+      }
+      
+      script.docker.image(config.image).inside("$links --privileged") { c ->
         config.script.each { command -> 
           script.sh command
         }
@@ -34,14 +41,6 @@ class Task {
     }
 
     try {
-      // parse environment variable
-      if (config.variables) {
-        config.variables.each { k, v -> 
-          script.env."$k" = v
-        }
-      }
-
-
       if (config.credentials) {
         WithCredentials.parse(config.credentials, script, task)
         return
