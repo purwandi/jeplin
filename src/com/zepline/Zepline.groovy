@@ -14,11 +14,14 @@ class Zepline {
   }
 
   def init() {
+    def t = [:]
+
     this.stages = yaml.stages
     this.yaml.tasks.each { k, v ->
       def config = new Config(v, yaml)
-      this.tasks[k] = new Task(k, config, script)
+      t[k] = new Task(k, config, script)
     }
+    this.tasks = t
 
     if (stages) {
       // check if all task have stage property
