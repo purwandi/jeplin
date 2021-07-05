@@ -46,11 +46,17 @@ class Zepline {
   }
 
   def execute() {
-    this.buildTask("hello")
-    // buildTask(tasks).values()
-    // for (t in ) {
-    //   t.call()
-    // }
+    def taskable = { name -> 
+      script.sh "echo ${name}"
+    }
+
+    taskable("magic")
+    
+    // this.buildTask("hello")
+    // // buildTask(tasks).values()
+    // // for (t in ) {
+    // //   t.call()
+    // // }
   }
   
   def buildTasks(String t) {
