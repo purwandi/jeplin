@@ -1,10 +1,10 @@
 package com.zepline
 
-// import java.util.LinkedHashMap
+import java.util.LinkedHashMap
 
 class Zepline {
   def stages
-  def tasks = [:]
+  LinkedHashMap tasks = [:]
   def yaml
   def script
 
