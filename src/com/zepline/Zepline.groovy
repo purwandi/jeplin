@@ -9,11 +9,10 @@ class Zepline {
   Zepline(def script, def yaml) {
     this.script = script
     this.yaml = yaml
-
-    this.stages = yaml.stages
   }
 
   def init() {
+    this.stages = yaml.stages
     this.yaml.tasks.each { k, v ->
       def config = new Config(v, yaml)
     //   return new Task(k, new Config(v, yaml), script)

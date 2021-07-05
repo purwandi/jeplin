@@ -27,7 +27,7 @@ class Config {
 
     config.each { c, v ->
       if (c == "extends") {
-        parse(yaml."$v")
+        parseConfig(yaml."$v")
         return
       }
 
@@ -46,7 +46,7 @@ class Config {
   }
 
   // need refactor
-  def parse(def yaml) {
+  def parseConfig(def yaml) {
     yaml.each { c, v -> 
       if (v) {
         if (c == "variables") {
