@@ -51,18 +51,18 @@ class Zepline {
 
   def buildTasks(def t) {
     def closure = [:]
-    t.each { k, task ->
-      closure[k] = {
-        // script.stage(k) {
-        //   if (task.config.script) {
-        //     script.sh 'echo "Hello"'
-        //     // task.execute()
-        //   } else {
-        //     parallel buildTask(task)
-        //   }
-        // }        
-      }
-    }
+    // t.each { k, task ->
+    //   closure[k] = {
+    //     // script.stage(k) {
+    //     //   if (task.config.script) {
+    //     //     script.sh 'echo "Hello"'
+    //     //     // task.execute()
+    //     //   } else {
+    //     //     parallel buildTask(task)
+    //     //   }
+    //     // }        
+    //   }
+    // }
 
     return closure
   }
