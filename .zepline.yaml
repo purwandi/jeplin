@@ -14,31 +14,31 @@ include:
       - /helm.yaml
 
 tasks:
-  release:
-    image: alpine:3.13
-    stage: release
-    script: 
-      - echo "hello from alpine 3.13"
-      - sleep 10
+  # release:
+  #   image: alpine:3.13
+  #   stage: release
+  #   script: 
+  #     - echo "hello from alpine 3.13"
+  #     - sleep 10
 
-  notification:
-    image: alpine
-    stage: prepare
-    script:
-      - echo "hello notification"
-      - sleep 15
+  # notification:
+  #   image: alpine
+  #   stage: prepare
+  #   script:
+  #     - echo "hello notification"
+  #     - sleep 15
 
-  docker:
-    image: alpine
-    stage: build
-    services:
-      - image: nginx:alpine
-        alias: web
-        # entrypoint: 
-        # command: 
-    script:
-      - echo "hello"
-      - sleep 7
+  # docker:
+  #   image: alpine
+  #   stage: build
+  #   services:
+  #     - image: nginx:alpine
+  #       alias: web
+  #       # entrypoint: 
+  #       # command: 
+  #   script:
+  #     - echo "hello"
+  #     - sleep 7
 
   helm:
     image: alpine
