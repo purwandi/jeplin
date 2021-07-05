@@ -24,7 +24,7 @@ class Task {
     }
 
     if (config.credentials) {
-      Credentials.parse(config.credentials, script, task)
+      Credentials.parse(config.credentials, script).run(task)
       return
     }
 

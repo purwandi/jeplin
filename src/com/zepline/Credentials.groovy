@@ -2,8 +2,9 @@ package com.zepline
 
 class Credentials {
 
-  static Credentials parse(def yaml, def script, def closure) {
-    def creds = []    
+  def creds = []
+
+  Credentials(def yaml, def script) {
     yaml.each { item ->
       switch(item.type) {
         case "usernamePassword": 
@@ -24,14 +25,18 @@ class Credentials {
       }
     }
 
-    return closure()
+    return this
 
     // return script.withCredentials(credentials) {
     //   closure()
     // }
   }
 
-  static def passUsernamePassword(def item, def script) {
+  def execute(def task) {
+    return task()
+  }
+
+  def passUsernamePassword(def item, def script) {
     return script.usernamePassword(
       credentialsId: item.credential,
       usernameVariable: item.variables.username,
@@ -39,21 +44,21 @@ class Credentials {
     )
   }
 
-  static def passUsernameColonPassword(def item, def script) {
+  def passUsernameColonPassword(def item, def script) {
     return script.usernameColonPassword(
       credentialsId: item.credential,
       variable: item.variables.variable
     )
   }
 
-  static def passFile(def item, def script) {
+  def passFile(def item, def script) {
     return script.file(
       credentialsId: item.credential,
       variable: item.variables.variable
     )
   }
 
-  static def passString(def item, def script) {
+  def passString(def item, def script) {
     return script.string(
       credentialsId: item.credential,
       variable: item.variables.variable
