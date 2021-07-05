@@ -33,7 +33,7 @@ class Task {
         }
       }
       
-      script.docker.image(config.image).inside("$links --privileged -e DOCKER_CERT_PATH=${script.env.WORKSPACE}/.certs/client") { c ->
+      script.docker.image(config.image).inside("$links --privileged -e DOCKER_HOST=tcp://docker:2376 -e DOCKER_CERT_PATH=${script.env.WORKSPACE}/.certs/client") { c ->
         config.script.each { command -> 
           script.sh command
         }
