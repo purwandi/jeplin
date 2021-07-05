@@ -47,12 +47,12 @@ class Zepline {
   }
 
   def execute() {
-    for (t in taskable(tasks).values()) {
+    for (t in taskable(tasks, script).values()) {
       t.call()
     }
   }
 
-  def taskable (def t) { 
+  def taskable (def t, def script) { 
     def closure = [:]
     t.each { k, task -> 
       closure[k] = {
@@ -60,11 +60,10 @@ class Zepline {
           if (task.config != null && task.config.script != null) {
             script.sh "echo 'Hello'"
           } else {
-            task.each { k1, v1 -> 
-              script.sh "echo ${k1}"
-            }
-            // println task
-            // script.parallel taskable(task)
+            script.parallel taskable(task, script)
+            // task.each { k1, v1 -> 
+            //   // script.sh "echo ${k1}"
+            // }
           }
         }
       }
