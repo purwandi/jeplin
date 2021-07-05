@@ -11,8 +11,14 @@ class Task {
 
   def execute(def script) {
     // script.sh 'echo "Hello"'
-    config.script.each { command -> 
-      script.sh command
+    if (config.script == null) {
+      throw new Exception("The script property in '${k}' is not defined ")
+    }
+
+    script.docker.image(config.image).inside() { c ->
+      config.script.each { command -> 
+        script.sh command
+      }
     }
   }
 }
