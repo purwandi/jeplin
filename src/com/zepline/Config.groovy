@@ -45,13 +45,13 @@ class Config {
       }
 
       if (v) {
-        if (c == "variables") {
+        if (k == "variables") {
           v.collect { i, n ->
             data.variables[i] = n
           }
           return
         }
-        data."$c" = v
+        data."$k" = v
       }
     }
     return data

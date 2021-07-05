@@ -38,7 +38,7 @@ tasks:
 
 def y = new YamlSlurper().parseText(yaml)
 y.tasks.each { c, v ->
-  def cfg = new Config(v, y)
+  def cfg = Config.parse(v, y)
 
   println cfg.getProperties().toString()
   
