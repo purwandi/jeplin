@@ -12,6 +12,8 @@ include:
     ref: main
     files: 
       - /helm.yaml
+variables:
+  DOCKER_REGISTRY: ghcr.io
 
 tasks:
   # release:
@@ -28,17 +30,24 @@ tasks:
   #     - echo "hello notification"
   #     - sleep 15
 
-  # docker:
-  #   image: alpine
-  #   stage: build
-  #   services:
-  #     - image: nginx:alpine
-  #       alias: web
-  #       # entrypoint: 
-  #       # command: 
-  #   script:
-  #     - echo "hello"
-  #     - sleep 7
+  docker:
+    image: docker
+    stage: build
+    credentials:
+      - credential: github-credentials
+        variables:
+          username: GITHUB_USERNAME
+          password: GITHUB_PASSWORD
+    services:
+      - image: docker:dind
+        alias: web
+        # entrypoint: 
+        # command: 
+    script:
+      - env
+      # - echo "$GITHUB_PASSWORD" | docker login $DOCKER_REGISTRY --username $GITHUB_USERNAME --password-stdin
+      - echo "hello"
+      - sleep 7
 
   helm:
     image: alpine

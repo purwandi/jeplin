@@ -23,6 +23,13 @@ class Task {
       }
     }
 
+    // parse environment variable
+    if (config.variables) {
+      config.variables.each { k, v -> 
+        script.env."$k" = v
+      }
+    }
+
     if (config.credentials) {
       WithCredentials.parse(config.credentials, script, task)
       return
