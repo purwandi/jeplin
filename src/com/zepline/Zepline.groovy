@@ -54,7 +54,7 @@ class Zepline {
     t.each { k, task ->
       closure[k] = {
         script.stage(k) {
-          if (task.script) {
+          if (task.config.script) {
             task.execute()
           } else {
             parallel buildTask(task)

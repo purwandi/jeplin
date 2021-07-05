@@ -12,9 +12,10 @@ class Task {
   }
 
   def execute() {
-    config.script.each { command -> 
-      script.sh command
-    }
+    script.sh 'echo "Hello"'
+    // config.script.each { command -> 
+    //   script.sh command
+    // }
   }
 
   // def run() {
