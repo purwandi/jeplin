@@ -25,6 +25,7 @@ def call(String filename) {
   Zepline zepline = new Zepline(this, config).init()
 
   println zepline
+  println config
 
   try {
     zepline.execute()
