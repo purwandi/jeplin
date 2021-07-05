@@ -4,7 +4,7 @@ class WithCredentials {
 
   def creds = []
 
-  static def parse(def yaml, def script) {
+  static def parse(def yaml, def script, def closure) {
     def self = new WithCredentials()
 
     yaml.each { item ->
@@ -23,7 +23,7 @@ class WithCredentials {
       // }
     }
 
-    return this
+    return closure()
 
     // return script.withCredentials(credentials) {
     //   closure()
