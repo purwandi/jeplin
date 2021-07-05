@@ -25,5 +25,8 @@ def call(String filename) {
   }
 
   println files
+  config = readYaml text: files
+
+  println config
   sh 'ls -all'
 }
