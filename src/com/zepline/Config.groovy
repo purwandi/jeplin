@@ -13,55 +13,48 @@ class Config {
 
   def yaml 
 
-  Config(def config, def yaml) {
-    this.yaml = yaml
-    // this.uid  = GenUID()
+  static Config parse(def config, def yaml) {
+    Config data = new Config()
+    data.yaml = yaml
+    
 
     if (yaml.image) {
-      this.image = yaml.image
+      data.image = yaml.image
     }
-
+    
     if (yaml.variables) {
-      this.variables = yaml.variables
+      data.variables = yaml.variables
     }
 
-    config.each { c, v ->
-      if (c == "extends") {
-        parseConfig(yaml."$v")
+    // this.variables = yaml.variables
+    config.each { k, v -> 
+      if (k == "extends") {
+        def yamlExtends = yaml."$v"
+        if (yamlExtends) {
+          yamlExtends.each {ky, vy -> 
+            if (ky == "variables") {
+              vy.collect { i, n ->
+                data.variables[i] = n
+              }
+              return
+            }
+            data."$ky" = vy
+          }
+        }
         return
       }
 
-      // need refactor
       if (v) {
         if (c == "variables") {
           v.collect { i, n ->
-            this.variables[i] = n
+            data.variables[i] = n
           }
           return
-        } 
-
-        this."$c" = v
+        }
+        data."$c" = v
       }
     }
-  }
-
-  // need refactor
-  // @NonCPS
-  def parseConfig(def yaml) {
-    yaml.each { c, v -> 
-      if (v) {
-        if (c == "variables") {
-          v.collect { i, n ->
-            this.variables[i] = n
-          }
-          return
-        } 
-
-        this."$c" = v
-      }
-    }
-
-    return this
+    return data
   }
 
   // @NonCPS
