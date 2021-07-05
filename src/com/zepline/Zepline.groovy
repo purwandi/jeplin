@@ -57,8 +57,21 @@ class Zepline {
             if (task.config != null && task.config.script != null) {
               script.sh "echo 'Hello'"
             } else {
-              parallel taskable(task)
+              script.parallel tasksableParallel(task)
             }
+          }
+        }
+      }
+
+      return closure
+    }
+
+    def tasksableParallel = { t -> 
+      def closure = [:]
+      t.each { k, task -> 
+        closure[k] = {
+          script.stage(k) {
+            script.sh "echo 'Hello'"
           }
         }
       }
