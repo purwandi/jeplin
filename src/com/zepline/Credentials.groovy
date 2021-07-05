@@ -3,13 +3,21 @@ package com.zepline
 class Credentials {
 
   static Credentials parse(def yaml, def script, def closure) {
-    def credentials = []    
+    def creds = []    
     yaml.each { item ->
       switch(item.type) {
-        case "usernamePassword": return credentials.add(passUsernamePassword(item, script))
-        case "usernameColonPassword": return credentials.add(passUsernameColonPassword(item, script))
-        case "file": return credentials.add(passFile(item, script))
-        case "string": return credentials.add(passString(item, script))
+        case "usernamePassword": 
+          creds.add(passUsernamePassword(item, script))
+          break
+        case "usernameColonPassword": 
+          creds.add(passUsernameColonPassword(item, script))
+          break
+        case "file": 
+          creds.add(passFile(item, script))
+          break
+        case "string": 
+          creds.add(passString(item, script))
+          break
         default:
           throw new Exception("Undefined '${item.type}' credential ")
           break
