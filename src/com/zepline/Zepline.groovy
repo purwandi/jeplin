@@ -55,17 +55,17 @@ class Zepline {
   def taskable (def t) { 
     def that = this
     def closure = [:]
-    // t.each { k, task -> 
-    //   closure[k] = {
-    //     script.stage(k) {
-    //       if (task.config != null && task.config.script != null) {
-    //         script.sh "echo 'Hello'"
+    t.each { k, task -> 
+      closure[k] = {
+        script.stage(k) {
+          // if (task.config != null && task.config.script != null) {
+            script.sh "echo 'Hello'"
     //       } else {
     //         script.parallel that.taskable(task)
     //       }
-    //     }
-    //   }
-    // }
+        }
+      }
+    }
 
     return closure
   }
