@@ -23,10 +23,10 @@ class Task {
       }
     }
 
-    if (config.credentials) {
-      Credentials.parse(config.credentials, script, task)
-      return
-    }
+    // if (config.credentials) {
+    //   Credentials.parse(config.credentials, script, task)
+    //   return
+    // }
 
     task()
     return
