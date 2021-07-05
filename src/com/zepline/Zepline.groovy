@@ -61,7 +61,7 @@ class Zepline {
           if (task.config != null && task.config.script != null) {
             script.sh "echo 'Hello'"
           } else {
-            script.parallel that.taskable(task)
+            script.parallel taskable(task)
           }
         }
       }
