@@ -50,7 +50,7 @@ class Zepline {
       def closure = [:]
       t.each { k, task -> 
         closure[k] = {
-          script.stage {
+          script.stage(k) {
             script.sh "echo 'Hello'"
           }
         }
