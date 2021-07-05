@@ -23,7 +23,7 @@ class Zepline {
     if (stages) {
       // check if all task have stage property
       tasks.each { k, v -> 
-        if (v.stage == null) {
+        if (v.config.stage == null) {
           throw new Exception("The stage property in '${k}' is not defined ")
         }
 
@@ -34,8 +34,8 @@ class Zepline {
 
       // sort tasks by stage
       def closure = [:]
-      def groups = tasks.groupBy(it.value.stage)
-      stages.collect{k ->
+      def groups = tasks.groupBy(it.value.config.stage)
+      stages.collect{ k ->
         if (groups[k] != null) {
           closure[k] = groups[k]
         }
