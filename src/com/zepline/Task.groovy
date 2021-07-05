@@ -1,6 +1,7 @@
 package com.zepline
 
 class Task {
+  String        name
   Config        config
   def           script
 
