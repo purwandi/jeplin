@@ -3,19 +3,17 @@ package com.zepline
 class Task {
   String        name
   Config        config
-  def           script
 
-  Task (String name, Config config, def script) {
+  Task (String name, Config config) {
     this.name     = name
     this.config   = config
-    this.script   = script
   }
 
-  def execute() {
+  def execute(def script) {
     // script.sh 'echo "Hello"'
-    // config.script.each { command -> 
-    //   script.sh command
-    // }
+    config.script.each { command -> 
+      script.sh command
+    }
   }
 
   // def run() {
