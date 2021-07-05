@@ -45,7 +45,7 @@ tasks:
           password: GITHUB_PASSWORD
     variables:
       # DOCKER_CERT_PATH: "$WORKSPACE/.certs/client"
-      DOCKER_TLS_VERIFY: true
+      DOCKER_TLS_VERIFY: false
       DOCKER_DRIVER: overlay2 
       DOCKER_HOST: "tcp://docker:2376"
     services:
