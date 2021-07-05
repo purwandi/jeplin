@@ -46,11 +46,20 @@ class Zepline {
   }
 
   def execute() {
-    def taskable = { name -> 
-      script.sh "echo ${name}"
+    def taskable = { t -> 
+      def closure = [:]
+      t.each { k, task -> 
+        closure[k] = {
+          script.stage {
+            script.sh "echo 'Hello'"
+          }
+        }
+      }
+
+      return closure
     }
 
-    taskable("magic")
+    taskable(tasks)
     
     // this.buildTask("hello")
     // // buildTask(tasks).values()
