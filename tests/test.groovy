@@ -1,55 +1,56 @@
-String alphabet = "ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789"
-int n = 8
+import groovy.yaml.YamlSlurper
 
-def password = new Random().with {
-  (1..n).collect { alphabet[ nextInt( alphabet.length() ) ] }.join() 
-}
+import com.zepline.Config
 
-println password
+def yaml = """
+image: alpine:latest
+image: curl:latest
 
-// import groovy.yaml.YamlSlurper
+include:
+  - remote: 'https://github.com/purwandi/zepline-test.git'
+    credential: github-credentials
+    ref: main
+    files: 
+      - /helm.yaml
 
-// import com.zepline.Config
+tasks:
+  release:
+    image: alpine:3.13
+    stage: release
+    script: 
+      - echo "hello from alpine 3.13"
+      - sleep 10
 
-// def yaml = """
-// image: alpine:latest
-// image: curl:latest
+  helm:
+    extends: .helm
+    stage: release
+    variables:
+      ENV: prod
 
-// include:
-//   - remote: 'https://github.com/purwandi/zepline-test.git'
-//     credential: github-credentials
-//     ref: main
-//     files: 
-//       - /helm.yaml
+.helm:
+  image: dtzar/helm-kubectl:latest
+  variables:
+    PORT: 8080
+  script:
+    - echo "Runing as helm"
+    - sleep 30
+"""
 
-// tasks:
-//   release:
-//     image: alpine:3.13
-//     stage: release
-//     script: 
-//       - echo "hello from alpine 3.13"
-//       - sleep 10
+String s = ""
 
-//   helm:
-//     extends: .helm
-//     stage: release
-//     variables:
-//       ENV: prod
+s = s + " hello"
+s = s + " xx"
 
-// .helm:
-//   image: dtzar/helm-kubectl:latest
-//   variables:
-//     PORT: 8080
-//   script:
-//     - echo "Runing as helm"
-//     - sleep 30
-// """
+println s
 
 // def y = new YamlSlurper().parseText(yaml)
+
+// String string = ""
+
 // y.tasks.each { c, v ->
 //   def cfg = Config.parse(v, y)
 
 //   println cfg.getProperties().toString()
   
 // }
-// // def c = new Config(y.helm, y)
+// def c = new Config(y.helm, y)
