@@ -52,7 +52,7 @@ class Zepline {
     // }
   }
   
-  def buildTasks(def t) {
+  def buildTasks(LinkedHashMap t) {
     def closure = [:]
     // t.each { k, task ->
     //   closure[k] = {
