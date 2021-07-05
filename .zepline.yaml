@@ -39,6 +39,9 @@ tasks:
         variables:
           username: GITHUB_USERNAME
           password: GITHUB_PASSWORD
+    variables:
+      DOCKER_DRIVER: overlay2 
+      DOCKER_HOST=: tcp://docker:2376
     services:
       - image: docker:dind
         alias: docker
