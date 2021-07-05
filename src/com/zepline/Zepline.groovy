@@ -27,7 +27,7 @@ class Zepline {
           throw new Exception("The stage property in '${k}' is not defined ")
         }
 
-        if (stages.contains(v.stage) == false) {
+        if (stages.contains(v.config.stage) == false) {
           throw new Exception("The stage property in '${k}' is not defined in stages ")
         }
       }
