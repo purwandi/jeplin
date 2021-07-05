@@ -42,15 +42,16 @@ tasks:
 
   helm:
     image: alpine
+    extends: .helm
     stage: build
     services:
       - image: nginx:alpine
         alias: web
         # entrypoint: 
         # command: 
-    script:
-      - echo "hello"
-      - sleep 10
+    # script:
+    #   - echo "hello"
+    #   - sleep 10
 
   # helm:
   #   extends: .helm
