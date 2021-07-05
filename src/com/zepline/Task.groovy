@@ -20,13 +20,13 @@ class Task {
     def task = {
       if (config.services) {
         config.services.each { service ->
-          def container = script.docker.image(service.image).run("--privileged")
+          def container = script.docker.image(service.image).run("--privileged -e DOCKER_TLS_CERTDIR=${script.env.WORKSPACE}/.certs -v ${script.env.WORKSPACE}:${script.env.WORKSPACE}")
           links = links +  " --link $container.id:${service.alias}"
           containerIds = " $container.id "
         }
       }
 
-      script.docker.image(config.image).inside(" $links --privileged -e DOCKER_HOST=tcp://docker:2376") { c ->
+      script.docker.image(config.image).inside(" $links --privileged -e DOCKER_CERT_PATH=${script.env.WORKSPACE}/.certs/client -e DOCKER_HOST=tcp://docker:2376") { c ->
         config.script.each { command -> 
           script.sh command
         }
