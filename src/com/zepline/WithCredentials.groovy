@@ -12,8 +12,7 @@ class WithCredentials {
       // println item.type
       switch(item.type) {
         case "usernamePassword": 
-          return
-          break
+          return self.passUsernamePassword(item, script)
       //     return self.passUsernamePassword(item, script)
       //   case "usernameColonPassword": 
       //     return self.passUsernameColonPassword(item, script)
@@ -38,11 +37,11 @@ class WithCredentials {
     return task()
   }
 
-  def passUsernamePassword(def item, def script) {
+  static def passUsernamePassword(def item, def script) {
     this.creds.add(script.usernamePassword(
       credentialsId: item.credential,
-      usernameVariable: item.variables.username,
-      passwordVariable: item.variables.password
+      usernameVariable: "$item.variables.username",
+      passwordVariable: "$item.variables.password"
     ))
 
     return this
