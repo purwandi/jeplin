@@ -1,5 +1,23 @@
 import com.zepline.Zepline
 
+def taskable(def tasks) {
+  def closure = [:]
+
+  tasks.each { k, task -> 
+    closure[k] = {
+      stage(k) {
+        if (task.config != null && task.config.script != null) {
+          sh "echo 'Hello'"
+        } else {
+          parallel taskable(task)
+        }
+      }
+    }
+  }
+
+  return closure
+}
+
 def call(String filename) {
   def config = readYaml file: ".zepline.yaml"
   if (config == null) {
