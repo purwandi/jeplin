@@ -20,7 +20,7 @@ class Task {
     def task = {
       if (config.services) {
         config.services.each { service ->
-          def container = script.docker.image(service.image).run()
+          def container = script.docker.image(service.image).run("--privileged")
           links = links +  " --link $container.id:${service.alias}"
           containerIds = " $container.id "
         }
