@@ -52,6 +52,8 @@ class Task {
       if (config.services) {
         script.sh "docker rm $containerIds --force"
       }
+
+      script.cleanWs()
     }
   }
 }
