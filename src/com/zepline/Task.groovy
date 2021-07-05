@@ -20,7 +20,7 @@ class Task {
     def task = {
       if (config.services) {
         config.services.each { service ->
-          def container = script.docker.image(service.image).run("--privileged -e DOCKER_TLS_CERTDIR=${script.env.WORKSPACE}/.certs")
+          def container = script.docker.image(service.image).run("--privileged -e DOCKER_TLS_CERTDIR=${script.env.WORKSPACE}/.certs -v ${script.env.WORKSPACE}:${script.env.WORKSPACE}")
           links = links +  " --link $container.id:${service.alias}"
           containerIds = " $container.id "
         }
