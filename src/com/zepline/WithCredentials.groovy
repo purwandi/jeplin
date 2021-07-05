@@ -9,32 +9,24 @@ class WithCredentials {
 
     yaml.each { item ->
       script.sh "echo ${item.type}"
-      // println item.type
       switch(item.type) {
         case "usernamePassword": 
           return self.passUsernamePassword(item, script)
-      //     return self.passUsernamePassword(item, script)
-      //   case "usernameColonPassword": 
-      //     return self.passUsernameColonPassword(item, script)
-      //   case "file": 
-      //     return self.passFile(item, script)
-      //   case "string": 
-      //     return self.passString(item, script)
+        case "usernameColonPassword": 
+          return self.passUsernameColonPassword(item, script)
+        case "file": 
+          return self.passFile(item, script)
+        case "string": 
+          return self.passString(item, script)
         default:
           throw new Exception("Undefined '${item.type}' credential ")
           break
       }
     }
 
-    return closure()
-
-    // return script.withCredentials(credentials) {
-    //   closure()
-    // }
-  }
-
-  def execute(def task) {
-    return task()
+    return script.withCredentials(self.creds) {
+      closure()
+    }
   }
 
   def passUsernamePassword(def item, def script) {
