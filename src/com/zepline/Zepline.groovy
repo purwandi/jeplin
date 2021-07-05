@@ -4,7 +4,7 @@ import java.util.LinkedHashMap
 
 class Zepline {
   def stages
-  LinkedHashMap tasks = [:]
+  def tasks
   def yaml
   def script
 
