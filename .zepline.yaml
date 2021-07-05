@@ -40,6 +40,18 @@ tasks:
       - echo "hello"
       - sleep 7
 
+  helm:
+    image: alpine
+    stage: build
+    services:
+      - image: nginx:alpine
+        alias: web
+        # entrypoint: 
+        # command: 
+    script:
+      - echo "hello"
+      - sleep 10
+
   # helm:
   #   extends: .helm
   #   stage: release
