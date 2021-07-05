@@ -14,9 +14,8 @@ include:
       - /helm.yaml
 variables:
   DOCKER_REGISTRY: ghcr.io
-  # DOCKER_TLS_CERTDIR: $WORKSPACE/.certs
+  DOCKER_TLS_CERTDIR: $WORKSPACE/.certs
   # DOCKER_TLS_VERIFY: true
-  DOCKER_CERT_PATH: $WORKSPACE/.certs/client
   # DOCKER_DRIVER: overlay2 
   # DOCKER_HOST: "tcp://docker:2376"
 
@@ -45,6 +44,7 @@ tasks:
           username: GITHUB_USERNAME
           password: GITHUB_PASSWORD
     variables:
+      DOCKER_CERT_PATH: $WORKSPACE/.certs/client
       DOCKER_TLS_VERIFY: true
       DOCKER_DRIVER: overlay2 
       DOCKER_HOST: "tcp://docker:2376"
