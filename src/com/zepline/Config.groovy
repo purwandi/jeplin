@@ -58,14 +58,12 @@ class Config {
     return data
   }
 
-
-  @NonCPS
+  // @NonCPS
   def GenUID() {
-    String alphabet = "ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789"
-    int n = 8
-
-    return new Random().with {
-      (1..n).collect { alphabet[ nextInt( alphabet.length() ) ] }.join() 
-    }   
+    String alphabet = (('A'..'N')+('P'..'Z')+('a'..'k')+('m'..'z')+('2'..'9')).join('')
+    def rnd = new Random()   // because .with{} doesn't work
+    int n = 10
+    
+    return (1..n).collect { alphabet[ rnd.nextInt( alphabet.length() ) ] }.join('')
   }
 }
