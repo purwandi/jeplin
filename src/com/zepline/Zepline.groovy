@@ -50,7 +50,7 @@ class Zepline {
     // }
   }
 
-  def buildTasks(def t) {
+  def buildTasks(def t = [:]) {
     def closure = [:]
     // t.each { k, task ->
     //   closure[k] = {
