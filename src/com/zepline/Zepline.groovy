@@ -1,5 +1,7 @@
 package com.zepline
 
+import java.util.LinkedHashMap
+
 class Zepline {
   def stages
   def tasks = [:]
