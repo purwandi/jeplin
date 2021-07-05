@@ -46,6 +46,7 @@ tasks:
         command: 
     script:
       - env
+      - docker info
       # - echo "$GITHUB_PASSWORD" | docker login $DOCKER_REGISTRY --username $GITHUB_USERNAME --password-stdin
       - echo "hello"
       - sleep 7

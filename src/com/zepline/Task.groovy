@@ -10,40 +10,50 @@ class Task {
   }
 
   def execute(def script) {
+    String links = ""
+    String containerIds = ""
+
     if (config.script == null) {
       throw new Exception("The script property in '${k}' is not defined ")
     }
 
     def task = {
       if (config.services) {
-        
+        config.services.each { service -> {
+          def container = docker.image(service.image).run()
+          links = links +  " --link $container.id:${service.alias}"
+          containerIds = " $container.id "
+        }}
       }
 
-      script.docker.image(config.image).inside() { c ->
+      script.docker.image(config.image).inside(" $links ") { c ->
         config.script.each { command -> 
           script.sh command
         }
       }
     }
 
-    // parse environment variable
-    if (config.variables) {
-      config.variables.each { k, v -> 
-        script.env."$k" = v
+    try {
+      // parse environment variable
+      if (config.variables) {
+        config.variables.each { k, v -> 
+          script.env."$k" = v
+        }
+      }
+
+
+      if (config.credentials) {
+        WithCredentials.parse(config.credentials, script, task)
+        return
+      }
+
+      task()
+      return
+    } finally {
+      if (config.services) {
+        script.sh "docker rm $containerIds --force"
       }
     }
-
-    if (config.services) {
-
-    }
-
-    if (config.credentials) {
-      WithCredentials.parse(config.credentials, script, task)
-      return
-    }
-
-    task()
-    return
   }
 }
 
