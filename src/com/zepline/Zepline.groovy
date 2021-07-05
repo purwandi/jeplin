@@ -53,7 +53,7 @@ class Zepline {
       t.each { k, task -> 
         closure[k] = {
           script.stage(k) {
-            if (task.config.script) {
+            if (task.config.script != null) {
               script.sh "echo 'Hello'"
             } else {
               script.parallel taskable(task)
