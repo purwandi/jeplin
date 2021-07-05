@@ -2,7 +2,7 @@ package com.zepline
 
 class Zepline {
   def stages
-  def tasks 
+  def tasks = [:]
   def yaml
   def script
 
@@ -11,8 +11,9 @@ class Zepline {
     this.yaml = yaml
 
     this.stages = yaml.stages
-    this.tasks = yaml.tasks.each { k, v ->
-    //   def config = new Config(v, yaml)
+    
+    yaml.tasks.each { k, v ->
+      def config = new Config(v, yaml)
     //   return new Task(k, new Config(v, yaml), script)
     }
 
