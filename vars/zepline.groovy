@@ -28,6 +28,7 @@ def call(String filename) {
   config = readYaml text: files
 
   println config
+  println config.helm
   println config.".helm"
   sh 'ls -all'
 }
