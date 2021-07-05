@@ -46,7 +46,7 @@ class Config {
   }
 
   // need refactor
-  @NonCPS
+  // @NonCPS
   def parseConfig(def yaml) {
     yaml.each { c, v -> 
       if (v) {

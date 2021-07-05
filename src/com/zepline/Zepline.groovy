@@ -58,11 +58,6 @@ class Zepline {
         script.stage(k) {
           if (task.config != null && task.config.script != null) {
             task.execute(script)
-            // task.config.script.each { command ->
-            //   script.sh command
-            // }
-            // script.sh "echo ${task.name}"
-            // script.sh "echo 'Hello'"
           } else {
             script.parallel taskable(task, script)
           }
