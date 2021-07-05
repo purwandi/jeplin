@@ -19,11 +19,11 @@ class Task {
 
     def task = {
       if (config.services) {
-        config.services.each { service -> {
+        config.services.each { service ->
           def container = docker.image(service.image).run()
           links = links +  " --link $container.id:${service.alias}"
           containerIds = " $container.id "
-        }}
+        }
       }
 
       script.docker.image(config.image).inside(" $links ") { c ->
