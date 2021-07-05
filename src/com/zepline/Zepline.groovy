@@ -17,7 +17,10 @@ class Zepline {
     this.stages = yaml.stages
     this.yaml.tasks.each { k, v ->
       def config = new Config(v, yaml)
-      this.tasks[k] = new Task(k, config, script)
+      def task = new Task(k, config, script)
+      this.tasks[k] = task
+
+      println task
     }
 
     if (stages) {
@@ -53,11 +56,11 @@ class Zepline {
       t.each { k, task -> 
         closure[k] = {
           script.stage(k) {
-            if (task.config.script != null) {
-              script.sh "echo 'Hello'"
-            } else {
-              script.parallel taskable(task)
-            }
+            // if (task.config.script != null) {
+            //   script.sh "echo 'Hello'"
+            // } else {
+            //   script.parallel taskable(task)
+            // }
           }
         }
       }

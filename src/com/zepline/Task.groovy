@@ -5,7 +5,7 @@ class Task {
   Config        config
   def           script
 
-  Task (String name, def config, def script) {
+  Task (String name, Config config, def script) {
     this.name     = name
     this.config   = config
     this.script   = script
