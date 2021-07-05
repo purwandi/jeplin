@@ -4,7 +4,7 @@ import java.util.LinkedHashMap
 
 class Zepline {
   def stages
-  def tasks
+  def tasks = [:]
   def yaml
   def script
 
@@ -14,14 +14,11 @@ class Zepline {
   }
 
   def init() {
-    def t = [:]
-
     this.stages = yaml.stages
     this.yaml.tasks.each { k, v ->
       def config = new Config(v, yaml)
-      t[k] = new Task(k, config, script)
+      this.tasks[k] = new Task(k, config, script)
     }
-    this.tasks = t
 
     if (stages) {
       // check if all task have stage property
@@ -37,7 +34,7 @@ class Zepline {
 
       // sort tasks by stage
       def closure = [:]
-      def groups = tasks.groupBy(it.value.config.stage)
+      def groups = tasks.groupBy{it.value.config.stage}
       stages.collect{ k ->
         if (groups[k] != null) {
           closure[k] = groups[k]
