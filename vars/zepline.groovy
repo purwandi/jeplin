@@ -30,5 +30,12 @@ def call(String filename) {
   println config
   println config.helm
   println config.".helm"
+
+  config.".helm".each { k, v ->
+    println k
+    println v
+  }
+
+
   sh 'ls -all'
 }
