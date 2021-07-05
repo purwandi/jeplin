@@ -1,6 +1,6 @@
 package com.zepline
 
-import java.util.LinkedHashMap
+// import java.util.LinkedHashMap
 
 class Zepline {
   def stages
@@ -52,7 +52,7 @@ class Zepline {
     // }
   }
   
-  def buildTasks(LinkedHashMap t) {
+  def buildTasks(def t) {
     def closure = [:]
     // t.each { k, task ->
     //   closure[k] = {
