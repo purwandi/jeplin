@@ -59,7 +59,9 @@ class Zepline {
       return closure
     }
 
-    taskable(tasks)
+    for (t in taskable(tasks).values()) {
+      t.call()
+    }
     
     // this.buildTask("hello")
     // // buildTask(tasks).values()
