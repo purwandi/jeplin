@@ -24,9 +24,6 @@ def call(String filename) {
   config = readYaml text: files
   Zepline zepline = new Zepline(this, config).init()
 
-  println zepline
-  println config
-
   try {
     zepline.execute()
   } finally {

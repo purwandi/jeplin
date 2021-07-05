@@ -56,14 +56,4 @@ class Config {
     }
     return data
   }
-
-  // @NonCPS
-  // def GenUID() {
-  //   String alphabet = (('A'..'N')+('P'..'Z')+('a'..'k')+('m'..'z')+('2'..'9')).join() 
-  //   def length = 8
-
-  //   return new Random().with {
-  //     (1..length).collect { alphabet[ nextInt( alphabet.length() ) ] }.join()
-  //   }
-  // }
 }
