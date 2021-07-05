@@ -57,11 +57,9 @@ tasks:
     script:
       - ls -all
       - env
-      - sleep 10
       - docker info
       # - echo "$GITHUB_PASSWORD" | docker login $DOCKER_REGISTRY --username $GITHUB_USERNAME --password-stdin
-      - echo "hello"
-      - sleep 7
+      - docker build -t zepline .
 
   # helm:
   #   image: alpine
