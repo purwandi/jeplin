@@ -6,7 +6,7 @@ def call(String filename) {
     return
   }
 
-  def files = readFile ".zepline.yaml"
+  def files = readFile file:".zepline.yaml"
   
   // clone include project
   if (config.include) {
@@ -15,9 +15,10 @@ def call(String filename) {
         git branch: item.ref , credentialsId: item.credential, url: item.remote 
       }
 
-      item.files.each { file ->
-        def f = readFile "$WORKSPACE/.include${file}"
+      item.files.each { f ->
+        def f = readFile file: "$WORKSPACE/.include${f}"
         files = "${files}\n${f}"
+        println files
         // files = files + readFile "$WORKSPACE/.include/${file}"
       }
     }
