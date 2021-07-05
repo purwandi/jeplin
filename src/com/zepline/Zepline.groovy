@@ -40,11 +40,29 @@ class Zepline {
       }
       this.tasks = closure
     }
-
-    // this.tasks = config.tasks.collect { k, item ->
-    //   return new Task(k, item, script)
-    // }
-
     return this
+  }
+
+  def execute() {
+    for (task in buildTask(tasks).values()) {
+      task.call()
+    }
+  }
+
+  def buildTasks(def t) {
+    def closure = [:]
+    t.each { k, task ->
+      closure[k] = {
+        script.stage(k) {
+          if (task.script) {
+            task.execute()
+          } else {
+            parallel buildTask(task)
+          }
+        }        
+      }
+    }
+
+    return closure
   }
 }

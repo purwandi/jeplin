@@ -12,7 +12,9 @@ class Task {
   }
 
   def execute() {
-    
+    script.each { command -> 
+      script.sh command
+    }
   }
 
   // def run() {

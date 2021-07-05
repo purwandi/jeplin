@@ -26,6 +26,11 @@ def call(String filename) {
 
   println zepline
 
+  try {
+    zepline.execute()
+  } finally {
+
+  }
 
   // println files
   
