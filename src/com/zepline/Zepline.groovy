@@ -44,8 +44,8 @@ class Zepline {
   }
 
   def execute() {
-    for (task in buildTask(tasks).values()) {
-      task.call()
+    for (t in buildTask(tasks).values()) {
+      t.call()
     }
   }
 
@@ -55,7 +55,8 @@ class Zepline {
       closure[k] = {
         script.stage(k) {
           if (task.config.script) {
-            task.execute()
+            script.sh 'echo "Hello"'
+            // task.execute()
           } else {
             parallel buildTask(task)
           }
