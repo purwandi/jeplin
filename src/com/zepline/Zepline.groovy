@@ -1,7 +1,5 @@
 package com.zepline
 
-import java.util.LinkedHashMap
-
 class Zepline {
   def stages
   def tasks = [:]
@@ -17,7 +15,7 @@ class Zepline {
     this.stages = yaml.stages
     this.yaml.tasks.each { k, v ->
       def config = new Config(v, yaml)
-      def task = new Task(k, config, script)
+      def task = new Task(k, config)
       this.tasks[k] = task
     }
 
@@ -59,10 +57,10 @@ class Zepline {
       closure[k] = {
         script.stage(k) {
           if (task.config != null && task.config.script != null) {
-            // task.execute(script)
-            task.config.script.each { command ->
-              script.sh command
-            }
+            task.execute(script)
+            // task.config.script.each { command ->
+            //   script.sh command
+            // }
             // script.sh "echo ${task.name}"
             // script.sh "echo 'Hello'"
           } else {
