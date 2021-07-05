@@ -59,7 +59,7 @@ class Zepline {
       closure[k] = {
         script.stage(k) {
           if (task.config != null && task.config.script != null) {
-            task.run(script)
+            task.execute(script)
             // task.config.script.each { command ->
             //   script.sh command
             // }
