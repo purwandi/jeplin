@@ -65,20 +65,7 @@ class Zepline {
 
       return closure
     }
-
-    def tasksableParallel = { t -> 
-      def closure = [:]
-      t.each { k, task -> 
-        closure[k] = {
-          script.stage(k) {
-            script.sh "echo 'Hello'"
-          }
-        }
-      }
-
-      return closure
-    }
-
+    
     for (t in taskable(tasks).values()) {
       t.call()
     }

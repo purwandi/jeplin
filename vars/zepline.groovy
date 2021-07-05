@@ -27,7 +27,9 @@ def call(String filename) {
   println zepline
 
   try {
-    zepline.execute()
+    for (t in taskable(zepline.tasks).values()) {
+      t.call()
+    }
   } finally {
 
   }
