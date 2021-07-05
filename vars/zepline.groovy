@@ -22,7 +22,7 @@ def call(String filename) {
 
   // final project configurations
   config = readYaml text: files
-  Zepline zepline = new Zepline(this, config)
+  Zepline zepline = new Zepline(this, config).init()
 
   println zepline
 
