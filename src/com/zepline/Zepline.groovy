@@ -44,9 +44,10 @@ class Zepline {
   }
 
   def execute() {
-    for (t in buildTask(tasks).values()) {
-      t.call()
-    }
+    this.buildTask(tasks).values()
+    // for (t in ) {
+    //   t.call()
+    // }
   }
 
   def buildTasks(def t) {
