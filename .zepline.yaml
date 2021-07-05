@@ -61,37 +61,37 @@ tasks:
       - echo "hello"
       - sleep 7
 
-  helm:
-    image: alpine
-    extends: .helm
-    credentials:
-      - credential: github-credentials
-        type: usernamePassword
-        variables:
-          username: GITHUB_USERNAME
-          password: GITHUB_PASSWORD
-      # - credential: github-credentials
-      #   type: usernameColonPassword
-      #   variables:
-      #     variable: GITHUB_TOKEN
-      # - credential: file-secret
-      #   type: file
-      #   variables:
-      #     variable: FILE_SECRET
-      # - credential: secret-text
-      #   type: string
-      #   variables:
-      #     variable: FILE_SECRET
-    stage: build
-    services:
-      - image: nginx:alpine
-        alias: web
-        # entrypoint: 
-        # command: 
-    script:
-      - echo $GITHUB_USERNAME
-      - echo $GITHUB_PASSWORD
-      - sleep 10
+  # helm:
+  #   image: alpine
+  #   extends: .helm
+  #   credentials:
+  #     - credential: github-credentials
+  #       type: usernamePassword
+  #       variables:
+  #         username: GITHUB_USERNAME
+  #         password: GITHUB_PASSWORD
+  #     # - credential: github-credentials
+  #     #   type: usernameColonPassword
+  #     #   variables:
+  #     #     variable: GITHUB_TOKEN
+  #     # - credential: file-secret
+  #     #   type: file
+  #     #   variables:
+  #     #     variable: FILE_SECRET
+  #     # - credential: secret-text
+  #     #   type: string
+  #     #   variables:
+  #     #     variable: FILE_SECRET
+  #   stage: build
+  #   services:
+  #     - image: nginx:alpine
+  #       alias: web
+  #       # entrypoint: 
+  #       # command: 
+  #   script:
+  #     - echo $GITHUB_USERNAME
+  #     - echo $GITHUB_PASSWORD
+  #     - sleep 10
 
   # helm:
   #   extends: .helm
