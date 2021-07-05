@@ -46,13 +46,14 @@ class Zepline {
   }
 
   def execute() {
-    buildTask(tasks).values()
+    buildTask("hello")
+    // buildTask(tasks).values()
     // for (t in ) {
     //   t.call()
     // }
   }
   
-  def buildTasks(LinkedHashMap t) {
+  def buildTasks(def t) {
     def closure = [:]
     // t.each { k, task ->
     //   closure[k] = {
