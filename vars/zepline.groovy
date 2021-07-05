@@ -17,8 +17,8 @@ def call(String filename) {
 
       item.files.each { f ->
         def fx = readFile file: "$WORKSPACE/.include${f}"
-        files = "${files}\n${fx}"
-        println files
+        files = "${files}\n\n${fx}"
+        // println files
         // files = files + readFile "$WORKSPACE/.include/${file}"
       }
     }
