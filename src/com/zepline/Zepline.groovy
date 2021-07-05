@@ -44,12 +44,12 @@ class Zepline {
   }
 
   def execute() {
-    // this.buildTask(tasks).values()
+    this.buildTask(tasks).values()
     // for (t in ) {
     //   t.call()
     // }
   }
-
+  @NonCPS
   def buildTasks(def t = [:]) {
     def closure = [:]
     // t.each { k, task ->
