@@ -40,8 +40,8 @@ tasks:
       - echo "hello"
       - sleep 7
 
-  helm:
-    extends: .helm
-    stage: release
-    variables:
-      ENV: prod
+  # helm:
+  #   extends: .helm
+  #   stage: release
+  #   variables:
+  #     ENV: prod
