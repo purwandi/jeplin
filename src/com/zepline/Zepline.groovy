@@ -53,7 +53,6 @@ class Zepline {
   }
 
   def taskable (def t) { 
-    def that = this
     def closure = [:]
     t.each { k, task -> 
       closure[k] = {
@@ -61,7 +60,7 @@ class Zepline {
           if (task.config != null && task.config.script != null) {
             script.sh "echo 'Hello'"
           } else {
-            script.parallel taskable(task)
+            // script.parallel taskable(task)
           }
         }
       }
