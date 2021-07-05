@@ -20,7 +20,9 @@ class Zepline {
       def task = new Task(k, config, script)
       this.tasks[k] = task
 
+      println "hello"
       println task.config
+      println config
     }
 
     if (stages) {
