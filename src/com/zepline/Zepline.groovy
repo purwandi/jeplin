@@ -46,6 +46,8 @@ class Zepline {
   }
 
   def execute() {
+    // closure function 
+    // i don't know because OOP way is not working in jenkins environment :-(
     def taskable = { t -> 
       def closure = [:]
       t.each { k, task -> 
@@ -68,23 +70,5 @@ class Zepline {
     // // for (t in ) {
     // //   t.call()
     // // }
-  }
-  
-  def buildTasks(String t) {
-    def closure = [:]
-    // t.each { k, task ->
-    //   closure[k] = {
-    //     // script.stage(k) {
-    //     //   if (task.config.script) {
-    //     //     script.sh 'echo "Hello"'
-    //     //     // task.execute()
-    //     //   } else {
-    //     //     parallel buildTask(task)
-    //     //   }
-    //     // }        
-    //   }
-    // }
-
-    return closure
   }
 }
