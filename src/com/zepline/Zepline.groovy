@@ -10,10 +10,11 @@ class Zepline {
     this.script = script
     this.yaml = yaml
 
-    this.stages = yaml.stages
-    this.tasks = yaml.tasks.each { k, v ->
-      return new Task(k, new Config(v, yaml), script)
-    }
+    // this.stages = yaml.stages
+    // this.tasks = yaml.tasks.each { k, v ->
+    //   def config = new Config(v, yaml)
+    //   return new Task(k, new Config(v, yaml), script)
+    // }
 
   }
 
