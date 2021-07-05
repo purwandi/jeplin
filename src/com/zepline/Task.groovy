@@ -33,7 +33,7 @@ class Task {
         }
       }
       
-      script.docker.image(config.image).inside("$links --privileged -e DOCKER_HOST=tcp://docker:2376") { c ->
+      script.docker.image(config.image).inside("$links --privileged") { c ->
         config.script.each { command -> 
           script.sh command
         }
