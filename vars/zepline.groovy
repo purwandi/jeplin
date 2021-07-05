@@ -14,6 +14,10 @@ def call(String filename) {
       dir('.include') {
         git branch: item.ref , credentialsId: item.credential, url: item.remote 
       }
+
+      item.files.each { file
+        files = files + readFile "$WORKSPACE/.include/${file}"
+      }
     }
   }
 
