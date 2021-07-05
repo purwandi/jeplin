@@ -10,12 +10,15 @@ class Task {
   }
 
   def execute(def script) {
-    // script.sh 'echo "Hello"'
     if (config.script == null) {
       throw new Exception("The script property in '${k}' is not defined ")
     }
 
     def task = {
+      if (config.services) {
+        
+      }
+
       script.docker.image(config.image).inside() { c ->
         config.script.each { command -> 
           script.sh command
@@ -28,6 +31,10 @@ class Task {
       config.variables.each { k, v -> 
         script.env."$k" = v
       }
+    }
+
+    if (config.services) {
+
     }
 
     if (config.credentials) {

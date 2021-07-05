@@ -17,7 +17,7 @@ class Config {
   static Config parse(def config, def yaml) {
     Config data = new Config()
     data.yaml = yaml
-    
+    data.uid  = data.GenUID()
 
     if (yaml.image) {
       data.image = yaml.image
@@ -56,5 +56,16 @@ class Config {
       }
     }
     return data
+  }
+
+
+  @NonCPS
+  def GenUID() {
+    String alphabet = "ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789"
+    int n = 8
+
+    return new Random().with {
+      (1..n).collect { alphabet[ nextInt( alphabet.length() ) ] }.join() 
+    }   
   }
 }

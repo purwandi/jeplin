@@ -41,9 +41,9 @@ tasks:
           password: GITHUB_PASSWORD
     services:
       - image: docker:dind
-        alias: web
-        # entrypoint: 
-        # command: 
+        alias: docker
+        entrypoint: 
+        command: 
     script:
       - env
       # - echo "$GITHUB_PASSWORD" | docker login $DOCKER_REGISTRY --username $GITHUB_USERNAME --password-stdin
