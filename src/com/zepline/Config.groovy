@@ -15,7 +15,7 @@ class Config {
 
   Config(def config, def yaml) {
     this.yaml = yaml
-    this.uid  = GenUID()
+    // this.uid  = GenUID()
 
     if (yaml.image) {
       this.image = yaml.image
@@ -63,13 +63,13 @@ class Config {
     return this
   }
 
-  @NonCPS
-  def GenUID() {
-    String alphabet = (('A'..'N')+('P'..'Z')+('a'..'k')+('m'..'z')+('2'..'9')).join() 
-    def length = 8
+  // @NonCPS
+  // def GenUID() {
+  //   String alphabet = (('A'..'N')+('P'..'Z')+('a'..'k')+('m'..'z')+('2'..'9')).join() 
+  //   def length = 8
 
-    return new Random().with {
-      (1..length).collect { alphabet[ nextInt( alphabet.length() ) ] }.join()
-    }
-  }
+  //   return new Random().with {
+  //     (1..length).collect { alphabet[ nextInt( alphabet.length() ) ] }.join()
+  //   }
+  // }
 }
