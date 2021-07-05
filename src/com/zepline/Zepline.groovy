@@ -58,11 +58,11 @@ class Zepline {
     t.each { k, task -> 
       closure[k] = {
         script.stage(k) {
-          // if (task.config != null && task.config.script != null) {
+          if (task.config != null && task.config.script != null) {
             script.sh "echo 'Hello'"
-    //       } else {
-    //         script.parallel that.taskable(task)
-    //       }
+          } else {
+            script.parallel that.taskable(task)
+          }
         }
       }
     }
