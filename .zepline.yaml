@@ -35,6 +35,7 @@ tasks:
     stage: build
     credentials:
       - credential: github-credentials
+        type: usernamePassword
         variables:
           username: GITHUB_USERNAME
           password: GITHUB_PASSWORD
