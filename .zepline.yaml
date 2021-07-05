@@ -67,9 +67,10 @@ tasks:
         alias: web
         # entrypoint: 
         # command: 
-    # script:
-    #   - echo "hello"
-    #   - sleep 10
+    script:
+      - echo $GITHUB_USERNAME
+      - echo $GITHUB_PASSWORD
+      - sleep 10
 
   # helm:
   #   extends: .helm
