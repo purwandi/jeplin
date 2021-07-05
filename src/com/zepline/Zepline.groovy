@@ -49,7 +49,7 @@ class Zepline {
     //   t.call()
     // }
   }
-  @NonCPS
+  
   def buildTasks(def t = [:]) {
     def closure = [:]
     // t.each { k, task ->
