@@ -42,6 +42,8 @@ tasks:
     variables:
       DOCKER_DRIVER: overlay2 
       DOCKER_HOST: "tcp://docker:2376"
+      APP_PORT: 8080
+      SECRET_KEY: 896sdas7122128912sdas
     services:
       - image: docker:dind
         alias: docker
