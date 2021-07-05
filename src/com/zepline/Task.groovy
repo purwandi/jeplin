@@ -16,10 +16,8 @@ class Task {
     }
 
     script.docker.image(config.image).inside() { c ->
-      script.steps {
-        config.script.each { command -> 
-          script.sh command
-        }
+      config.script.each { command -> 
+        script.sh command
       }
     }
   }
