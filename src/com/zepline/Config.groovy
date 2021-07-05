@@ -63,6 +63,7 @@ class Config {
     return this
   }
 
+  @NonCPS
   def GenUID() {
     String alphabet = (('A'..'N')+('P'..'Z')+('a'..'k')+('m'..'z')+('2'..'9')).join() 
     def length = 8
