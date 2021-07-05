@@ -37,7 +37,7 @@ class WithCredentials {
     return task()
   }
 
-  static def passUsernamePassword(def item, def script) {
+  def passUsernamePassword(def item, def script) {
     this.creds.add(script.usernamePassword(
       credentialsId: item.credential,
       usernameVariable: "$item.variables.username",
