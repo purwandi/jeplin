@@ -6,8 +6,9 @@ class Config {
   String        image
   String        stage
 
-  List<Service> services  = []
-  def           variables = [:]
+  List<Service> services      = []
+  def           variables     = [:]
+  def           credentials   = []
   List<String>  only
   List<String>  script
 

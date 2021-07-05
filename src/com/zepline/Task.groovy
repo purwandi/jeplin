@@ -15,11 +15,21 @@ class Task {
       throw new Exception("The script property in '${k}' is not defined ")
     }
 
-    script.docker.image(config.image).inside() { c ->
-      config.script.each { command -> 
-        script.sh command
+    def task = {
+      script.docker.image(config.image).inside() { c ->
+        config.script.each { command -> 
+          script.sh command
+        }
       }
     }
+
+    if (config.credentials) {
+      Credentials.parse(config.credentials, script, task)
+      return
+    }
+
+    task()
+    return
   }
 }
 
