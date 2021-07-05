@@ -1,42 +1,17 @@
 package com.zepline
 
 class Task {
-  String        name
-  String        image
-  List<String>  environments
-  List<String>  only
+  Config        config
+  def           script
 
-  List<Service> services
-  def           jk
-  def           config
-
-  Task (String name, def config, def jk) {
+  Task (String name, def config, def script) {
     this.name     = name
     this.config   = config
-    this.jk       = jk
+    this.script   = script
   }
 
   def execute() {
-    return {
-      script.stage(name) {
-        script.sh "echo 'Hello'"
-      }
-      // if (config.before_script) {
-      //   config.before_script.each { command ->
-      //     jk.script.sh command
-      //   }
-      // }
-
-      // config.script.each { command ->
-      //   jk.script.sh command
-      // }
-
-      // if (config.after_script) {
-      //   config.after_script.each { command ->
-      //     jk.script.sh command
-      //   }
-      // }
-    }
+    
   }
 
   // def run() {

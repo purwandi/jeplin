@@ -7,8 +7,6 @@ def call(String filename) {
   }
 
   def files = readFile file:".zepline.yaml"
-  
-  // clone include project
   if (config.include) {
     config.include.each { item ->
       dir('.include') {
@@ -18,24 +16,29 @@ def call(String filename) {
       item.files.each { f ->
         def fx = readFile file: "$WORKSPACE/.include${f}"
         files = "${files}\n\n${fx}"
-        // println files
-        // files = files + readFile "$WORKSPACE/.include/${file}"
       }
     }
   }
 
-  println files
+  // final project configurations
   config = readYaml text: files
+  Zepline zepline = new Zepline(this, config)
 
-  println config
-  println config.helm
-  println config.".helm"
-
-  config.".helm".each { k, v ->
-    println k
-    println v
-  }
+  println zepline
 
 
-  sh 'ls -all'
+  // println files
+  
+
+  // println config
+  // println config.helm
+  // println config.".helm"
+
+  // config.".helm".each { k, v ->
+  //   println k
+  //   println v
+  // }
+
+
+  // sh 'ls -all'
 }

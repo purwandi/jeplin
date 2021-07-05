@@ -1,19 +1,20 @@
 package com.zepline
 
 class Zepline {
-  def config
+  def stages
+  def tasks 
+  def yaml
   def script
 
-  String        image
-  List<Service> services
-  def           environment
-
-
-  List<Task> tasks
-
-  Zepline(def script, def config) {
+  Zepline(def script, def yaml) {
     this.script = script
-    this.config = config
+    this.yaml = yaml
+
+    this.stages = yaml.stages
+    this.tasks = yaml.tasks.each { k, v ->
+      return new Task(k, new Config(v, yaml), script)
+    }
+
   }
 
   def init() {
@@ -22,12 +23,5 @@ class Zepline {
     // }
 
     return this
-  }
-
-  def execute() {
-    return { variables ->
-      tasks.each { task ->
-      }
-    }
   }
 }
