@@ -1,23 +1,5 @@
 import com.zepline.Zepline
 
-def taskable(def tasks) {
-  def closure = [:]
-
-  tasks.each { k, task -> 
-    closure[k] = {
-      stage(k) {
-        if (task.config != null && task.config.script != null) {
-          sh "echo 'Hello'"
-        } else {
-          parallel taskable(task)
-        }
-      }
-    }
-  }
-
-  return closure
-}
-
 def call(String filename) {
   def config = readYaml file: ".zepline.yaml"
   if (config == null) {
@@ -45,25 +27,8 @@ def call(String filename) {
   println zepline
 
   try {
-    for (t in taskable(zepline.tasks).values()) {
-      t.call()
-    }
+    zepline.execute()
   } finally {
 
   }
-
-  // println files
-  
-
-  // println config
-  // println config.helm
-  // println config.".helm"
-
-  // config.".helm".each { k, v ->
-  //   println k
-  //   println v
-  // }
-
-
-  // sh 'ls -all'
 }

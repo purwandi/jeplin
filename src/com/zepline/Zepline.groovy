@@ -47,33 +47,26 @@ class Zepline {
   }
 
   def execute() {
-    // closure function 
-    // i don't know because OOP way is not working in jenkins environment :-(
-    def taskable = { t -> 
-      def closure = [:]
-      t.each { k, task -> 
-        closure[k] = {
-          script.stage(k) {
-            if (task.config != null && task.config.script != null) {
-              script.sh "echo 'Hello'"
-            } else {
-              script.parallel tasksableParallel(task)
-            }
-          }
-        }
-      }
-
-      return closure
-    }
-    
     for (t in taskable(tasks).values()) {
       t.call()
     }
-    
-    // this.buildTask("hello")
-    // // buildTask(tasks).values()
-    // // for (t in ) {
-    // //   t.call()
-    // // }
+  }
+
+  def taskable (def t) { 
+    def that = this
+    def closure = [:]
+    t.each { k, task -> 
+      closure[k] = {
+        script.stage(k) {
+          if (task.config != null && task.config.script != null) {
+            script.sh "echo 'Hello'"
+          } else {
+            script.parallel that.taskable(task)
+          }
+        }
+      }
+    }
+
+    return closure
   }
 }
