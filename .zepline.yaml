@@ -85,7 +85,6 @@ tasks:
       - echo $GITHUB_USERNAME
       - echo $GITHUB_PASSWORD
       - sleep 10
-      - go test ./...
     only:
       - master
       - develop
