@@ -9,6 +9,7 @@ class Config {
   def           variables     = [:]
   def           credentials   = []
   def           docker
+  List<String>  when
   List<String>  only
   List<String>  script
 
