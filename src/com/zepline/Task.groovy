@@ -51,7 +51,7 @@ class Task {
         task = WithCredentials.parse(config.credentials, script, task)
       }
 
-      task([:])
+      task()
     } finally {
       if (config.services) {
         script.sh "docker rm $containerIds --force"
