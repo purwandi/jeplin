@@ -19,6 +19,10 @@ class Task {
 
     def task = {
       if (config.services) {
+        if (config.image == null) {
+          throw new Exception("Sidecar service only available in docker pipeline")
+        }
+
         config.services.each { service ->
           def container = script.docker.image(service.image).run("-v ${script.env.WORKSPACE}:${script.env.WORKSPACE}")
           links = links +  " --link $container.id:${service.alias}"
@@ -32,16 +36,26 @@ class Task {
           script.env."$k" = v
         }
       }
-      
-      script.docker.image(config.image).inside("$links") { c ->
+
+      def cmd = {
         config.script.each { command -> 
           script.sh command
         }
       }
+      
+
+      // if image is defined we run it using docker
+      if (config.image) {
+        script.docker.image(config.image).inside("$links") { 
+          cmd()
+        }
+      } else {
+        cmd()
+      }
     }
 
     try {
-      if (config.docker) {
+      if (config.docker && config.image) {
         script.sh "echo 'using docker registry auth'"
         task = WithImageRegistry.parse(config.docker, script, task)
       }

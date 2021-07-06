@@ -1,4 +1,4 @@
-image: alpine:latest
+# image: alpine:latest
 
 docker:
   registry: https://ghcr.io
@@ -26,14 +26,14 @@ variables:
 
 tasks:
   release:
-    image: alpine:3.13
+    # image: alpine:3.13
     stage: release
     script: 
       - echo "hello from alpine 3.13"
       - sleep 10
 
   notification:
-    image: alpine
+    # image: alpine
     stage: prepare
     script:
       - ls -all
@@ -42,14 +42,14 @@ tasks:
       - sleep 15
 
   docker:
-    image: docker
+    # image: docker
     stage: build
     credentials:
       - credential: github-credentials
         type: usernamePassword
         variables:
           username: GITHUB_USERNAME
-          password: GITHUB_PASSWORD
+          palssword: GITHUB_PASSWORD
     script:
       - ls -all
       - env
@@ -57,7 +57,7 @@ tasks:
       - echo $GITHUB_PASSWORD
 
   helm:
-    image: alpine
+    # image: alpine
     extends: .helm
     credentials:
       - credential: github-credentials
@@ -78,13 +78,20 @@ tasks:
       #   variables:
       #     variable: FILE_SECRET
     stage: build
-    services:
-      - image: nginx:alpine
-        alias: web
+    # services:
+    #   - image: mysql:alpine
+    #     alias: web
     script:
       - echo $GITHUB_USERNAME
       - echo $GITHUB_PASSWORD
       - sleep 10
+      - go test ./...
+    only:
+      - master
+      - develop
+      - tags
+    when:
+      - manual
 
   # helm:
   #   extends: .helm
