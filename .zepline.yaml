@@ -109,7 +109,6 @@ tasks:
     only:
       - master
       - develop
-      - tags
     when:
       - manual
 
