@@ -39,7 +39,7 @@ class Task {
 
       def cmd = {
         config.script.each { command -> 
-          if (isUnix()) {
+          if (script.isUnix()) {
             script.sh command
           } else {
             script.bat command
