@@ -13,8 +13,6 @@ class WithImageRegistry {
       config.each { cfg ->
         closure = registry(cfg, closure)
       }
-
-      closure()
     }
     
 
