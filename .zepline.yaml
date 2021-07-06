@@ -25,12 +25,12 @@ variables:
   # DOCKER_HOST: "tcp://docker:2376"
 
 tasks:
-  # release:
-  #   image: alpine:3.13
-  #   stage: release
-  #   script: 
-  #     - echo "hello from alpine 3.13"
-  #     - sleep 10
+  release:
+    image: alpine:3.13
+    stage: release
+    script: 
+      - echo "hello from alpine 3.13"
+      - sleep 10
 
   notification:
     image: alpine
@@ -56,37 +56,35 @@ tasks:
       - echo $GITHUB_USERNAME
       - echo $GITHUB_PASSWORD
 
-  # helm:
-  #   image: alpine
-  #   extends: .helm
-  #   credentials:
-  #     - credential: github-credentials
-  #       type: usernamePassword
-  #       variables:
-  #         username: GITHUB_USERNAME
-  #         password: GITHUB_PASSWORD
-  #     # - credential: github-credentials
-  #     #   type: usernameColonPassword
-  #     #   variables:
-  #     #     variable: GITHUB_TOKEN
-  #     # - credential: file-secret
-  #     #   type: file
-  #     #   variables:
-  #     #     variable: FILE_SECRET
-  #     # - credential: secret-text
-  #     #   type: string
-  #     #   variables:
-  #     #     variable: FILE_SECRET
-  #   stage: build
-  #   services:
-  #     - image: nginx:alpine
-  #       alias: web
-  #       # entrypoint: 
-  #       # command: 
-  #   script:
-  #     - echo $GITHUB_USERNAME
-  #     - echo $GITHUB_PASSWORD
-  #     - sleep 10
+  helm:
+    image: alpine
+    extends: .helm
+    credentials:
+      - credential: github-credentials
+        type: usernamePassword
+        variables:
+          username: GITHUB_USERNAME
+          password: GITHUB_PASSWORD
+      # - credential: github-credentials
+      #   type: usernameColonPassword
+      #   variables:
+      #     variable: GITHUB_TOKEN
+      # - credential: file-secret
+      #   type: file
+      #   variables:
+      #     variable: FILE_SECRET
+      # - credential: secret-text
+      #   type: string
+      #   variables:
+      #     variable: FILE_SECRET
+    stage: build
+    services:
+      - image: nginx:alpine
+        alias: web
+    script:
+      - echo $GITHUB_USERNAME
+      - echo $GITHUB_PASSWORD
+      - sleep 10
 
   # helm:
   #   extends: .helm
