@@ -95,6 +95,8 @@ class Zepline {
       return true
     }
 
+    script.sh "echo $CI_GIT_BRANCH_NAME"
+
     // validate if task can run
     return task.config.only.contains(script.env.CI_GIT_BRANCH_NAME)
   }
@@ -106,7 +108,7 @@ class Zepline {
       if (canBuild(script, task) == false) {
         return
       }
-      
+
       closure[k] = { 
         script.stage(k) {
           if (task.config != null && task.config.script != null) {
