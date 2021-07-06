@@ -1,8 +1,8 @@
 // @Library('zepline-ci') _
-library identifier: 'zepline-ci@master', retriever: modernSCM([
+library identifier: 'zepline-ci@main', retriever: modernSCM([
   $class: 'GitSCMSource',
   // credentialsId: 'your-credentials-id',
-  remote: 'https://gitlab.com/purwandi/zepline.git'
+  remote: 'https://github.com/purwandi/zepline.git'
 ])
 
 node {
