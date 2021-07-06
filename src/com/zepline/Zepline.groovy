@@ -11,6 +11,24 @@ class Zepline {
     this.yaml = yaml
   }
 
+  def parseGitEnvironment() {
+    def envs = [
+      "CI_GIT_COMMIT_SHA": "git --no-pager show -s --format='%H'",
+      "CI_GIT_COMMIT_SHORT_SHA": "git --no-pager show -s --format='%h'",
+      "CI_GIT_AUTHOR_NAME": "git --no-pager show -s --format='%an'",
+      "CI_GIT_AUTHOR_EMAIL": "git --no-pager show -s --format='%ae'",
+      "CI_GIT_COMMIT": "git --no-pager show -s --format='%s'",
+    ]
+    
+    envs.each { k, v ->
+      if (isUnix()) {
+        script.env."$k" = script.sh(script: v, returnStdout: true).trim()
+      } else {
+        script.env."$k" = script.bat(script: v, returnStdout: true).trim()
+      }
+    }
+  }
+
   def init() {
     this.stages = yaml.stages
     this.yaml.tasks.each { k, v ->
@@ -18,6 +36,8 @@ class Zepline {
       def task = new Task(k, config)
       this.tasks[k] = task
     }
+
+    parseGitEnvironment()
 
     if (stages) {
       // check if all task have stage property

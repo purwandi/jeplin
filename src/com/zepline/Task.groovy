@@ -39,7 +39,11 @@ class Task {
 
       def cmd = {
         config.script.each { command -> 
-          script.sh command
+          if (isUnix()) {
+            script.sh command
+          } else {
+            script.bat command
+          }
         }
       }
       
@@ -56,12 +60,12 @@ class Task {
 
     try {
       if (config.docker) {
-        script.sh "echo 'using docker registry auth'"
+        // script.sh "echo 'using docker registry auth'"
         task = WithImageRegistry.parse(config.docker, script, task)
       }
 
       if (config.credentials) {
-        script.sh "echo 'using credentials'"
+        // script.sh "echo 'using credentials'"
         task = WithCredentials.parse(config.credentials, script, task)
       }
 

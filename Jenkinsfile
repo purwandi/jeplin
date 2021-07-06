@@ -8,9 +8,5 @@ library identifier: 'zepline-ci@docker-runner', retriever: modernSCM([
 node {
   checkout scm
 
-  //  
-
-  zepline()  
-
-  log.info "Hello"
+  zepline()
 }
