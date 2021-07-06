@@ -26,6 +26,10 @@ class Config {
       data.variables = yaml.variables
     }
 
+    if (yaml.docker) {
+      data.docker = yaml.docker
+    }
+
     // this.variables = yaml.variables
     config.each { k, v -> 
       if (k == "extends") {

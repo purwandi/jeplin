@@ -36,6 +36,8 @@ tasks:
     image: alpine
     stage: prepare
     script:
+      - ls -all
+      - env
       - echo "hello notification"
       - sleep 15
 
