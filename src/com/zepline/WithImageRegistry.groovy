@@ -14,7 +14,7 @@ class WithImageRegistry {
         closure = registry(cfg, closure)
       }
 
-      closure([:])
+      closure()
     }
     
 
