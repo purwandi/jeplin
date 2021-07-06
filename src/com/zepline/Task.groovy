@@ -20,7 +20,7 @@ class Task {
     def task = {
       if (config.services) {
         config.services.each { service ->
-          def container = script.docker.image(service.image).run("--privileged -e DOCKER_TLS_CERTDIR=${script.env.WORKSPACE}/.certs -v ${script.env.WORKSPACE}:${script.env.WORKSPACE}")
+          def container = script.docker.image(service.image).run("-v ${script.env.WORKSPACE}:${script.env.WORKSPACE}")
           links = links +  " --link $container.id:${service.alias}"
           containerIds = " $container.id "
         }
@@ -33,7 +33,7 @@ class Task {
         }
       }
       
-      script.docker.image(config.image).inside("$links --privileged -e DOCKER_HOST=tcp://docker:2376 -e DOCKER_CERT_PATH=${script.env.WORKSPACE}/.certs/client") { c ->
+      script.docker.image(config.image).inside("$links") { c ->
         config.script.each { command -> 
           script.sh command
         }
@@ -41,13 +41,15 @@ class Task {
     }
 
     try {
+      if (config.docker) {
+        task = WithImageRegistry.parse(config.docker, script, task)
+      }
+
       if (config.credentials) {
-        WithCredentials.parse(config.credentials, script, task)
-        return
+        task = WithCredentials.parse(config.credentials, script, task)
       }
 
       task()
-      return
     } finally {
       if (config.services) {
         script.sh "docker rm $containerIds --force"

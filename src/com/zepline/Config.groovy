@@ -1,7 +1,7 @@
 package com.zepline
 
 class Config {
-  String        uid
+  // String        uid
   String        name
   String        image
   String        stage
@@ -9,6 +9,7 @@ class Config {
   List<Service> services      = []
   def           variables     = [:]
   def           credentials   = []
+  def           docker
   List<String>  only
   List<String>  script
 
@@ -59,11 +60,11 @@ class Config {
   }
 
   // @NonCPS
-  def GenUID() {
-    String alphabet = (('A'..'N')+('P'..'Z')+('a'..'k')+('m'..'z')+('2'..'9')).join('')
-    def rnd = new Random()   // because .with{} doesn't work
-    int n = 10
+  // def GenUID() {
+  //   String alphabet = (('A'..'N')+('P'..'Z')+('a'..'k')+('m'..'z')+('2'..'9')).join('')
+  //   def rnd = new Random()   // because .with{} doesn't work
+  //   int n = 10
     
-    return (1..n).collect { alphabet[ rnd.nextInt( alphabet.length() ) ] }.join('')
-  }
+  //   return (1..n).collect { alphabet[ rnd.nextInt( alphabet.length() ) ] }.join('')
+  // }
 }

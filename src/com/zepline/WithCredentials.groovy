@@ -25,7 +25,7 @@ class WithCredentials {
     }
 
     return script.withCredentials(self.creds) {
-      closure()
+      return closure
     }
   }
 

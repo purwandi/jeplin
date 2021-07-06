@@ -1,5 +1,9 @@
 image: alpine:latest
 
+docker:
+  registry: https://ghcr.io
+  credential: github-credentials
+
 stages:
   - prepare
   - build
@@ -12,6 +16,7 @@ include:
     ref: main
     files: 
       - /helm.yaml
+
 variables:
   DOCKER_REGISTRY: ghcr.io
   # DOCKER_TLS_CERTDIR: $WORKSPACE/.certs
@@ -43,21 +48,9 @@ tasks:
         variables:
           username: GITHUB_USERNAME
           password: GITHUB_PASSWORD
-    variables:
-      DOCKER_TLS_VERIFY: true
-      DOCKER_DRIVER: overlay2 
-      DOCKER_HOST: "tcp://docker:2376"
-    services:
-      - image: docker:dind
-        alias: docker
-        entrypoint: 
-        command: 
     script:
       - ls -all
       - env
-      - docker info
-      # - echo "$GITHUB_PASSWORD" | docker login $DOCKER_REGISTRY --username $GITHUB_USERNAME --password-stdin
-      - docker build -t zepline .
 
   # helm:
   #   image: alpine
