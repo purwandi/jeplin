@@ -32,12 +32,12 @@ tasks:
   #     - echo "hello from alpine 3.13"
   #     - sleep 10
 
-  # notification:
-  #   image: alpine
-  #   stage: prepare
-  #   script:
-  #     - echo "hello notification"
-  #     - sleep 15
+  notification:
+    image: alpine
+    stage: prepare
+    script:
+      - echo "hello notification"
+      - sleep 15
 
   docker:
     image: docker
