@@ -84,24 +84,30 @@ class Zepline {
   }
 
   def canBuild(def script, def task) {
+    script.sh "echo 'Trigger can build'"
+    if (task.config == null) {
+      return true
+    }
+
     // if task.only is not defined
-    if (task.only == null) {
+    if (task.config.only == null) {
+      script.sh "echo 'By pass task, because task.only is null'"
       return true
     }
 
     // validate if task can run
-    return task.only.contains(script.env.CI_GIT_BRANCH_NAME)
+    return task.config.only.contains(script.env.CI_GIT_BRANCH_NAME)
   }
 
   def taskable (def t, def script) { 
     def closure = [:]
     
     t.each { k, task -> 
+      if (canBuild(task, script) == false) {
+        return
+      }
+      
       closure[k] = {
-        if (canBuild(task, script) == false) {
-          return
-        }
-
         script.stage(k) {
           if (task.config != null && task.config.script != null) {
             task.execute(script)
