@@ -2,7 +2,7 @@
 library identifier: 'zepline-ci@feature/git-env', retriever: modernSCM([
   $class: 'GitSCMSource',
   // credentialsId: 'your-credentials-id',
-  remote: 'https://github.com/purwandi/zepline.git'
+  remote: 'https://gitlab.com/purwandi/zepline.git'
 ])
 
 node {
