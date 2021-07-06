@@ -16,19 +16,6 @@ class WithImageRegistry {
     }
 
     return closure
-    
-
-    // // return {
-    // //   config.each { cfg ->
-    // //     // script.docker.withRegistry(cfg.registry, cfg.credential) {
-    // //     //   closure()
-    // //     // }
-    // //   }
-    // // // }
-
-    // // return {
-    // //   registry()
-    // // }
   }
 
 }

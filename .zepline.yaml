@@ -59,7 +59,7 @@ tasks:
       - echo $GITHUB_PASSWORD
 
   helm:
-    # image: alpine
+    image: alpine
     extends: .helm
     credentials:
       - credential: github-credentials
