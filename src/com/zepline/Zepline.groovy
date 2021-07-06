@@ -103,10 +103,10 @@ class Zepline {
     def closure = [:]
     
     t.each { k, task -> 
-      if (canBuild(task, script) == false) {
+      if (canBuild(script, task) == false) {
         return
       }
-      
+
       closure[k] = {
         script.stage(k) {
           if (task.config != null && task.config.script != null) {
