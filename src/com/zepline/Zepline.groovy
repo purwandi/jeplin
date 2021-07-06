@@ -18,7 +18,7 @@ class Zepline {
       "CI_GIT_AUTHOR_NAME": "git --no-pager show -s --format='%an'",
       "CI_GIT_AUTHOR_EMAIL": "git --no-pager show -s --format='%ae'",
       "CI_GIT_COMMIT": "git --no-pager show -s --format='%s'",
-      "CI_GIT_BRANCH_NAME": "git name-rev --name-only HEAD",
+      "CI_GIT_REMOTE_BRANCH_NAME": "git name-rev --name-only HEAD",
       // "CI_GIT_RELEASE_NAME": "git describe --tags --abbrev=0 || true"
     ]
     
@@ -28,6 +28,17 @@ class Zepline {
       } else {
         script.env."$k" = script.bat(script: v, returnStdout: true).trim()
       }
+    }
+
+    // parse git branch name
+    if (script.env.CI_GIT_REMOTE_BRANCH_NAME.include("tags/")) {
+      script.env.CI_GIT_BRANCH_NAME = "tags"
+    } else {
+      script.env.CI_GIT_BRANCH_NAME = script.env.CI_GIT_REMOTE_BRANCH_NAME.replace("remotes/origin/", "")
+    }
+
+    if (script.env.CI_GIT_BRANCH_NAME == "tags") {
+      script.env.CI_GIT_RELEASE_NAME = script.env.CI_GIT_REMOTE_BRANCH_NAME.replace("tags/", "")
     }
   }
 
@@ -72,11 +83,24 @@ class Zepline {
     }
   }
 
+  def canBuild(def script, def task) {
+    // if task.only is not defined
+    if (task.only == null) {
+      return true
+    }
+
+    return task.only.contains(script.env.CI_GIT_BRANCH_NAME)
+  }
+
   def taskable (def t, def script) { 
     def closure = [:]
     
     t.each { k, task -> 
       closure[k] = {
+        if (canBuild(task, script) == false) {
+          return
+        }
+
         script.stage(k) {
           if (task.config != null && task.config.script != null) {
             task.execute(script)
