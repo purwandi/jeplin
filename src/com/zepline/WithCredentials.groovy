@@ -8,7 +8,6 @@ class WithCredentials {
     def self = new WithCredentials()
 
     yaml.each { item ->
-      script.sh "echo ${item.type}"
       switch(item.type) {
         case "usernamePassword": 
           return self.passUsernamePassword(item, script)

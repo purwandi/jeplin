@@ -27,6 +27,6 @@ def call() {
   try {
     zepline.execute()
   } finally {
-
+    cleanWs()
   }
 }

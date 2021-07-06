@@ -51,6 +51,8 @@ tasks:
     script:
       - ls -all
       - env
+      - echo $GITHUB_USERNAME
+      - echo $GITHUB_PASSWORD
 
   # helm:
   #   image: alpine

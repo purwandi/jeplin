@@ -6,6 +6,10 @@ def yaml = """
 image: alpine:latest
 image: curl:latest
 
+docker:
+  registry: https://ghcr.io
+  credential: github-credentials
+
 include:
   - remote: 'https://github.com/purwandi/zepline-test.git'
     credential: github-credentials
@@ -36,21 +40,21 @@ tasks:
     - sleep 30
 """
 
-String s = ""
+// String s = ""
 
-s = s + " hello"
-s = s + " xx"
+// s = s + " hello"
+// s = s + " xx"
 
-println s
+// println s
 
-// def y = new YamlSlurper().parseText(yaml)
+def y = new YamlSlurper().parseText(yaml)
 
-// String string = ""
+String string = ""
 
-// y.tasks.each { c, v ->
-//   def cfg = Config.parse(v, y)
+y.tasks.each { c, v ->
+  def cfg = Config.parse(v, y)
 
-//   println cfg.getProperties().toString()
+  println cfg.getProperties().toString()
   
-// }
+}
 // def c = new Config(y.helm, y)
