@@ -58,6 +58,25 @@ tasks:
       - echo $GITHUB_USERNAME
       - echo $GITHUB_PASSWORD
 
+  helm-cannary:
+    image: alpine
+    stage: build
+    extends: .helm
+
+  helm-uat:
+    image: alpine
+    stage: build
+    extends: .helm
+    only: 
+      - master
+
+  helm-prod:
+    image: alpine
+    stage: build
+    extends: .helm
+    only: 
+      - tags
+
   helm:
     image: alpine
     extends: .helm
