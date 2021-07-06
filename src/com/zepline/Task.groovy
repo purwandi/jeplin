@@ -42,12 +42,12 @@ class Task {
 
     try {
       if (config.docker) {
-        println "using docker registry auth"
+        scrip.sh "echo 'using docker registry auth'"
         task = WithImageRegistry.parse(config.docker, script, task)
       }
 
       if (config.credentials) {
-        println "using credentials"
+        scrip.sh "echo 'using credentials'"
         task = WithCredentials.parse(config.credentials, script, task)
       }
 
