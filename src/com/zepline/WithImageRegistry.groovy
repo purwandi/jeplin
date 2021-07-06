@@ -9,9 +9,14 @@ class WithImageRegistry {
       }
     }
 
-    config.each { cfg ->
-      registry = registry(cfg, closure)
+    return {
+      config.each { cfg ->
+        closure = registry(cfg, closure)
+      }
+
+      closure([:])
     }
+    
 
     // return {
     //   config.each { cfg ->
@@ -21,9 +26,9 @@ class WithImageRegistry {
     //   }
     // // }
 
-    return {
-      registry()
-    }
+    // return {
+    //   registry()
+    // }
   }
 
 }
