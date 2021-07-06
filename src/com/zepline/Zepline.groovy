@@ -31,7 +31,7 @@ class Zepline {
     }
 
     // parse git branch name
-    if (script.env.CI_GIT_REMOTE_BRANCH_NAME.include("tags/")) {
+    if (script.env.CI_GIT_REMOTE_BRANCH_NAME.contains("tags/")) {
       script.env.CI_GIT_BRANCH_NAME = "tags"
     } else {
       script.env.CI_GIT_BRANCH_NAME = script.env.CI_GIT_REMOTE_BRANCH_NAME.replace("remotes/origin/", "")
