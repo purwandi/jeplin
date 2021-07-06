@@ -21,7 +21,9 @@ class WithImageRegistry {
     //   }
     // // }
 
-    return registry
+    return {
+      registry()
+    }
   }
 
 }
