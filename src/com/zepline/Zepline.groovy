@@ -89,6 +89,7 @@ class Zepline {
       return true
     }
 
+    // validate if task can run
     return task.only.contains(script.env.CI_GIT_BRANCH_NAME)
   }
 
