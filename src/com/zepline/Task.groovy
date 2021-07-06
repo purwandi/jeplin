@@ -55,7 +55,7 @@ class Task {
     }
 
     try {
-      if (config.docker && config.image) {
+      if (config.docker) {
         script.sh "echo 'using docker registry auth'"
         task = WithImageRegistry.parse(config.docker, script, task)
       }

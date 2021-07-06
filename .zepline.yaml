@@ -1,8 +1,10 @@
 # image: alpine:latest
 
 docker:
-  registry: https://ghcr.io
-  credential: github-credentials
+  - registry: https://ghcr.io
+    credential: github-credentials
+  - registry: https://index.docker.io/v1/
+    credential: dockerhub-credentials
 
 stages:
   - prepare
