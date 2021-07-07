@@ -67,7 +67,7 @@ class Task {
           ]
 
           script.withCredentials(creds) {
-            Command.parse(script, 'docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD ${cfg.credentials}')
+            Command.parse(script, 'docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD ${cfg.registry}')
           }
         }
       }
@@ -82,7 +82,7 @@ class Task {
       // cleanup authentication with docker registry
       if (config.docker) {
         config.docker.each { cfg -> 
-          Command.parse(script, "docker logout ${cfg.credentials}")
+          Command.parse(script, "docker logout ${cfg.registry}")
         }
       }
 
