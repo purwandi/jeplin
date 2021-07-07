@@ -67,7 +67,7 @@ class Task {
           ]
 
           script.withCredentials(creds) {
-            Command.parse(script, "docker login -u ${DOCKER_REGISTRY_USERNAME} -p ${DOCKER_REGISTRY_PASSWORD} ${cfg.credentials}")
+            Command.parse(script, "docker login -u ${script.env.DOCKER_REGISTRY_USERNAME} -p ${script.env.DOCKER_REGISTRY_PASSWORD} ${cfg.credentials}")
           }
         }
       }
