@@ -39,11 +39,7 @@ class Task {
 
       def cmd = {
         config.script.each { command -> 
-          if (script.isUnix()) {
-            script.sh command
-          } else {
-            script.bat command
-          }
+          Command.parse(script, command)
         }
       }
       
@@ -60,8 +56,17 @@ class Task {
 
     try {
       if (config.docker) {
-        // script.sh "echo 'using docker registry auth'"
-        task = WithImageRegistry.parse(config.docker, script, task)
+        // authenticate with docker registry for pulling preparation
+        config.docker.each { cfg -> 
+          script.withCredentials([script.usernamePassword(
+              credentialsId: cfg.credentials,
+              usernameVariable: "DOCKER_REGISTRY_USERNAME",
+              passwordVariable:  "DOCKER_REGISTRY_PASSWORD",
+            )
+          ]) {
+            Command.parse(script, "docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD ${cfg.credentials}")
+          }
+        }
       }
 
       if (config.credentials) {
@@ -71,12 +76,15 @@ class Task {
 
       task()
     } finally {
-      if (config.services) {
-        if (isUnix()) {
-          script.sh "docker rm $containerIds --force"
-        } else {
-          script.bat "docker rm $containerIds --force"
+      // cleanup authentication with docker registry
+      if (config.docker) {
+        config.docker.each { cfg -> 
+          Command.parse(script, "docker logout ${cfg.credentials}")
         }
+      }
+
+      if (config.services) {
+        Command.parse(script, "docker rm $containerIds --force")
       }
     }
   }
