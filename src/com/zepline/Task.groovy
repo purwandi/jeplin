@@ -81,9 +81,9 @@ class Task {
     } finally {
       // cleanup authentication with docker registry
       if (config.docker) {
-        config.docker.each { cfg -> 
-          Command.parse(script, (script: 'docker logout ' + cfg.registry))
-        }
+        // config.docker.each { cfg -> 
+        //   Command.parse(script, (script: 'docker logout ' + cfg.registry))
+        // }
       }
 
       if (config.services) {
