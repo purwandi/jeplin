@@ -5,7 +5,7 @@ class WithImageRegistry {
   static def parse(def config, def script, def closure) {
     def registry = { cfg, clsr ->
       return {
-        script.withDockerRegistry([credentialsId: cfg.registry, url: cfg.credential]) {
+        script.withDockerRegistry([url: cfg.registry, credentialsId: cfg.credential]) {
           clsr()
         }
       }
