@@ -72,7 +72,11 @@ class Task {
       task()
     } finally {
       if (config.services) {
-        script.sh "docker rm $containerIds --force"
+        if (isUnix()) {
+          script.sh "docker rm $containerIds --force"
+        } else {
+          script.bat "docker rm $containerIds --force"
+        }
       }
     }
   }
