@@ -4,22 +4,21 @@ class WithImageRegistry {
 
   static def parse(def config, def cfgRegistry, def script, def closure) {
     def getHost = { url ->
-        String domainName = new String(url)
-        int index = domainName.indexOf("://")
-        if (index != -1) {
-          // keep everything after the "://"
-          domainName = domainName.substring(index + 3)
-        }
-
-        index = domainName.indexOf('/')
-
-        if (index != -1) {
-          // keep everything before the '/'
-          domainName = domainName.substring(0, index)
-        }
-
-        return domainName.replaceFirst("^www.*?\\.", "")
+      String domainName = new String(url)
+      int index = domainName.indexOf("://")
+      if (index != -1) {
+        // keep everything after the "://"
+        domainName = domainName.substring(index + 3)
       }
+
+      index = domainName.indexOf('/')
+
+      if (index != -1) {
+        // keep everything before the '/'
+        domainName = domainName.substring(0, index)
+      }
+
+      return domainName.replaceFirst("^www.*?\\.", "")
     }
 
     // if config registy is null 
