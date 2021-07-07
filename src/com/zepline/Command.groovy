@@ -2,7 +2,7 @@ package com.zepline
 
 class Command {
   static Command parse(def script, def command) {
-    if (isUnix()) {
+    if (script.isUnix()) {
       script.sh command
     } else {
       script.bat command
