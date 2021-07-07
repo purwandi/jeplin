@@ -13,7 +13,7 @@ class WithImageRegistry {
     // loop in available docker property credentials
     def registry
     cfgRegistry.each { cfg -> 
-      def hostname = new URI(cfg.registry).getHost()
+      def hostname = new URL(cfg.registry).getHost()
       if (config.image.contains(hostname)) {
         registry = cfg
       }
