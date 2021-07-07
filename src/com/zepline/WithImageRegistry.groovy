@@ -2,20 +2,36 @@ package com.zepline
 
 class WithImageRegistry {
 
-  static def parse(def config, def script, def closure) {
-    def registry = { cfg, clsr ->
+  static def parse(def config, def cfgRegistry, def script, def closure) {
+    // if config registy is null 
+    if (cfgRegistry == null) {
       return {
-        script.withDockerRegistry([url: cfg.registry, credentialsId: cfg.credential]) {
-          clsr()
-        }
+        closure()
       }
     }
 
-    config.each { cfg ->
-      closure = registry(cfg, closure)
+    // loop in available docker property credentials
+    def registry
+    cfgRegistry.each { cfg -> 
+      def hostname = new URI(cfg.registry).getHost()
+      if (config.image.contains(hostname)) {
+        registry = cfg
+      }
+    }
+    
+    // if image is not match in existing docker property we need to return it
+    if (registry == null) {
+      return {
+        closure()
+      }
     }
 
-    return closure
+    // wrap closure using docker registry
+    return {
+      script.withDockerRegistry([url: registry.registry, credentialsId: registry.credential]) {
+        closure()
+      }
+    }
   }
 
 }

@@ -24,16 +24,15 @@ class Task {
         }
 
         config.services.each { service ->
-          def container = script.docker.image(service.image).run("-v ${script.env.WORKSPACE}:${script.env.WORKSPACE}")
-          links = links +  " --link $container.id:${service.alias}"
-          containerIds = " $container.id "
-        }
-      }
+          WithImageRegistry.parse(service, config.docker, script, {
+            def ctr = script
+                  .docker
+                  .image(service.image)
+                  .run("-v ${script.env.WORKSPACE}:${script.env.WORKSPACE}")
 
-      // parse environment variable
-      if (config.variables) {
-        config.variables.each { k, v -> 
-          script.env."$k" = v
+            links = links +  " --link $ctr.id:${service.alias}"
+            ctrIds = " $ctr.id "
+          })
         }
       }
 
@@ -42,24 +41,21 @@ class Task {
           Command.parse(script, command)
         }
       }
-      
 
       // if image is defined we run it using docker
       if (config.image) {
-        script.docker.image(config.image).inside("$links") { 
-          cmd()
-        }
+        WithImageRegistry.parse(config, config.docker, script, {
+          script.docker.image(config.image).inside("$links") { 
+            cmd()
+          }
+        })
       } else {
         cmd()
       }
     }
 
     try {
-      if (config.docker) {
-        // authenticate with docker registry for pulling preparation
-        script.sh "echo 'Authenticate with docker registry'"
-        task = WithImageRegistry.parse(config.docker, script, task)
-      }
+      WithEnvironment.parse(config, script)
 
       if (config.credentials) {
         // script.sh "echo 'using credentials'"
