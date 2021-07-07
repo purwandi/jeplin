@@ -57,19 +57,7 @@ class Task {
     try {
       if (config.docker) {
         // authenticate with docker registry for pulling preparation
-        config.docker.each { cfg -> 
-          def creds = [
-            script.usernamePassword(
-              credentialsId: cfg.credentials,
-              usernameVariable: "DOCKER_REGISTRY_USERNAME",
-              passwordVariable:  "DOCKER_REGISTRY_PASSWORD",
-            )
-          ]
-
-          script.withCredentials(creds) {
-            Command.parse(script, ('docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD ' + cfg.registry))
-          }
-        }
+        task = WithImageRegistry.parse(config.docker, script, task)
       }
 
       if (config.credentials) {
@@ -79,13 +67,6 @@ class Task {
 
       task()
     } finally {
-      // cleanup authentication with docker registry
-      if (config.docker) {
-        // config.docker.each { cfg -> 
-        //   Command.parse(script, (script: 'docker logout ' + cfg.registry))
-        // }
-      }
-
       if (config.services) {
         Command.parse(script, "docker rm $containerIds --force")
       }
