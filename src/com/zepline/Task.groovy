@@ -58,13 +58,16 @@ class Task {
       if (config.docker) {
         // authenticate with docker registry for pulling preparation
         config.docker.each { cfg -> 
-          script.withCredentials([script.usernamePassword(
+          def creds = [
+            script.usernamePassword(
               credentialsId: cfg.credentials,
               usernameVariable: "DOCKER_REGISTRY_USERNAME",
               passwordVariable:  "DOCKER_REGISTRY_PASSWORD",
             )
-          ]) {
-            Command.parse(script, "docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD ${cfg.credentials}")
+          ]
+
+          script.withCredentials(creds) {
+            Command.parse(script, "docker login -u ${DOCKER_REGISTRY_USERNAME} -p ${DOCKER_REGISTRY_PASSWORD} ${cfg.credentials}")
           }
         }
       }
