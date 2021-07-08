@@ -29,7 +29,7 @@ class Task {
             def image = script.docker.image(service.image)
             image.pull()
 
-            def ctr  = image.run("-v ${script.env.WORKSPACE}:${script.env.WORKSPACE}")
+            def ctr  = image.run("--privileged -v ${script.env.WORKSPACE}:${script.env.WORKSPACE}")
 
             links = links +  " --link $ctr.id:${service.alias}"
             ctrIds = " $ctr.id "
@@ -55,7 +55,7 @@ class Task {
         def svc = {
           def image = script.docker.image(config.image)
           image.pull()
-          image.inside("$links") { 
+          image.inside("$links --privileged") { 
             cmd(config.before_script)
             cmd(config.script)
             cmd(config.after_script)
