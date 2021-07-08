@@ -2,7 +2,7 @@ package com.zepline
 
 class Image {
   String name 
-  String entrypoint = ""
+  String args = ""
 
   Image(def config) {
     if (config.hasProperty("name")) {
