@@ -5,11 +5,11 @@ class Image {
   String entrypoint = ""
 
   Image(def config) {
-    if (config.name == null) {
-      this.name = config
-    } else {
+    if (config.hasProperty("name")) {
       this.name       = config.name 
       this.args       = config.args
+    } else {
+      this.name = config
     }
   }
 }
