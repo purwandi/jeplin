@@ -7,7 +7,7 @@ class WithEnvironment {
     }
 
     config.variables.each { k, v -> 
-      script.sh "echo $v"
+      script.sh "echo 'Debugging : $v'"
       script.env."$k" = v.toString()
     }
   }
