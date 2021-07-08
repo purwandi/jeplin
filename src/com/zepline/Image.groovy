@@ -5,11 +5,13 @@ class Image {
   String args = ""
 
   Image(def config) {
-    if (config.name) {
-      this.name       = config.name 
-      this.args       = config.args
-    } else {
-      this.name = config
-    }
+    try {
+      if (config.name) {
+        this.name       = config.name 
+        this.args       = config.args
+      } else {
+        this.name = config
+      }
+    } catch (Exception e) {}
   }
 }
