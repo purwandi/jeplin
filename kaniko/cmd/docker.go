@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -32,11 +31,8 @@ var dockerCommand = &cobra.Command{
 			if err := ioutil.WriteFile(filepath, []byte("{}"), 0600); err != nil {
 				logger.Panic(err.Error())
 			}
-
-			logger.Info("Creating file in :")
-			logger.Info(filepath)
 		} else {
-			logger.Info(fmt.Sprintf("File is exists %s", filepath))
+			logger.Info(fmt.Sprintf("file is exists %s", filepath))
 		}
 
 		configFile, err := os.Open(filepath)
@@ -47,8 +43,6 @@ var dockerCommand = &cobra.Command{
 
 		parser := json.NewDecoder(configFile)
 		parser.Decode(&conf)
-
-		log.Println(fmt.Sprintf("%+v", conf))
 
 		if conf.Auths == nil {
 			conf.Auths = make(map[string]DockerAuth)
@@ -62,8 +56,6 @@ var dockerCommand = &cobra.Command{
 		if err != nil {
 			logger.Error(err.Error())
 		}
-
-		log.Println(fmt.Sprintf("%+v", conf))
 
 		if err := ioutil.WriteFile(filepath, []byte(string(c)), 0600); err != nil {
 			logger.Panic(err.Error())
