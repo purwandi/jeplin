@@ -15,25 +15,31 @@ class Config {
   List<String>  script
   List<String>  after_script
 
+  def config
   def yaml 
 
   Config(def config, def yaml) {
-    this.yaml = yaml 
-
-    // parse global
-    this.parse(yaml)
-
-    // parse extends
-    this.parse(config)
+    this.yaml   = yaml 
+    this.config = config
   }
 
-  def parse(def cfg) {
+  def parse() {
+    // parse global
+    parseConfig(yaml)
+
+    // parse extends
+    parseConfig(config)
+
+    return this
+  }
+
+  def parseConfig(def cfg) {
     cfg.each { key, val -> 
       if (this.hasProperty(key) && val != null) {
         if (key == "extends") {
           def cfgExtends = yaml."$v"
           if (cfgExtends != null) {
-            this.parse(cfgExtends)
+            parseConfig(cfgExtends)
           }
         } else if (key == "image") {
           this."$key" = new Image(val)

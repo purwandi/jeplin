@@ -46,7 +46,7 @@ class Zepline {
     this.stages = yaml.stages
     this.yaml.tasks.each { k, v ->
       def config = new Config(v, yaml)
-      def task = new Task(k, config)
+      def task = new Task(k, config.parse())
       this.tasks[k] = task
     }
 
