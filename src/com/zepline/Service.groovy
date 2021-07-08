@@ -8,7 +8,7 @@ class Service {
 
   Service (def config) {
     config.each { k, v -> 
-      if (this.hasProperty(k) && v != null) {
+      if (v != null) { // this.hasProperty(k) && v != null
         if (k == "image") {
           this.image = new Image(v)
         } else {

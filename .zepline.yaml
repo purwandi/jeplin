@@ -35,6 +35,6 @@ tasks:
           username: GITLAB_USERNAME
           password: GITLAB_PASSWORD
     before_script:
-      - helper auth:docker --username $GITHUB_USERNAME --password $GITHUB_PASSWORD --registry $DOCKER_HOSTED
+      - helper auth:docker --username $GITLAB_USERNAME --password $GITLAB_PASSWORD --registry $DOCKER_HOSTED
     script:
       - executor --context $KANIKO_CONTEXT --dockerfile $KANIKO_DOCKERFILE --destination $KANIKO_DOCKERIMAGE

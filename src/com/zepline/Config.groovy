@@ -35,7 +35,7 @@ class Config {
 
   def parseConfig(def cfg) {
     cfg.each { key, val -> 
-      if (this.hasProperty(key) && val != null) {
+      if (val != null) { // this.hasProperty(key) && val != null
         if (key == "extends") {
           def cfgExtends = yaml."$v"
           if (cfgExtends != null) {
@@ -57,57 +57,4 @@ class Config {
       }
     }
   }
-
-
-
-  // static Config parse(def config, def yaml) {
-  //   Config data = new Config()
-  //   data.yaml = yaml
-
-  //   if (yaml.image) {
-  //     data.image = new Image(yaml.image)
-  //   }
-    
-  //   if (yaml.variables) {
-  //     data.variables = yaml.variables
-  //   }
-
-  //   if (yaml.docker) {
-  //     data.docker = yaml.docker
-  //   }
-
-  //   // this.variables = yaml.variables
-  //   config.each { k, v -> 
-  //     if (k == "extends") {
-  //       def yamlExtends = yaml."$v"
-  //       if (yamlExtends) {
-  //         yamlExtends.each {ky, vy -> 
-  //           if (ky == "variables") {
-  //             vy.collect { i, n ->
-  //               data.variables[i] = n
-  //             }
-  //             return
-  //           }
-  //           if (data.hasProperty(ky)) {
-  //             data."$ky" = vy
-  //           }
-  //         }
-  //       }
-  //       return
-  //     }
-
-  //     if (v) {
-  //       if (k == "variables") {
-  //         v.collect { i, n ->
-  //           data.variables[i] = n
-  //         }
-  //         return
-  //       }
-  //       if (data.hasProperty(k)) {
-  //         data."$k" = v
-  //       }
-  //     }
-  //   }
-  //   return data
-  // }
 }
