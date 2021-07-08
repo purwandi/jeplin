@@ -7,7 +7,7 @@ class WithEnvironment {
     }
 
     config.variables.each { k, v -> 
-      script.env."$k" = v
+      script.env."$k" = "$v"
     }
   }
 }
