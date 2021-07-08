@@ -24,7 +24,8 @@ class Task {
         }
 
         config.services.each { service ->
-          WithImageRegistry.parse(service, config.docker, script, {
+          // service callback
+          def svc = {
             def ctr = script
                   .docker
                   .image(service.image)
@@ -32,25 +33,38 @@ class Task {
 
             links = links +  " --link $ctr.id:${service.alias}"
             ctrIds = " $ctr.id "
-          })
+          }
+
+          WithImageRegistry.parse(service, config.docker, script, svc)
         }
       }
 
-      def cmd = {
-        config.script.each { command -> 
+      def cmd = { cmds ->
+        if (cmds == null) {
+          return
+        }
+
+        cmds.each { command -> 
           Command.parse(script, command)
         }
       }
 
       // if image is defined we run it using docker
       if (config.image) {
-        WithImageRegistry.parse(config, config.docker, script, {
+        // service callback
+        def svc = {
           script.docker.image(config.image).inside("$links") { 
-            cmd()
+            cmd(config.before_script)
+            cmd(config.script)
+            cmd(config.after_script)
           }
-        })
+        }
+
+        WithImageRegistry.parse(config, config.docker, script, svc)
       } else {
-        cmd()
+        cmd(config.before_script)
+        cmd(config.script)
+        cmd(config.after_script)
       }
     }
 
