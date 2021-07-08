@@ -55,7 +55,7 @@ class Task {
         def svc = {
           def image = script.docker.image(config.image)
           image.pull()
-          image.inside("$links --privileged") { 
+          image.inside("$links --privileged --cap-add CHOWN --cap-add=SETUID --cap-add=SETGID") { 
             cmd(config.before_script)
             cmd(config.script)
             cmd(config.after_script)

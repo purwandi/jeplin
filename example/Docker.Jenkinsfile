@@ -34,3 +34,17 @@ node {
     }
   }
 }
+
+
+node {
+  stage ("hello") {
+    withDockerRegistry([url: "https://ghcr.io", credentialsId: "github-credentials"]) {
+      def image = docker.image("ghcr.io/purwandi/zepline:kaniko")
+      image.pull()
+      image.inside() {
+        sh "env"
+        sh "ls -all /kaniko"
+      }
+    }
+  }
+}

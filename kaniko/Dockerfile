@@ -12,11 +12,12 @@ WORKDIR /kaniko
 RUN apk add --no-cache ca-certificates curl gettext openssl
 
 COPY --from=builder                        /workspace/helper   /kaniko/helper
-COPY --from=gcr.io/kaniko-project/executor /kaniko/executor    /kaniko/executor
-COPY --from=gcr.io/kaniko-project/executor /kaniko/.docker     /kaniko/.docker
-COPY --from=gcr.io/kaniko-project/executor /kaniko/ssl         /kaniko/ssl
-COPY --from=gcr.io/kaniko-project/executor /etc/nsswitch.conf  /etc/nsswitch.conf
+COPY --from=gcr.io/kaniko-project/executor:debug /kaniko/executor    /kaniko/executor
+COPY --from=gcr.io/kaniko-project/executor:debug /kaniko/.docker     /kaniko/.docker
+COPY --from=gcr.io/kaniko-project/executor:debug /kaniko/ssl         /kaniko/ssl
+COPY --from=gcr.io/kaniko-project/executor:debug /etc/nsswitch.conf  /etc/nsswitch.conf
 
+ENV HOME=/root
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/kaniko
 ENV SSL_CERT_DIR /kaniko/ssl/certs
 ENV DOCKER_CONFIG /kaniko/.docker/
@@ -24,3 +25,6 @@ ENV DOCKER_CONFIG /kaniko/.docker/
 RUN update-ca-certificates \
   && cp /etc/ssl/certs/ca-certificates.crt /kaniko/ssl/certs/ \
   && chmod 777 /kaniko/ && chmod 777 /kaniko/.docker
+
+RUN chgrp -R 0 $HOME && \
+  chmod -R g=u $HOME
