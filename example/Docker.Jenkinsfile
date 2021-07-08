@@ -48,3 +48,13 @@ node {
     }
   }
 }
+
+node {
+  stage ("hello") {
+    env.KANIKO_CONTEXT = '$WORKSPACE'
+
+    def envs = "echo $KANIKO_CONTEXT"
+
+    sh (script: envs)
+  }
+}

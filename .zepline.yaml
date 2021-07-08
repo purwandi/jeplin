@@ -37,7 +37,7 @@ tasks:
     script:
       - echo "build kaniko"
       - echo $DOCKER_HOSTED
-      - echo $KANIKO_CONTEXT
+      - "echo $KANIKO_CONTEXT"
       - echo $KANIKO_DOCKERFILE
       - executor
           --context $WORKSPACE
