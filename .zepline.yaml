@@ -37,12 +37,4 @@ tasks:
     before_script:
       - helper auth:docker --username $GITHUB_USERNAME --password $GITHUB_PASSWORD --registry $DOCKER_HOSTED
     script:
-      - env
-      - echo "build kaniko"
-      - echo $DOCKER_HOSTED
-      - echo $KANIKO_CONTEXT
-      - echo $KANIKO_DOCKERFILE
-      - executor
-          --context $KANIKO_CONTEXT
-          --dockerfile $KANIKO_DOCKERFILE
-          --destination $KANIKO_DOCKERIMAGE
+      - executor --context $KANIKO_CONTEXT --dockerfile $KANIKO_DOCKERFILE --destination $KANIKO_DOCKERIMAGE
