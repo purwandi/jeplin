@@ -1,11 +1,11 @@
 package com.zepline
 
 class Command {
-  static Command parse(def script, def command) {
-    if (script.isUnix()) {
-      script.sh command
+  static Command parse(def jenkins, def command) {
+    if (jenkins.isUnix()) {
+      jenkins.sh (script: command)
     } else {
-      script.bat command
+      jenkins.bat (script: command)
     }
   }
 }

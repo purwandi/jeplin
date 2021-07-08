@@ -2,7 +2,7 @@ package com.zepline
 
 class Config {
   String        name
-  String        image
+  Image         image
   String        stage
 
   List<Service> services      = []
@@ -17,54 +17,91 @@ class Config {
 
   def yaml 
 
-  static Config parse(def config, def yaml) {
-    Config data = new Config()
-    data.yaml = yaml
+  Config(def config, def yaml) {
+    this.yaml = yaml 
 
-    if (yaml.image) {
-      data.image = yaml.image
-    }
-    
-    if (yaml.variables) {
-      data.variables = yaml.variables
-    }
+    // parse global
+    this.parse(yaml)
 
-    if (yaml.docker) {
-      data.docker = yaml.docker
-    }
-
-    // this.variables = yaml.variables
-    config.each { k, v -> 
-      if (k == "extends") {
-        def yamlExtends = yaml."$v"
-        if (yamlExtends) {
-          yamlExtends.each {ky, vy -> 
-            if (ky == "variables") {
-              vy.collect { i, n ->
-                data.variables[i] = n
-              }
-              return
-            }
-            if (data.hasProperty(ky)) {
-              data."$ky" = vy
-            }
-          }
-        }
-        return
-      }
-
-      if (v) {
-        if (k == "variables") {
-          v.collect { i, n ->
-            data.variables[i] = n
-          }
-          return
-        }
-        if (data.hasProperty(k)) {
-          data."$k" = v
-        }
-      }
-    }
-    return data
+    // parse extends
+    this.parse(config)
   }
+
+  def parse(def cfg) {
+    cfg.each { key, val -> 
+      if (this.hasProperty(key) && val != null) {
+        if (key == "extends") {
+          def cfgExtends = yaml."$v"
+          if (cfgExtends != null) {
+            this.parse(cfgExtends)
+          }
+        } else if (key == "image") {
+          this."$key" = new Image(val)
+        } else if (key == "variables") {
+          val.each { i, n -> 
+            this.variables[i] = n
+          }
+        } else if (key == "services") {
+          val.each { cfg -> 
+            this.services.add(new Service(cfg))
+          }
+        } else {
+          this."$key" = val
+        }
+      }
+    }
+  }
+
+
+
+  // static Config parse(def config, def yaml) {
+  //   Config data = new Config()
+  //   data.yaml = yaml
+
+  //   if (yaml.image) {
+  //     data.image = new Image(yaml.image)
+  //   }
+    
+  //   if (yaml.variables) {
+  //     data.variables = yaml.variables
+  //   }
+
+  //   if (yaml.docker) {
+  //     data.docker = yaml.docker
+  //   }
+
+  //   // this.variables = yaml.variables
+  //   config.each { k, v -> 
+  //     if (k == "extends") {
+  //       def yamlExtends = yaml."$v"
+  //       if (yamlExtends) {
+  //         yamlExtends.each {ky, vy -> 
+  //           if (ky == "variables") {
+  //             vy.collect { i, n ->
+  //               data.variables[i] = n
+  //             }
+  //             return
+  //           }
+  //           if (data.hasProperty(ky)) {
+  //             data."$ky" = vy
+  //           }
+  //         }
+  //       }
+  //       return
+  //     }
+
+  //     if (v) {
+  //       if (k == "variables") {
+  //         v.collect { i, n ->
+  //           data.variables[i] = n
+  //         }
+  //         return
+  //       }
+  //       if (data.hasProperty(k)) {
+  //         data."$k" = v
+  //       }
+  //     }
+  //   }
+  //   return data
+  // }
 }

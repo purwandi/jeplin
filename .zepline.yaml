@@ -18,7 +18,9 @@ tasks:
       - echo "Prepare for deployment"
 
   kaniko:
-    image: ghcr.io/purwandi/zepline:kaniko
+    image:
+      name: ghcr.io/purwandi/zepline:kaniko
+      args: -u 0
     stage: build
     variables:
       DOCKER_HOSTED: ghcr.io
@@ -37,3 +39,4 @@ tasks:
           --context $WORKSPACE
           --dockerfile $WORKSPACE/Dockerfile
           --destination $DOCKER_HOSTED/purwandi/zepline:$CI_GIT_COMMIT_SHORT_SHA
+      - executor --context /workspace --dockerfile /workspace/Dockerfile --destination ghcr.io/purwandi/zepline:debug

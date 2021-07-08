@@ -31,7 +31,7 @@ class WithImageRegistry {
     def registry
     cfgRegistry.each { cfg -> 
       def hostname = getHost(cfg.registry)
-      if (config.image.contains(hostname)) {
+      if (config.image.name.contains(hostname)) {
         registry = cfg
       }
     }
