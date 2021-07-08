@@ -11,7 +11,9 @@ class Config {
   def           docker
   List<String>  when
   List<String>  only
+  List<String>  before_script
   List<String>  script
+  List<String>  after_script
 
   def yaml 
 
@@ -43,7 +45,9 @@ class Config {
               }
               return
             }
-            data."$ky" = vy
+            if (data.hasProperty($ky)) {
+              data."$ky" = vy
+            }
           }
         }
         return
@@ -56,7 +60,9 @@ class Config {
           }
           return
         }
-        data."$k" = v
+        if (data.hasProperty($k)) {
+          data."$k" = v
+        }
       }
     }
     return data
