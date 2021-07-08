@@ -45,7 +45,7 @@ class Config {
               }
               return
             }
-            if (data.hasProperty("$ky")) {
+            if (data.hasProperty(ky)) {
               data."$ky" = vy
             }
           }
@@ -60,7 +60,7 @@ class Config {
           }
           return
         }
-        if (data.hasProperty("$k")) {
+        if (data.hasProperty(k)) {
           data."$k" = v
         }
       }
