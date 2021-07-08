@@ -25,7 +25,7 @@ tasks:
     variables:
       DOCKER_HOSTED: ghcr.io
       KANIKO_CONTEXT: $WORKSPACE
-      KANIKO_DOCKERFILE: '$WORKSPACE/Dockerfile'
+      KANIKO_DOCKERFILE: $WORKSPACE/Dockerfile
     credentials:
       - credential: github-credentials
         type: usernamePassword
