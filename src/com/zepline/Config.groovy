@@ -35,7 +35,7 @@ class Config {
 
   def parseConfig(def cfg) {
     cfg.each { key, val -> 
-      if (["stages", "include"].contains(key)) {
+      if (!["name", "image", "stage", "services", "variables", "credentials", "docker", "when", "only", "before_script", "script", "after_script"].contains(key)) {
         return
       }
 
