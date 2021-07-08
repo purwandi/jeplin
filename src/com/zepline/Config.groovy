@@ -35,6 +35,10 @@ class Config {
 
   def parseConfig(def cfg) {
     cfg.each { key, val -> 
+      if (["stages", "include"].contains(key)) {
+        return
+      }
+
       if (val != null) { // this.hasProperty(key) && val != null
         if (key == "extends") {
           def cfgExtends = yaml."$v"
