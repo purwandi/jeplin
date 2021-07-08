@@ -26,10 +26,10 @@ class Task {
         config.services.each { service ->
           // service callback
           def svc = {
-            def ctr = script
-                  .docker
-                  .image(service.image)
-                  .run("-v ${script.env.WORKSPACE}:${script.env.WORKSPACE}")
+            def image = script.docker.image(service.image)
+            image.pull()
+
+            def ctr  = image.run("-v ${script.env.WORKSPACE}:${script.env.WORKSPACE}")
 
             links = links +  " --link $ctr.id:${service.alias}"
             ctrIds = " $ctr.id "
@@ -53,7 +53,9 @@ class Task {
       if (config.image) {
         // service callback
         def svc = {
-          script.docker.image(config.image).inside("$links") { 
+          def image = script.docker.image(config.image)
+          image.pull()
+          image.inside("$links") { 
             cmd(config.before_script)
             cmd(config.script)
             cmd(config.after_script)
