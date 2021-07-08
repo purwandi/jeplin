@@ -20,5 +20,20 @@ tasks:
   kaniko:
     image: ghcr.io/purwandi/zepline:kaniko
     stage: build
+    variables:
+      DOCKER_HOSTED: ghcr.io
+    credentials:
+      - credential: github-credentials
+        type: usernamePassword
+        variables:
+          username: GITHUB_USERNAME
+          password: GITHUB_PASSWORD
+    before_script:
+      - /kaniko/helper auth:docker --username $GITHUB_USERNAME --password $GITHUB_PASSWORD --registry $DOCKER_HOSTED
     script:
       - echo "build kaniko"
+      - echo $DOCKER_HOSTED
+      - /kaniko/executor
+          --context $WORKSPACE
+          --dockerfile $WORKSPACE/Dockerfile
+          --destination $DOCKER_HOSTED/purwandi/zepline:$CI_GIT_COMMIT_SHORT_SHA
