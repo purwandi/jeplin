@@ -11,9 +11,9 @@ class Config {
   def           docker
   List<String>  when
   List<String>  only
-  List<String>  before_script
-  List<String>  script
-  List<String>  after_script
+  def  before_script
+  def  script
+  def  after_script
 
   def config
   def yaml 
