@@ -24,7 +24,7 @@ var dockerCommand = &cobra.Command{
 	Short: "Authorise with docker registry",
 	Run: func(cmd *cobra.Command, args []string) {
 		path := os.Getenv("DOCKER_CONFIG")
-		filepath := fmt.Sprintf("%sconfig.json", path)
+		filepath := fmt.Sprintf("%s/config.json", path) // hack in jenkins :-(
 		conf := DockerAuths{}
 
 		if !Exists(filepath) {
