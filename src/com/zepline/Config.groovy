@@ -42,8 +42,8 @@ class Config {
             this.variables[i] = n
           }
         } else if (key == "services") {
-          val.each { cfg -> 
-            this.services.add(new Service(cfg))
+          val.each { s -> 
+            this.services.add(new Service(s))
           }
         } else {
           this."$key" = val
