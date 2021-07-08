@@ -18,8 +18,7 @@ class Zepline {
       "CI_GIT_AUTHOR_NAME": "git --no-pager show -s --format='%an'",
       "CI_GIT_AUTHOR_EMAIL": "git --no-pager show -s --format='%ae'",
       "CI_GIT_COMMIT": "git --no-pager show -s --format='%s'",
-      "CI_GIT_REMOTE_BRANCH_NAME": "git name-rev --name-only HEAD",
-      // "CI_GIT_RELEASE_NAME": "git describe --tags --abbrev=0 || true"
+      "CI_GIT_REMOTE_BRANCH_NAME": "git name-rev --name-only HEAD"
     ]
     
     envs.each { k, v ->

@@ -50,7 +50,7 @@ class Task {
       }
 
       // if image is defined we run it using docker
-      if (config.image) {
+      if (config.image.name) {
         // service callback
         def svc = {
           def image = script.docker.image(config.image.name)

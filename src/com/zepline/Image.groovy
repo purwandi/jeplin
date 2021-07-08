@@ -5,7 +5,7 @@ class Image {
   String args = ""
 
   Image(def config) {
-    if (config.hasProperty("name")) {
+    if (config.name) {
       this.name       = config.name 
       this.args       = config.args
     } else {
