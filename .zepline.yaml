@@ -29,7 +29,7 @@ tasks:
       KANIKO_DOCKERFILE: $WORKSPACE/Dockerfile
       KANIKO_DOCKERIMAGE: $DOCKER_HOSTED/$CI_PROJECT_PATH:$CI_GIT_BRANCH_NAME-$CI_GIT_COMMIT_SHORT_SHA
     credentials:
-      - credential: gitlab-credentials
+      - credential: gl-credentials
         type: usernamePassword
         variables:
           username: GITLAB_USERNAME
