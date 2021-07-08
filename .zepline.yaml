@@ -23,15 +23,17 @@ tasks:
       args: -u 0
     stage: build
     variables:
-      DOCKER_HOSTED: ghcr.io
+      CI_PROJECT_PATH: purwandi/zepline
+      DOCKER_HOSTED: registry.gitlab.com
       KANIKO_CONTEXT: $WORKSPACE
       KANIKO_DOCKERFILE: $WORKSPACE/Dockerfile
+      KANIKO_DOCKERIMAGE: $DOCKER_HOSTED/$CI_PROJECT_PATH:$CI_GIT_BRANCH_NAME-$CI_GIT_COMMIT_SHORT_SHA
     credentials:
-      - credential: github-credentials
+      - credential: gitlab-credentials
         type: usernamePassword
         variables:
-          username: GITHUB_USERNAME
-          password: GITHUB_PASSWORD
+          username: GITLAB_USERNAME
+          password: GITLAB_PASSWORD
     before_script:
       - helper auth:docker --username $GITHUB_USERNAME --password $GITHUB_PASSWORD --registry $DOCKER_HOSTED
     script:
@@ -41,6 +43,6 @@ tasks:
       - echo $KANIKO_CONTEXT
       - echo $KANIKO_DOCKERFILE
       - executor
-          --context $WORKSPACE
-          --dockerfile $WORKSPACE/Dockerfile
-          --destination $DOCKER_HOSTED/purwandi/zepline:$CI_GIT_COMMIT_SHORT_SHA
+          --context $KANIKO_CONTEXT
+          --dockerfile $KANIKO_DOCKERFILE
+          --destination $KANIKO_DOCKERIMAGE
