@@ -8,6 +8,7 @@ include:
     ref: main
     files:
       - /variables.yaml
+      - /kaniko.yaml
       - /nodejs.yaml
 
 tasks:
@@ -18,25 +19,7 @@ tasks:
       - echo "Prepare for deployment"
 
   kaniko:
-    image:
-      name: ghcr.io/purwandi/zepline:kaniko
-      args: -u 0
+    extends: .kaniko
     stage: build
     variables:
       CI_PROJECT_PATH: purwandi/zepline
-      DOCKER_HOSTED: registry.gitlab.com
-      KANIKO_CONTEXT: $WORKSPACE
-      KANIKO_DOCKERFILE: $WORKSPACE/Dockerfile
-      KANIKO_DOCKERIMAGE: $DOCKER_HOSTED/$CI_PROJECT_PATH:$CI_GIT_BRANCH_NAME-$CI_GIT_COMMIT_SHORT_SHA
-    credentials:
-      - credential: gl-credentials
-        type: usernamePassword
-        variables:
-          username: GITLAB_USERNAME
-          password: GITLAB_PASSWORD
-    before_script:
-      - helper auth:docker --username $GITLAB_USERNAME --password $GITLAB_PASSWORD --registry $DOCKER_HOSTED
-      - cat $DOCKER_CONFIG/config.json
-    script:
-      - env
-      - executor --context $KANIKO_CONTEXT --dockerfile $KANIKO_DOCKERFILE --destination $KANIKO_DOCKERIMAGE

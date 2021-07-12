@@ -19,7 +19,7 @@ type DockerAuths struct {
 
 var dockerCommand = &cobra.Command{
 	Use:   "auth:docker",
-	Short: "Authorise with docker registry",
+	Short: "Authorize with docker registry",
 	Run: func(cmd *cobra.Command, args []string) {
 		path := os.Getenv("DOCKER_CONFIG")
 		filepath := fmt.Sprintf("%s/config.json", path) // hack in jenkins :-(

@@ -1,7 +1,8 @@
 package cmd
 
 import (
-	"log"
+	"fmt"
+	"io/ioutil"
 
 	"github.com/spf13/cobra"
 )
@@ -13,10 +14,19 @@ var (
 
 var npmCommand = &cobra.Command{
 	Use:   "auth:npm",
-	Short: "Authorise with npm registry",
+	Short: "Authorize with npm registry",
 	Run: func(cmd *cobra.Command, args []string) {
-		log.Println(username)
-		log.Println(password)
+		filepath := fmt.Sprintf("%s/.npmrc", workspace)
+		npmrc := fmt.Sprintf(`
+registry="%s"
+always-auth=%t
+strict-ssl=%t
+_auth="%s"
+`, registry, npmAwalysAuth, npmStrictSSL, decodeToBase64(username, password))
+
+		if err := ioutil.WriteFile(filepath, []byte(npmrc), 0600); err != nil {
+			logger.Panic(err.Error())
+		}
 	},
 }
 
