@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"encoding/base64"
+	"fmt"
 	"log"
 	"os"
 
@@ -13,6 +15,7 @@ var (
 	password  string
 	location  string
 	registry  string
+	workspace string
 	logger, _ = zap.NewProduction()
 )
 
@@ -28,17 +31,22 @@ func Execute() {
 	rootCmd.PersistentFlags().StringVarP(&username, "username", "u", "", "The username")
 	rootCmd.PersistentFlags().StringVarP(&password, "password", "p", "", "The password")
 	rootCmd.PersistentFlags().StringVarP(&registry, "registry", "r", "", "The registry")
+	rootCmd.PersistentFlags().StringVarP(&workspace, "workspace", "w", "", "The workspace directory")
 
 	if err := rootCmd.Execute(); err != nil {
 		log.Panic(err)
 	}
 }
 
-func Exists(name string) bool {
+func exists(name string) bool {
 	if _, err := os.Stat(name); err != nil {
 		if os.IsNotExist(err) {
 			return false
 		}
 	}
 	return true
+}
+
+func decodeToBase64(username, password string) string {
+	return base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", username, password)))
 }

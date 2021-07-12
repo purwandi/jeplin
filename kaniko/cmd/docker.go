@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -26,7 +25,7 @@ var dockerCommand = &cobra.Command{
 		filepath := fmt.Sprintf("%s/config.json", path) // hack in jenkins :-(
 		conf := DockerAuths{}
 
-		if !Exists(filepath) {
+		if !exists(filepath) {
 			os.MkdirAll(path, 0700)
 			if err := ioutil.WriteFile(filepath, []byte("{}"), 0600); err != nil {
 				logger.Panic(err.Error())
@@ -49,7 +48,7 @@ var dockerCommand = &cobra.Command{
 		}
 
 		conf.Auths[registry] = DockerAuth{
-			Auth: base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", username, password))),
+			Auth: decodeToBase64(username, password),
 		}
 
 		c, err := json.Marshal(conf)

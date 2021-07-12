@@ -5,9 +5,20 @@
 - https://plugins.jenkins.io/docker-workflow/
 - https://plugins.jenkins.io/docker-plugin/
 
+## Pros
 
-- image
-- node mesin biasa
+- Jenkinsless
+- Parsing yaml file menjadi jenkins jobs
+- Job template support via yaml
+- Retrieve credentials
+- Docker dan Server Native support
+
+## Const
+
+- Butuh docker agent apabila terdapat jobs yang memerlukan container
+
+
+## Example
 
 ```
 # image: alpine:latest
@@ -113,7 +124,7 @@ tasks:
     stage: build
     # services:
     #   - image: mysql:alpine
-    #     alias: web
+    #     alias: db
     script:
       - echo $GITHUB_USERNAME
       - echo $GITHUB_PASSWORD
