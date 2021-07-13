@@ -108,15 +108,15 @@ class Zepline {
     def closure = [:]
     
     t.each { k, task -> 
-      // if (canBuild(script, task) == false) {
-      //   return
-      // }
+      if (canBuild(script, task) == false) {
+        return
+      }
 
       closure[k] = { 
         script.stage(k) {
           if (task.config != null && task.config.script != null) {
-            script.sh "echo ${task.config}"
-            // task.execute(script)
+            // script.sh "echo ${task.config}"
+            task.execute(script)
           } else {
             script.parallel taskable(task, script)
           }
