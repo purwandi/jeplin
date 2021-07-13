@@ -1,4 +1,4 @@
 .phony: test
 
 test:
-	@groovy -cp src/ tests/host.groovy
+	@groovy -cp src/ tests/config.groovy
