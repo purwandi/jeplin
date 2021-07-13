@@ -6,7 +6,7 @@ class Config {
   String        stage
 
   List<Service> services      = []
-  def           variables     = []
+  def           variables     = [:]
   def           credentials   = []
   def           docker
   List<String>  when
@@ -25,18 +25,36 @@ class Config {
   }
 
   def parse() {
-    // parse global
-    parseConfig(yaml)
+    parseVarConfig(yaml)
+    parseVarConfig(config)
 
-    // parse extends
-    parseConfig(config)
+    if (config.extend) {
+      def cfgExtends = yaml."${config.extend}"
+      if (cfgExtends != null) {
+        parseVarConfig(cfgExtends)
+      }
+    }
+    
+    // parse global
+    parseConfig(yaml, true)
+    parseConfig(config, true)
 
     return this
   }
 
-  def parseConfig(def cfg) {
+  def parseVarConfig(def cfg) {
+    if (cfg.variables == null) {
+      return
+    }
+
+    cfg.variables.each { k, v -> 
+      this.variables[k] = v
+    }
+  }
+
+  def parseConfig(def cfg, def highOrder) {
     cfg.each { key, val -> 
-      if (!["name","image","stage","services","variables","credentials","docker","when","only","before_script","script","after_script","extend"].contains(key)) {
+      if (!["name","image","stage","services","credentials","docker","when","only","before_script","script","after_script","extend"].contains(key)) {
         return
       }
 
@@ -44,12 +62,10 @@ class Config {
         if (key == "extend") {
           def cfgExtends = yaml."$val"
           if (cfgExtends != null) {
-            parseConfig(cfgExtends)
+            parseConfig(cfgExtends, false)
           }
         } else if (key == "variables") {
-          val.each { i, n -> 
-            this.variables.add(key: i, value: n)
-          }
+          return
         } else if (key == "image") {
           this."$key" = new Image(val)
         } else if (key == "services") {
