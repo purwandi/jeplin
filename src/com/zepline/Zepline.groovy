@@ -77,6 +77,8 @@ class Zepline {
   }
 
   def execute() {
+    script.sh "echo $tasks"
+
     for (t in taskable(tasks, script).values()) {
       t.call()
     }
