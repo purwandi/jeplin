@@ -23,3 +23,5 @@ tasks:
     stage: build
     variables:
       CI_PROJECT_PATH: purwandi/zepline
+    script: 
+      - env
