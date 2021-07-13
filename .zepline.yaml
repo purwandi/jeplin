@@ -19,7 +19,7 @@ tasks:
       - echo "Prepare for deployment"
 
   kaniko:
-    extends: .kaniko
+    extend: .kaniko
     stage: build
     variables:
       CI_PROJECT_PATH: purwandi/zepline

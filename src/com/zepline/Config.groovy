@@ -17,7 +17,7 @@ class Config {
 
   def config
   def yaml 
-  def extends
+  def extend
 
   Config(def config, def yaml) {
     this.yaml   = yaml 
@@ -45,7 +45,7 @@ class Config {
       // }
 
       if (val != null) { // this.hasProperty(key) && val != null
-        if (key == "extends") {
+        if (key == "extend") {
           def cfgExtends = yaml."$val"
           if (cfgExtends != null) {
             parseConfig(cfgExtends)
