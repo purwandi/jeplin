@@ -47,8 +47,8 @@ class Config {
             parseConfig(cfgExtends)
           }
         } else if (key == "variables") {
-          val.each { var -> 
-            this.variables.push(var)
+          val.each { i, n -> 
+            this.variables.add(key: i, value: n)
           }
         } else if (key == "image") {
           this."$key" = new Image(val)

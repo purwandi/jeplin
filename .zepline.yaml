@@ -22,6 +22,7 @@ tasks:
     extend: .kaniko
     stage: build
     variables:
+      PORT_ENV: 8080
       CI_PROJECT_PATH: purwandi/zepline
     script: 
       - env
