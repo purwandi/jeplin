@@ -25,4 +25,4 @@ tasks:
       CI_PROJECT_PATH: purwandi/zepline
     script: 
       - env
-      - echo $(KANIKO_DOCKERIMAGE)
+      - echo "$KANIKO_DOCKERIMAGE"
