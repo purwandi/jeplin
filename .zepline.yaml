@@ -24,6 +24,3 @@ tasks:
     variables:
       PORT_ENV: 8080
       CI_PROJECT_PATH: purwandi/zepline
-    script: 
-      - env
-      - echo "$KANIKO_DOCKERIMAGE"
