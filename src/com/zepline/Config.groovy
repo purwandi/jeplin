@@ -6,7 +6,7 @@ class Config {
   String        stage
 
   List<Service> services      = []
-  def           variables     = [:]
+  def           variables     = []
   def           credentials   = []
   def           docker
   List<String>  when
@@ -50,7 +50,7 @@ class Config {
           this."$key" = new Image(val)
         } else if (key == "variables") {
           val.each { i, n -> 
-            this.variables[i] = n
+            this.variables.push(key: i, value: n)
           }
         } else if (key == "services") {
           val.each { s -> 

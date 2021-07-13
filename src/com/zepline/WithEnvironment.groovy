@@ -6,11 +6,11 @@ class WithEnvironment {
       return
     }
 
-    config.variables.each { k, v -> 
+    config.variables.each { val -> 
       if (jenkins.isUnix()) {
-        jenkins.env."$k" = jenkins.sh(script: "echo $v", returnStdout: true).trim()
+        jenkins.env."${val.key}" = jenkins.sh(script: "echo ${val.value}", returnStdout: true).trim()
       } else {
-        jenkins.env."$k" = jenkins.powershell(script: "echo $v", returnStdout: true).trim()
+        jenkins.env."${val.key}" = jenkins.powershell(script: "echo ${val.value}", returnStdout: true).trim()
       }
       
     }
