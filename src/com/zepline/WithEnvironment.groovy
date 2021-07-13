@@ -2,7 +2,6 @@ package com.zepline
 
 class WithEnvironment {
   static def parse(def config, def jenkins) {
-    jenkins.sh "echo $config"
     jenkins.script {
       config.each { k, v -> 
         if (jenkins.isUnix()) {
