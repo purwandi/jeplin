@@ -79,9 +79,9 @@ class Zepline {
   def execute() {
     script.sh "echo $tasks"
 
-    for (t in taskable(tasks, script).values()) {
-      t.call()
-    }
+    // for (t in taskable(tasks, script).values()) {
+    //   t.call()
+    // }
   }
 
   def canBuild(def script, def task) {
