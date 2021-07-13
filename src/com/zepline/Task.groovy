@@ -72,7 +72,7 @@ class Task {
 
     try {
       if (config.variables) {
-        task = WithCredentials.parse(config, script, task)
+        task = WithCredentials.parse(config.variables, script, task)
       }
       
       if (config.credentials) {
