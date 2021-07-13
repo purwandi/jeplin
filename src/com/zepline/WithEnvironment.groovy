@@ -1,9 +1,9 @@
 package com.zepline
 
 class WithEnvironment {
-  static def parse(def config, def jenkins, def closure) {
+  static def parse(def config, def script, def closure) {
     return {
-      withEnv(config.variables) {
+      script.withEnv(config.variables) {
         closure()
       }
     }
