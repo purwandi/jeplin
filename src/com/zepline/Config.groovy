@@ -41,17 +41,17 @@ class Config {
       }
 
       if (val != null) { // this.hasProperty(key) && val != null
-        if (key == "extend") {
+        if (key == "variables") {
+          val.each { i, n -> 
+            this.variables.push(key: i, value: n)
+          }
+        } else if (key == "extend") {
           def cfgExtends = yaml."$val"
           if (cfgExtends != null) {
             parseConfig(cfgExtends)
           }
         } else if (key == "image") {
           this."$key" = new Image(val)
-        } else if (key == "variables") {
-          val.each { i, n -> 
-            this.variables.add(key: i, value: n)
-          }
         } else if (key == "services") {
           val.each { s -> 
             this.services.add(new Service(s))
