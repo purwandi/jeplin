@@ -35,14 +35,10 @@ class Config {
   }
 
   def parseConfig(def cfg) {
-    def self = this
     cfg.each { key, val -> 
-      if (!self.hasProperty(val)) {
+      if (!["name","image","stage","services","variables","credentials","docker","when","only","before_script","script","after_script","extend"].contains(key)) {
         return
       }
-      // if (!["name","image","stage","services","variables","credentials","docker","when","only","before_script","script","after_script","extends"].contains(key)) {
-      //   return
-      // }
 
       if (val != null) { // this.hasProperty(key) && val != null
         if (key == "extend") {
