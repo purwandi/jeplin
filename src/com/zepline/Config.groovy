@@ -17,6 +17,7 @@ class Config {
 
   def config
   def yaml 
+  def extends
 
   Config(def config, def yaml) {
     this.yaml   = yaml 
@@ -34,14 +35,18 @@ class Config {
   }
 
   def parseConfig(def cfg) {
+    def self = this
     cfg.each { key, val -> 
-      if (!["name", "image", "stage", "services", "variables", "credentials", "docker", "when", "only", "before_script", "script", "after_script"].contains(key)) {
+      if (!self.hasProperty(val)) {
         return
       }
+      // if (!["name","image","stage","services","variables","credentials","docker","when","only","before_script","script","after_script","extends"].contains(key)) {
+      //   return
+      // }
 
       if (val != null) { // this.hasProperty(key) && val != null
         if (key == "extends") {
-          def cfgExtends = yaml."$v"
+          def cfgExtends = yaml."$val"
           if (cfgExtends != null) {
             parseConfig(cfgExtends)
           }
