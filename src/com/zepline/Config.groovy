@@ -42,8 +42,8 @@ class Config {
 
       if (val != null) { // this.hasProperty(key) && val != null
         if (key == "variables") {
-          val.each { i, n -> 
-            this.variables.push(key: i, value: n)
+          val.each { var -> 
+            this.variables.push(var)
           }
         } else if (key == "extend") {
           def cfgExtends = yaml."$val"

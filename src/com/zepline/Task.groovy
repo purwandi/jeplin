@@ -71,8 +71,10 @@ class Task {
     }
 
     try {
-      WithEnvironment.parse(config, script)
-
+      if (config.variables) {
+        task = WithCredentials.parse(config, script, task)
+      }
+      
       if (config.credentials) {
         // script.sh "echo 'using credentials'"
         task = WithCredentials.parse(config.credentials, script, task)
