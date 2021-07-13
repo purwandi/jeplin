@@ -77,11 +77,11 @@ class Zepline {
   }
 
   def execute() {
-    script.sh "echo $tasks"
+    // script.sh "echo $tasks"
 
-    // for (t in taskable(tasks, script).values()) {
-    //   t.call()
-    // }
+    for (t in taskable(tasks, script).values()) {
+      t.call()
+    }
   }
 
   def canBuild(def script, def task) {
@@ -115,7 +115,8 @@ class Zepline {
       closure[k] = { 
         script.stage(k) {
           if (task.config != null && task.config.script != null) {
-            task.execute(script)
+            script.sh "echo ${task.config}"
+            // task.execute(script)
           } else {
             script.parallel taskable(task, script)
           }
