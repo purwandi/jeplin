@@ -23,9 +23,9 @@ class Zepline {
     
     envs.each { k, v ->
       if (script.isUnix()) {
-        script.env."$k" = script.sh(script: v).trim()
+        script.env."$k" = script.sh(script: v, returnStdout: true).trim()
       } else {
-        script.env."$k" = script.bat(script: v).trim()
+        script.env."$k" = script.bat(script: v, returnStdout: true).trim()
       }
     }
 
