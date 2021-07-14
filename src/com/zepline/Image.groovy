@@ -6,12 +6,10 @@ class Image {
 
   Image(def config) {
     try {
-      if (config.name) {
-        this.name       = config.name 
-        this.args       = config.args
-      } else {
-        this.name = config
-      }
-    } catch (Exception e) {}
+      this.name       = config.name 
+      this.args       = config.args
+    } catch (Exception e) {
+      this.name = config
+    }
   }
 }
