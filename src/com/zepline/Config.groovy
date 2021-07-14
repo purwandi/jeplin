@@ -66,6 +66,15 @@ class Config {
           }
         } else if (key == "variables") {
           return
+        } else if (key == "credentials") {
+          val.each { c -> 
+            def idx = this.credentials.findIndexOf{it.credential == c.credential}
+            if (idx >= 0) {
+              this.credentials[idx] = c
+            } else {
+              this.credentials.add(c)
+            }
+          }
         } else if (key == "image") {
           this."$key" = new Image(val)
         } else if (key == "services") {
