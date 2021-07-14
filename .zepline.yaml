@@ -16,6 +16,7 @@ tasks:
     image: docker.io/alpine:3.13
     stage: pre
     script:
+      - env
       - echo "Prepare for deployment"
 
   kaniko:
