@@ -36,7 +36,7 @@ class Config {
     if (config.extend) {
       def cfgExtends = yaml."${config.extend}"
       if (cfgExtends != null) {
-        parseVarConfig(cfgExtends)
+        parseVarConfig(cfgExtends.variables)
       }
     }
     

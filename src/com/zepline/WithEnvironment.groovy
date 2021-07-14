@@ -6,9 +6,9 @@ class WithEnvironment {
       jenkins.script {
         config.each { k, v -> 
           if (jenkins.isUnix()) {
-            jenkins.env."$k" = jenkins.sh(script: "echo $v", returnStdout: true).trim()
+            jenkins.env."$k" = jenkins.sh(script: "echo $v").trim()
           } else {
-            jenkins.env."$k" = jenkins.powershell(script: "echo $v", returnStdout: true).trim()
+            jenkins.env."$k" = jenkins.powershell(script: "echo $v").trim()
           }
         }
       }
