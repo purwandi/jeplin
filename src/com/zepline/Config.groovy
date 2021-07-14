@@ -25,9 +25,9 @@ class Config {
   }
 
   def parse() {
+    // Parse variables
     parseVarConfig(yaml)
     parseVarConfig(config)
-
     if (config.extend) {
       def cfgExtends = yaml."${config.extend}"
       if (cfgExtends != null) {
