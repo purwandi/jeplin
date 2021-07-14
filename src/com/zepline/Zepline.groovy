@@ -38,6 +38,8 @@ class Zepline {
 
     if (script.env.CI_GIT_BRANCH_NAME == "tags") {
       script.env.CI_GIT_RELEASE_NAME = script.env.CI_GIT_REMOTE_BRANCH_NAME.replace("tags/", "")
+    } else {
+      script.env.CI_GIT_RELEASE_NAME = [script.env.CI_GIT_BRANCH_NAME, script.env.CI_GIT_COMMIT_SHORT_SHA].join("-")
     }
   }
 
