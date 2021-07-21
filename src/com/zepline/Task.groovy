@@ -81,6 +81,11 @@ class Task {
         script.sh 'echo "with credentials"'
         task = WithCredentials.parse(config.credentials, script, task)
       }
+
+      // 3 Parse node
+      if (config.node) {
+        task = WithNode.parse(config.node, script, task)
+      }
       
       // 
       task()

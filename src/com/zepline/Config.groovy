@@ -4,6 +4,7 @@ class Config {
   String        name
   Image         image
   String        stage
+  String        node
 
   List<Service> services      = []
   def           variables     = [:]
